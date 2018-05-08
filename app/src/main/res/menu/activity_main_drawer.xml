@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/home"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Home" />
+        <item
+            android:id="@+id/penduduk"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Penduduk" />
+        <item
+            android:id="@+id/pengajuan_surat"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Pengajuan Surat" />
+
+    </group>
+
+    <item android:title="Mutasi">
+        <menu>
+            <item
+                android:id="@+id/kelahiran"
+                android:icon="@android:drawable/alert_dark_frame"
+                android:title="Kelahiran" />
+            <item
+                android:id="@+id/kematian"
+                android:icon="@drawable/ic_menu_manage"
+                android:title="Kematian" />
+            <item
+                android:id="@+id/datang"
+                android:icon="@drawable/ic_menu_manage"
+                android:title="Datang" />
+            <item
+                android:id="@+id/pergi"
+                android:icon="@drawable/ic_menu_manage"
+                android:title="Pergi" />
+        </menu>
+    </item>
+
+    <item android:title="Manajemen">
+        <menu>
+            <item
+                android:id="@+id/user"
+                android:icon="@drawable/ic_account_box"
+                android:title="User" />
+            <item
+                android:id="@+id/profil"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Profil Desa" />
+        </menu>
+    </item>
+
+</menu>
