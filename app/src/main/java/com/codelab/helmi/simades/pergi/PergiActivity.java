@@ -1,4 +1,4 @@
-package com.codelab.helmi.simades.penduduk;
+package com.codelab.helmi.simades.pergi;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -8,9 +8,9 @@ import android.view.ViewGroup;
 
 import com.codelab.helmi.simades.R;
 
-public class PendudukActivity extends Fragment implements  PendudukView{
+public class PergiActivity extends Fragment implements PergiView {
 
-    PendudukPresenter presenter;
+    PergiPresenter presenter;
     View view;
 
     @Override
@@ -18,28 +18,27 @@ public class PendudukActivity extends Fragment implements  PendudukView{
                              Bundle savedInstanceState) {
 
 
-        view = inflater.inflate(R.layout.activity_penduduk, container, false);
+        view = inflater.inflate(R.layout.activity_pergi, container, false);
         initPresenter();
         onAttachView();
-        getActivity().setTitle("Penduduk");
+        getActivity().setTitle("Pergi");
 
         return view;
 
     }
 
     private void initPresenter() {
-        presenter = new PendudukPresenter();
+        presenter = new PergiPresenter();
     }
 
     @Override
-    public void onShowData(PendudukData pendudukData) {
+    public void onShowData(PergiData pergiData) {
 
     }
 
     @Override
     public void onAttachView() {
         presenter.onAttach(this);
-
     }
 
     @Override

@@ -10,10 +10,18 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.Gallery;
 
+import com.codelab.helmi.simades.HomeActivity;
 import com.codelab.helmi.simades.R;
+import com.codelab.helmi.simades.datang.DatangActivity;
+import com.codelab.helmi.simades.kelahiran.KelahiranActivity;
+import com.codelab.helmi.simades.kematian.KematianActivity;
+import com.codelab.helmi.simades.penduduk.PendudukActivity;
+import com.codelab.helmi.simades.pergi.PergiActivity;
 import com.codelab.helmi.simades.profil.ProfilActivity;
 import com.codelab.helmi.simades.profil.ProfilPresenter;
+import com.codelab.helmi.simades.user.UserActivity;
 
 public class NavigateActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,NavigateView {
 
@@ -43,7 +51,7 @@ public class NavigateActivity extends AppCompatActivity implements NavigationVie
 
         // tampilan default awal ketika aplikasii dijalankan
         if (savedInstanceState == null) {
-            fragment = new ProfilActivity();
+            fragment = new HomeActivity();
             callFragment(fragment);
         }
 
@@ -70,25 +78,31 @@ public class NavigateActivity extends AppCompatActivity implements NavigationVie
         int id = item.getItemId();
 
         // Untuk memanggil layout dari menu yang dipilih
-       /* if (id == R.id.nav_camera) {
-            fragment = new Import();
+        if (id == R.id.profil) {
+            fragment = new ProfilActivity();
             callFragment(fragment);
-        } else if (id == R.id.nav_gallery) {
-            fragment = new Gallery();
+        }else if (id == R.id.home) {
+            fragment = new HomeActivity();
             callFragment(fragment);
-        } else if (id == R.id.nav_slideshow) {
-            fragment = new SlideShow();
+        } else if (id == R.id.penduduk) {
+            fragment = new PendudukActivity();
             callFragment(fragment);
-        } else if (id == R.id.nav_manage) {
-            fragment = new Tools();
+        } else if (id == R.id.kelahiran) {
+            fragment = new KelahiranActivity();
             callFragment(fragment);
-        } else if (id == R.id.nav_share) {
-            fragment = new Share();
+        } else if (id == R.id.kematian) {
+            fragment = new KematianActivity();
             callFragment(fragment);
-        } else if (id == R.id.nav_send) {
-            fragment = new Send();
+        } else if (id == R.id.datang) {
+            fragment = new DatangActivity();
             callFragment(fragment);
-        }*/
+        } else if (id == R.id.pergi) {
+            fragment = new PergiActivity();
+            callFragment(fragment);
+        } else if( id == R.id.user ){
+            fragment = new UserActivity();
+            callFragment(fragment);
+        }
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

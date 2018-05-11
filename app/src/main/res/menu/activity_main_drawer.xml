@@ -4,24 +4,26 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/home"
-            android:icon="@drawable/ic_menu_camera"
+
+            android:icon="@drawable/ic_home_24px"
             android:title="Home" />
         <item
             android:id="@+id/penduduk"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_supervisor_account_24px"
             android:title="Penduduk" />
         <item
             android:id="@+id/pengajuan_surat"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_menu_send"
             android:title="Pengajuan Surat" />
 
     </group>
 
     <item android:title="Mutasi">
         <menu>
+            <group android:checkableBehavior="single">
             <item
                 android:id="@+id/kelahiran"
-                android:icon="@android:drawable/alert_dark_frame"
+                android:icon="@drawable/ic_menu_manage"
                 android:title="Kelahiran" />
             <item
                 android:id="@+id/kematian"
@@ -33,22 +35,26 @@
                 android:title="Datang" />
             <item
                 android:id="@+id/pergi"
-                android:icon="@drawable/ic_menu_manage"
+                android:icon="@drawable/ic_flight_takeoff_24px"
                 android:title="Pergi" />
+            </group>
         </menu>
     </item>
 
     <item android:title="Manajemen">
         <menu>
+            <group android:checkableBehavior="single">
             <item
                 android:id="@+id/user"
-                android:icon="@drawable/ic_account_box"
+                android:icon="@drawable/ic_account_box_18px"
                 android:title="User" />
             <item
                 android:id="@+id/profil"
-                android:icon="@drawable/ic_menu_send"
+                android:icon="@drawable/ic_menu_manage"
                 android:title="Profil Desa" />
+            </group>
         </menu>
     </item>
+
 
 </menu>

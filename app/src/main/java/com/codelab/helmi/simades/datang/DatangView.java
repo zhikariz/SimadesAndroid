@@ -1,4 +1,8 @@
 package com.codelab.helmi.simades.datang;
 
-public interface DatangView {
+import com.codelab.helmi.simades.base.View;
+
+public interface DatangView extends View{
+
+    void onShowData(DatangData datangData);
 }

@@ -1,4 +1,9 @@
 package com.codelab.helmi.simades.kematian;
 
-public interface KematianView {
+import com.codelab.helmi.simades.base.View;
+
+public interface KematianView extends View {
+
+    void onShowData(KematianData kematianData);
+
 }

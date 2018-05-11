@@ -1,4 +1,7 @@
 package com.codelab.helmi.simades.kelahiran;
 
-public interface KelahiranView {
+import com.codelab.helmi.simades.base.View;
+
+public interface KelahiranView extends View{
+    void onShowData(KelahiranData kelahiranData);
 }
