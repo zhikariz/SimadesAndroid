@@ -2,6 +2,8 @@ package com.codelab.helmi.simades.penduduk;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,14 +14,18 @@ public class PendudukActivity extends Fragment implements  PendudukView{
 
     PendudukPresenter presenter;
     View view;
+    private RecyclerView mRecycler;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mManager;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
 
-        view = inflater.inflate(R.layout.activity_penduduk, container, false);
+        view = inflater.inflate(R.layout.recycle_content, container, false);
         initPresenter();
+        initView();
         onAttachView();
         getActivity().setTitle("Penduduk");
 
@@ -27,8 +33,14 @@ public class PendudukActivity extends Fragment implements  PendudukView{
 
     }
 
+    private void initView() {
+        mRecycler = (RecyclerView) view.findViewById(R.id.recyclerTemp);
+        mManager = new LinearLayoutManager(getActivity().getApplicationContext());
+        mRecycler.setLayoutManager(mManager);
+    }
+
     private void initPresenter() {
-        presenter = new PendudukPresenter();
+        presenter = new PendudukPresenter(mAdapter);
     }
 
     @Override
@@ -39,6 +51,7 @@ public class PendudukActivity extends Fragment implements  PendudukView{
     @Override
     public void onAttachView() {
         presenter.onAttach(this);
+        presenter.showData(getActivity().getApplicationContext(), mRecycler);
 
     }
 

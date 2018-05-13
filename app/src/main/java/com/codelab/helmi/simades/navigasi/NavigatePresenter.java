@@ -15,4 +15,6 @@ public class NavigatePresenter implements Presenter<NavigateView> {
     public void onDetach() {
         nView = null;
     }
+
+
 }

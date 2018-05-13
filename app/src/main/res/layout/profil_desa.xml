@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:padding="16dp">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
 
         <ImageView
             android:id="@+id/ivGambar"
@@ -25,7 +30,7 @@
             android:layout_height="wrap_content"
             android:enabled="false"
             android:paddingLeft="10dp"
-            android:text="0000"
+            android:text=""
             android:textColor="#000"
             android:textSize="14sp"
             android:textStyle="bold" />
@@ -44,7 +49,7 @@
             android:layout_height="wrap_content"
             android:enabled="false"
             android:paddingLeft="10dp"
-            android:text="Bolon"
+            android:text=""
             android:textColor="#000"
             android:textSize="14sp"
             android:textStyle="bold" />
@@ -64,7 +69,7 @@
             android:layout_height="wrap_content"
             android:enabled="false"
             android:paddingLeft="10dp"
-            android:text="Colomadu"
+            android:text=""
             android:textColor="#000"
             android:textSize="14sp"
             android:textStyle="bold" />
@@ -83,7 +88,7 @@
             android:layout_height="wrap_content"
             android:enabled="false"
             android:paddingLeft="10dp"
-            android:text="Karanganyar"
+            android:text=""
             android:textColor="#000"
             android:textSize="14sp"
             android:textStyle="bold" />
@@ -103,7 +108,7 @@
             android:layout_height="wrap_content"
             android:enabled="false"
             android:paddingLeft="10dp"
-            android:text="Jawa Tengah"
+            android:text=""
             android:textColor="#000"
             android:textSize="14sp"
             android:textStyle="bold" />
@@ -122,7 +127,7 @@
             android:layout_height="wrap_content"
             android:enabled="false"
             android:paddingLeft="10dp"
-            android:text="Darto Imam"
+            android:text=""
             android:textColor="#000"
             android:textSize="14sp"
             android:textStyle="bold" />
@@ -141,7 +146,7 @@
             android:layout_height="wrap_content"
             android:enabled="false"
             android:paddingLeft="10dp"
-            android:text="898988976986776565"
+            android:text=""
             android:textColor="#000"
             android:textSize="14sp"
             android:textStyle="bold" />
@@ -160,7 +165,7 @@
             android:layout_height="wrap_content"
             android:enabled="false"
             android:paddingLeft="10dp"
-            android:text="Jl. Tentara Pelajar Bolon"
+            android:text=""
             android:textColor="#000"
             android:textSize="14sp"
             android:textStyle="bold" />
@@ -179,7 +184,7 @@
             android:layout_height="wrap_content"
             android:enabled="false"
             android:paddingLeft="10dp"
-            android:text="(0271) 898764"
+            android:text=""
             android:textColor="#000"
             android:textSize="14sp"
             android:textStyle="bold" />
@@ -198,7 +203,7 @@
             android:layout_height="wrap_content"
             android:enabled="false"
             android:paddingLeft="10dp"
-            android:text="57178"
+            android:text=""
             android:textColor="#000"
             android:textSize="14sp"
             android:textStyle="bold" />
@@ -221,5 +226,6 @@
                 android:text="Kembali" />
 
     </LinearLayout>
+        </LinearLayout>
 
-</LinearLayout>
+</ScrollView>

@@ -10,7 +10,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.widget.Gallery;
 
 import com.codelab.helmi.simades.HomeActivity;
 import com.codelab.helmi.simades.R;
@@ -20,7 +19,6 @@ import com.codelab.helmi.simades.kematian.KematianActivity;
 import com.codelab.helmi.simades.penduduk.PendudukActivity;
 import com.codelab.helmi.simades.pergi.PergiActivity;
 import com.codelab.helmi.simades.profil.ProfilActivity;
-import com.codelab.helmi.simades.profil.ProfilPresenter;
 import com.codelab.helmi.simades.user.UserActivity;
 
 public class NavigateActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,NavigateView {
@@ -37,18 +35,7 @@ public class NavigateActivity extends AppCompatActivity implements NavigationVie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initPresenter();
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-
-        navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-
+        setNavigasi();
         // tampilan default awal ketika aplikasii dijalankan
         if (savedInstanceState == null) {
             fragment = new HomeActivity();
@@ -69,6 +56,20 @@ public class NavigateActivity extends AppCompatActivity implements NavigationVie
         } else {
             super.onBackPressed();
         }
+    }
+
+    public void setNavigasi(){
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
