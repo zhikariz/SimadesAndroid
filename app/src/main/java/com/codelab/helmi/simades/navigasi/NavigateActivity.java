@@ -18,7 +18,7 @@ import com.codelab.helmi.simades.kelahiran.KelahiranActivity;
 import com.codelab.helmi.simades.kematian.KematianActivity;
 import com.codelab.helmi.simades.penduduk.PendudukActivity;
 import com.codelab.helmi.simades.pergi.PergiActivity;
-import com.codelab.helmi.simades.profil.ProfilActivity;
+import com.codelab.helmi.simades.profil.ShowProfilActivity;
 import com.codelab.helmi.simades.user.UserActivity;
 
 public class NavigateActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,NavigateView {
@@ -80,7 +80,7 @@ public class NavigateActivity extends AppCompatActivity implements NavigationVie
 
         // Untuk memanggil layout dari menu yang dipilih
         if (id == R.id.profil) {
-            fragment = new ProfilActivity();
+            fragment = new ShowProfilActivity();
             callFragment(fragment);
         }else if (id == R.id.home) {
             fragment = new HomeActivity();

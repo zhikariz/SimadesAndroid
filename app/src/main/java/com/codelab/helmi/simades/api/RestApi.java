@@ -1,5 +1,6 @@
 package com.codelab.helmi.simades.api;
 
+import com.codelab.helmi.simades.datang.DatangResponseModel;
 import com.codelab.helmi.simades.kelahiran.KelahiranResponseModel;
 import com.codelab.helmi.simades.kematian.KematianResponseModel;
 import com.codelab.helmi.simades.penduduk.PendudukResponseModel;
@@ -34,5 +35,8 @@ public interface RestApi {
 
     @GET("api/pergi")
     Call<PergiResponseModel> getPergiData();
+
+    @GET("api/datang")
+    Call<DatangResponseModel> getDatangData();
 
 }

@@ -1,6 +1,7 @@
 package com.codelab.helmi.simades.profil;
 
 import com.google.gson.annotations.SerializedName;
+
 @SuppressWarnings("unused")
 public class ProfilData {
 
@@ -29,7 +30,7 @@ public class ProfilData {
     @SerializedName("image")
     private String image;
 
-    public ProfilData(){
+    public ProfilData() {
 
     }
 
@@ -128,7 +129,6 @@ public class ProfilData {
     public void setImage(String image) {
         this.image = image;
     }
-
 
 
 }

@@ -19,8 +19,6 @@ public class ProfilPresenter implements Presenter<ProfilView> {
     public List<ProfilData> mItems = new ArrayList<>();
 
 
-
-
     @Override
     public void onAttach(ProfilView view) {
         pView = view;
@@ -38,27 +36,31 @@ public class ProfilPresenter implements Presenter<ProfilView> {
         getdata.enqueue(new Callback<ProfilResponseModel>() {
             @Override
             public void onResponse(Call<ProfilResponseModel> call, Response<ProfilResponseModel> response) {
-                mItems = response.body().getResult();
-                profilData.setKode_desa(mItems.get(0).getKode_desa().toString());
-                profilData.setNm_desa(mItems.get(0).getNm_desa().toString());
-                profilData.setKecamatan(mItems.get(0).getKecamatan().toString());
-                profilData.setKabupaten(mItems.get(0).getKabupaten().toString());
-                profilData.setPropinsi(mItems.get(0).getPropinsi().toString());
-                profilData.setNm_kepdes(mItems.get(0).getNm_kepdes().toString());
-                profilData.setNip_kepdes(mItems.get(0).getNip_kepdes().toString());
-                profilData.setAlamat_desa(mItems.get(0).getAlamat_desa().toString());
-                profilData.setNo_telp(mItems.get(0).getNo_telp().toString());
-                profilData.setKode_pos(mItems.get(0).getKode_pos().toString());
-                profilData.setImage(mItems.get(0).getImage().toString());
+                int kode = response.body().getKode();
+                if(kode == 1) {
+                    mItems = response.body().getResult();
+                    profilData.setKode_desa(mItems.get(0).getKode_desa());
+                    profilData.setNm_desa(mItems.get(0).getNm_desa());
+                    profilData.setKecamatan(mItems.get(0).getKecamatan());
+                    profilData.setKabupaten(mItems.get(0).getKabupaten());
+                    profilData.setPropinsi(mItems.get(0).getPropinsi());
+                    profilData.setNm_kepdes(mItems.get(0).getNm_kepdes());
+                    profilData.setNip_kepdes(mItems.get(0).getNip_kepdes());
+                    profilData.setAlamat_desa(mItems.get(0).getAlamat_desa());
+                    profilData.setNo_telp(mItems.get(0).getNo_telp());
+                    profilData.setKode_pos(mItems.get(0).getKode_pos());
+                    profilData.setImage(mItems.get(0).getImage());
 
 
+                    pView.onShowData(profilData);
+                }else{
 
-                pView.onShowData(profilData);
+                }
             }
 
             @Override
             public void onFailure(Call<ProfilResponseModel> call, Throwable t) {
-
+                Log.d("Error", t.getMessage());
             }
         });
 

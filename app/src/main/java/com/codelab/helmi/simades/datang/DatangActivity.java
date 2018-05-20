@@ -2,6 +2,8 @@ package com.codelab.helmi.simades.datang;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,23 +15,35 @@ public class DatangActivity extends Fragment implements DatangView {
     DatangPresenter presenter;
     View view;
 
+    private RecyclerView mRecycler;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mManager;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
 
-        view = inflater.inflate(R.layout.activity_datang, container, false);
+        view = inflater.inflate(R.layout.recycle_content, container, false);
         initPresenter();
+        initView();
         onAttachView();
+
         getActivity().setTitle("Datang");
 
         return view;
 
     }
 
+    private void initView() {
+        mRecycler = (RecyclerView) view.findViewById(R.id.recyclerTemp);
+        mManager = new LinearLayoutManager(getActivity().getApplicationContext());
+        mRecycler.setLayoutManager(mManager);
+    }
+
     private void initPresenter() {
-        presenter = new DatangPresenter();
+        presenter = new DatangPresenter(mAdapter);
     }
 
 
@@ -41,6 +55,7 @@ public class DatangActivity extends Fragment implements DatangView {
     @Override
     public void onAttachView() {
         presenter.onAttach(this);
+        presenter.showData(getActivity().getApplicationContext(), mRecycler);
     }
 
     @Override

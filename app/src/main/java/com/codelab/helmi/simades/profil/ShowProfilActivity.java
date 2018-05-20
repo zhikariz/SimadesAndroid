@@ -2,33 +2,28 @@ package com.codelab.helmi.simades.profil;
 
 
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.codelab.helmi.simades.R;
-import com.codelab.helmi.simades.api.RestApi;
 import com.codelab.helmi.simades.api.RestServer;
-import com.squareup.picasso.Picasso;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 
-public class ProfilActivity extends Fragment implements ProfilView {
+public class ShowProfilActivity extends Fragment implements ProfilView {
 
     ProfilPresenter presenter;
     EditText kode_desa, nm_desa, kecamatan, kabupaten, provinsi, nm_kepdes, nip_kepdes, alamat_desa, no_telp, kode_pos;
     ImageView image;
+    Button btnEditProfilDesa;
     View view;
+    FragmentManager fragmentManager;
 
 
     @Override
@@ -36,21 +31,37 @@ public class ProfilActivity extends Fragment implements ProfilView {
                              Bundle savedInstanceState) {
 
 
-        view = inflater.inflate(R.layout.profil_desa, container, false);
+        view = inflater.inflate(R.layout.activity_profildesa, container, false);
 
         initPresenter();
 
         initView();
+        btnListener();
         onAttachView();
 
         getActivity().setTitle("Profil Desa");
-
 
 
         return view;
 
 
     }
+
+    private void btnListener() {
+        btnEditProfilDesa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.frame_container, new EditProfilFragment())
+                        .addToBackStack(null)
+                        .commit();
+
+            }
+        });
+    }
+
 
     private void initPresenter() {
         presenter = new ProfilPresenter();
@@ -70,6 +81,7 @@ public class ProfilActivity extends Fragment implements ProfilView {
         no_telp = view.findViewById(R.id.edtNoTelp);
         kode_pos = view.findViewById(R.id.edtKodePos);
         image = view.findViewById(R.id.ivGambar);
+        btnEditProfilDesa = view.findViewById(R.id.btnEditProfilDesa);
     }
 
     @Override
@@ -91,9 +103,15 @@ public class ProfilActivity extends Fragment implements ProfilView {
         alamat_desa.setText(profilData.getAlamat_desa());
         no_telp.setText(profilData.getNo_telp());
         kode_pos.setText(profilData.getKode_pos());
-        Picasso.get().load(api.getBase_url()+"/uploads/image/"+profilData.getImage()).into(image);
+        Glide.with(this).load(api.getBase_url() + "uploads/image/" + profilData.getImage()).into(image);
+
+
     }
 
+    @Override
+    public void onEditData(ProfilData profilData) {
+
+    }
 
 
     @Override

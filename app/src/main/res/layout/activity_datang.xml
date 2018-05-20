@@ -54,7 +54,7 @@
                 <TextView
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
-                    android:text="Nama Bayi"
+                    android:text="Alamat Asal"
                     android:textColor="#000"
                     android:textSize="17sp"
                     android:textStyle="bold" />
@@ -65,7 +65,7 @@
                     android:text=":" />
 
                 <TextView
-                    android:id="@+id/tvNamaBayi"
+                    android:id="@+id/tv_alamat_asal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text=""
@@ -84,7 +84,7 @@
                 <TextView
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
-                    android:text="Tanggal Lahir Bayi"
+                    android:text="Alasan"
                     android:textColor="#000"
                     android:textSize="17sp"
                     android:textStyle="bold" />
@@ -95,7 +95,37 @@
                     android:text=":" />
 
                 <TextView
-                    android:id="@+id/tvTTLBayi"
+                    android:id="@+id/tv_alasan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="#000"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <TextView
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:text="Pengikut"
+                    android:textColor="#000"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="5dp"
+                    android:layout_height="wrap_content"
+                    android:text=":" />
+
+                <TextView
+                    android:id="@+id/tv_pengikut"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text=""
