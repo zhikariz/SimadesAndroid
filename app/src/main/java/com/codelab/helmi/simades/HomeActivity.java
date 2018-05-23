@@ -15,7 +15,7 @@ public class HomeActivity extends Fragment {
                              Bundle savedInstanceState) {
 
 
-        view = inflater.inflate(R.layout.activity_home, container, false);
+        view = inflater.inflate(R.layout.fragment_home, container, false);
         getActivity().setTitle("Home");
 
         return view;

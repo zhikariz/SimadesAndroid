@@ -19,6 +19,7 @@ import com.codelab.helmi.simades.kematian.KematianActivity;
 import com.codelab.helmi.simades.penduduk.PendudukActivity;
 import com.codelab.helmi.simades.pergi.PergiActivity;
 import com.codelab.helmi.simades.profil.ShowProfilActivity;
+import com.codelab.helmi.simades.surat.HomeSuratFragment;
 import com.codelab.helmi.simades.user.UserActivity;
 
 public class NavigateActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,NavigateView {
@@ -33,7 +34,7 @@ public class NavigateActivity extends AppCompatActivity implements NavigationVie
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_navigate);
         initPresenter();
         setNavigasi();
         // tampilan default awal ketika aplikasii dijalankan
@@ -102,6 +103,9 @@ public class NavigateActivity extends AppCompatActivity implements NavigationVie
             callFragment(fragment);
         } else if( id == R.id.user ){
             fragment = new UserActivity();
+            callFragment(fragment);
+        } else if(id == R.id.pengajuan_surat){
+            fragment = new HomeSuratFragment();
             callFragment(fragment);
         }
 

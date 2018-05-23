@@ -26,7 +26,7 @@ public class PergiRecyclerAdapter extends RecyclerView.Adapter<PergiRecyclerAdap
     @NonNull
     @Override
     public MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View layout = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_pergi,parent, false);
+        View layout = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_pergi,parent, false);
         MyHolder holder = new MyHolder(layout);
         return holder;
     }

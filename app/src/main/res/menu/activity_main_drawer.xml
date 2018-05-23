@@ -13,7 +13,7 @@
             android:title="Penduduk" />
         <item
             android:id="@+id/pengajuan_surat"
-            android:icon="@drawable/ic_menu_send"
+            android:icon="@drawable/ic_email_48px"
             android:title="Pengajuan Surat" />
 
     </group>

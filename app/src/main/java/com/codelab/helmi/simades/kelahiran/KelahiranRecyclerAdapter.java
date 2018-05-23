@@ -27,7 +27,7 @@ public class KelahiranRecyclerAdapter extends RecyclerView.Adapter<KelahiranRecy
     @NonNull
     @Override
     public KelahiranRecyclerAdapter.MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View layout = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_kelahiran,parent, false);
+        View layout = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_kelahiran,parent, false);
         MyHolder holder = new MyHolder(layout);
         return holder;
     }

@@ -31,7 +31,7 @@ public class ShowProfilActivity extends Fragment implements ProfilView {
                              Bundle savedInstanceState) {
 
 
-        view = inflater.inflate(R.layout.activity_profildesa, container, false);
+        view = inflater.inflate(R.layout.fragment_profil_desa, container, false);
 
         initPresenter();
 

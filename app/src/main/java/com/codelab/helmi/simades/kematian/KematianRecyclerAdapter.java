@@ -27,7 +27,7 @@ public class KematianRecyclerAdapter extends RecyclerView.Adapter<KematianRecycl
     @NonNull
     @Override
     public MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View layout = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_kematian,parent, false);
+        View layout = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_kematian,parent, false);
         MyHolder holder = new MyHolder(layout);
         return holder;
     }

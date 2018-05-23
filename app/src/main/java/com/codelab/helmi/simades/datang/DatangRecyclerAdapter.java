@@ -27,7 +27,7 @@ public class DatangRecyclerAdapter extends RecyclerView.Adapter<DatangRecyclerAd
     @NonNull
     @Override
     public MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View layout = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_datang,parent,false);
+        View layout = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_datang,parent,false);
         MyHolder holder = new MyHolder(layout);
         return holder;
     }

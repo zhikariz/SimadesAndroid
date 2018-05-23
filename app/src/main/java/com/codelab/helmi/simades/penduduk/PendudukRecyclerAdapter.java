@@ -10,7 +10,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.codelab.helmi.simades.R;
-import com.codelab.helmi.simades.kelahiran.KelahiranRecyclerAdapter;
 
 
 import java.util.List;
@@ -30,7 +29,7 @@ public class PendudukRecyclerAdapter extends RecyclerView.Adapter<PendudukRecycl
     @NonNull
     @Override
     public MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View layout = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_penduduk,parent, false);
+        View layout = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_penduduk,parent, false);
         MyHolder holder = new MyHolder(layout);
         return holder;
     }
