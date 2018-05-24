@@ -6,6 +6,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.codelab.helmi.simades.R;
 
@@ -30,8 +32,19 @@ public class SuratKelahiranRecyclerAdapter extends RecyclerView.Adapter<SuratKel
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final MyHolder holder, int position) {
+        holder.kode_surat.setText(mList.get(position).getKd_surat());
+        holder.no_surat.setText(mList.get(position).getNo_surat());
+        holder.tgl_surat.setText(mList.get(position).getTgl_surat());
+        holder.status_persetujuan.setText(mList.get(position).getStatus_persetujuan());
 
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(ctx, ""+holder.no_surat.getText().toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 
@@ -41,9 +54,17 @@ public class SuratKelahiranRecyclerAdapter extends RecyclerView.Adapter<SuratKel
     }
 
     public class MyHolder extends RecyclerView.ViewHolder {
+        TextView id_surat, kode_surat, no_surat, jenis_surat;
+        TextView tgl_surat, waktu, status_persetujuan;
 
-        public MyHolder(View itemView) {
-            super(itemView);
+        public MyHolder(View v) {
+            super(v);
+
+            kode_surat = v.findViewById(R.id.tv_kode_surat_kelahiran);
+            no_surat = v.findViewById(R.id.tv_nomor_surat_kelahiran);
+            tgl_surat = v.findViewById(R.id.tv_tanggal_surat_kelahiran);
+            status_persetujuan = v.findViewById(R.id.tv_status_persetujauan_surat_kelahiran);
+
         }
     }
 }

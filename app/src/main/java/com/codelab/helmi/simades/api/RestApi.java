@@ -8,6 +8,7 @@ import com.codelab.helmi.simades.pergi.PergiResponseModel;
 import com.codelab.helmi.simades.profil.ProfilData;
 import com.codelab.helmi.simades.profil.ProfilResponseModel;
 import com.codelab.helmi.simades.surat.kelahiran.SuratKelahiranResponseModel;
+import com.codelab.helmi.simades.surat.usaha.SuratUsahaResponseModel;
 import com.codelab.helmi.simades.user.UserResponseModel;
 
 import retrofit2.Call;
@@ -42,5 +43,8 @@ public interface RestApi {
 
     @GET("api/surat_kelahiran")
     Call<SuratKelahiranResponseModel> getSuratKelahiranData();
+
+    @GET("api/surat_usaha")
+    Call<SuratUsahaResponseModel> getSuratUsahaData();
 
 }

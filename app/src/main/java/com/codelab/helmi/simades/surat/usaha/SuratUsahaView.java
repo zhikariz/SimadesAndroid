@@ -1,4 +1,7 @@
 package com.codelab.helmi.simades.surat.usaha;
 
-public interface SuratUsahaView {
+import com.codelab.helmi.simades.base.View;
+
+public interface SuratUsahaView extends View {
+    void onShowData(SuratUsahaData suratUsahaData);
 }

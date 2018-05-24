@@ -30,8 +30,10 @@ public class SuratKelahiranFragment extends Fragment implements SuratKelahiranVi
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_surat_kelahiran, container, false);
+        view = inflater.inflate(R.layout.recycle_content, container, false);
         initPresenter();
+        initView();
+        onAttachView();
         getActivity().setTitle("Surat Kelahiran");
         return view;
     }
