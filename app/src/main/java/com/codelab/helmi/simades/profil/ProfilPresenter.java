@@ -1,6 +1,8 @@
 package com.codelab.helmi.simades.profil;
 
+import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.codelab.helmi.simades.api.RestApi;
 import com.codelab.helmi.simades.api.RestServer;
@@ -29,15 +31,16 @@ public class ProfilPresenter implements Presenter<ProfilView> {
         pView = null;
     }
 
-    public void showData() {
+    public void showData(final Context ctx) {
         final ProfilData profilData = new ProfilData();
         RestApi api = RestServer.getClient().create(RestApi.class);
         Call<ProfilResponseModel> getdata = api.getProfilData();
         getdata.enqueue(new Callback<ProfilResponseModel>() {
             @Override
             public void onResponse(Call<ProfilResponseModel> call, Response<ProfilResponseModel> response) {
-                int kode = response.body().getKode();
-                if(kode == 1) {
+                try {
+                    int kode = response.body().getKode();
+
                     mItems = response.body().getResult();
                     profilData.setKode_desa(mItems.get(0).getKode_desa());
                     profilData.setNm_desa(mItems.get(0).getNm_desa());
@@ -53,14 +56,15 @@ public class ProfilPresenter implements Presenter<ProfilView> {
 
 
                     pView.onShowData(profilData);
-                }else{
-
+                } catch (Exception e){
+                    Toast.makeText(ctx, "Anda Tidak Terkoneksi Internet !", Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
                 }
             }
 
             @Override
             public void onFailure(Call<ProfilResponseModel> call, Throwable t) {
-                Log.d("Error", t.getMessage());
+               // Log.d("Error", t.getMessage());
             }
         });
 

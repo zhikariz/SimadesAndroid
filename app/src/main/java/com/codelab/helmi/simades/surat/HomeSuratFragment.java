@@ -7,10 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.codelab.helmi.simades.R;
 import com.codelab.helmi.simades.surat.bepergian.SuratBepergianFragment;
@@ -94,8 +91,8 @@ public class HomeSuratFragment extends Fragment implements View.OnClickListener 
     private void callFragment(Fragment fragment) {
         fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.frame_container, fragment)
-                .addToBackStack(null)
+                .replace(R.id.frame_container, fragment, fragment.getClass().getSimpleName())
+                .addToBackStack(fragment.getClass().getSimpleName())
                 .commit();
     }
 

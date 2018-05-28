@@ -19,6 +19,51 @@ public class SuratKelahiranData {
     private String waktu;
     @SerializedName("status_persetujuan")
     private String status_persetujuan;
+    @SerializedName("nik")
+    private String nik;
+    @SerializedName("nik_ayah")
+    private String nik_ayah;
+    @SerializedName("nik_ibu")
+    private String nik_ibu;
+    @SerializedName("id_user_ttd")
+    private String id_user_ttd;
+    @SerializedName("no_kk")
+    private String no_kk;
+    @SerializedName("nama_depan")
+    private String nama_depan;
+    @SerializedName("nama_belakang")
+    private String nama_belakang;
+    @SerializedName("jekel")
+    private String jekel;
+    @SerializedName("umur")
+    private String umur;
+    @SerializedName("id_agama")
+    private String id_agama;
+    @SerializedName("id_goldar")
+    private String id_goldar;
+    @SerializedName("id_stskawin")
+    private String id_stskawin;
+    @SerializedName("tempat_lhr")
+    private String tempat_lhr;
+    @SerializedName("tangaal_lhr")
+    private String tanggal_lhr;
+    @SerializedName("nama_ayah")
+    private String nama_ayah;
+    @SerializedName("nama_ibu")
+    private String nama_ibu;
+    @SerializedName("anak_ke")
+    private String anak_ke;
+    @SerializedName("id_kerja")
+    private String id_kerja;
+    @SerializedName("id_hubkel")
+    private String id_hubkel;
+    @SerializedName("id_pendidikan")
+    private String id_pendidikan;
+    @SerializedName("status")
+    private String status;
+    @SerializedName("tgl_mutasi")
+    private String tgl_mutasi;
+
 
 
     public String getId_surat() {

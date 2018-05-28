@@ -16,7 +16,7 @@ import com.codelab.helmi.simades.R;
 import com.codelab.helmi.simades.datang.DatangActivity;
 import com.codelab.helmi.simades.kelahiran.KelahiranActivity;
 import com.codelab.helmi.simades.kematian.KematianActivity;
-import com.codelab.helmi.simades.penduduk.PendudukActivity;
+import com.codelab.helmi.simades.kk.ShowKkFragment;
 import com.codelab.helmi.simades.pergi.PergiActivity;
 import com.codelab.helmi.simades.profil.ShowProfilActivity;
 import com.codelab.helmi.simades.surat.HomeSuratFragment;
@@ -87,7 +87,7 @@ public class NavigateActivity extends AppCompatActivity implements NavigationVie
             fragment = new HomeActivity();
             callFragment(fragment);
         } else if (id == R.id.penduduk) {
-            fragment = new PendudukActivity();
+            fragment = new ShowKkFragment();
             callFragment(fragment);
         } else if (id == R.id.kelahiran) {
             fragment = new KelahiranActivity();
@@ -118,7 +118,7 @@ public class NavigateActivity extends AppCompatActivity implements NavigationVie
     private void callFragment(Fragment fragment) {
         fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.frame_container, fragment)
+                .replace(R.id.frame_container, fragment, fragment.getClass().getSimpleName())
                 .commit();
     }
 

@@ -11,13 +11,9 @@ import android.widget.Toast;
 
 import com.codelab.helmi.simades.R;
 
-
 import java.util.List;
 
-
 public class PendudukRecyclerAdapter extends RecyclerView.Adapter<PendudukRecyclerAdapter.MyHolder> {
-
-
     List<PendudukData> mList ;
     Context ctx;
 

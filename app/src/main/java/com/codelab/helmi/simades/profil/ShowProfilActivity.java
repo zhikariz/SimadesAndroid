@@ -87,7 +87,7 @@ public class ShowProfilActivity extends Fragment implements ProfilView {
     @Override
     public void onAttachView() {
         presenter.onAttach(this);
-        presenter.showData();
+        presenter.showData(getActivity().getApplicationContext());
     }
 
     @Override

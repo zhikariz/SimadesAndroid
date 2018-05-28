@@ -7,8 +7,6 @@ import com.codelab.helmi.simades.api.RestApi;
 import com.codelab.helmi.simades.api.RestServer;
 import com.codelab.helmi.simades.base.Presenter;
 
-
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +15,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class PendudukPresenter implements Presenter<PendudukView> {
-
     private PendudukView pendudukView;
     RecyclerView.Adapter mAdapter;
     public List<PendudukData> mItems = new ArrayList<>();
@@ -36,10 +33,10 @@ public class PendudukPresenter implements Presenter<PendudukView> {
         pendudukView = null;
     }
 
-    public void showData(final Context ctx, final RecyclerView mRecycler){
+    public void showData(final Context ctx, final RecyclerView mRecycler,String nik){
         final PendudukData pendudukData = new PendudukData();
         RestApi api = RestServer.getClient().create(RestApi.class);
-        Call<PendudukResponseModel> getData = api.getPendudukData();
+        Call<PendudukResponseModel> getData = api.getPendudukData(nik);
         getData.enqueue(new Callback<PendudukResponseModel>() {
             @Override
             public void onResponse(Call<PendudukResponseModel> call, Response<PendudukResponseModel> response) {

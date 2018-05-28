@@ -10,13 +10,13 @@ import android.view.ViewGroup;
 
 import com.codelab.helmi.simades.R;
 
-public class PendudukActivity extends Fragment implements  PendudukView{
-
+public class ShowPendudukFragment extends Fragment implements PendudukView {
     PendudukPresenter presenter;
     View view;
     private RecyclerView mRecycler;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mManager;
+    public static String EXTRA_NIK = "extra_nik";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -51,7 +51,7 @@ public class PendudukActivity extends Fragment implements  PendudukView{
     @Override
     public void onAttachView() {
         presenter.onAttach(this);
-        presenter.showData(getActivity().getApplicationContext(), mRecycler);
+        presenter.showData(getActivity().getApplicationContext(), mRecycler, getArguments().getString(EXTRA_NIK));
 
     }
 
