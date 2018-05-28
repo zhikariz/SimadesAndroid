@@ -60,7 +60,7 @@ public class SuratUsahaRecyclerAdapter extends RecyclerView.Adapter<SuratUsahaRe
             kode_surat = v.findViewById(R.id.tv_kode_surat_usaha);
             no_surat = v.findViewById(R.id.tv_nomor_surat_usaha);
             tgl_surat = v.findViewById(R.id.tv_tanggal_surat_usaha);
-            status_persetujuan = v.findViewById(R.id.tv_status_persetujauan_surat_usaha);
+            status_persetujuan = v.findViewById(R.id.tv_status_persetujuan_surat_usaha);
 
         }
     }

@@ -1,4 +1,7 @@
 package com.codelab.helmi.simades.surat.skck;
 
-public interface SuratSkckView {
+import com.codelab.helmi.simades.base.View;
+
+public interface SuratSkckView extends View{
+    void onShowData(SuratSkckData suratSkckData);
 }

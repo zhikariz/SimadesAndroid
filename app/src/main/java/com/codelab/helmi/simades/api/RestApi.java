@@ -7,8 +7,18 @@ import com.codelab.helmi.simades.penduduk.PendudukResponseModel;
 import com.codelab.helmi.simades.pergi.PergiResponseModel;
 import com.codelab.helmi.simades.profil.ProfilData;
 import com.codelab.helmi.simades.profil.ProfilResponseModel;
+import com.codelab.helmi.simades.surat.bepergian.SuratBepergianResponseModel;
+import com.codelab.helmi.simades.surat.blm_menikah.SuratBlmMenikahResponseModel;
+import com.codelab.helmi.simades.surat.domisili.SuratDomisiliResponseModel;
+import com.codelab.helmi.simades.surat.ektp.SuratEktpResponseModel;
+import com.codelab.helmi.simades.surat.kehilangan.SuratKehilanganResponseModel;
 import com.codelab.helmi.simades.surat.kelahiran.SuratKelahiranResponseModel;
+import com.codelab.helmi.simades.surat.kematian.SuratKematianResponseModel;
+import com.codelab.helmi.simades.surat.keramaian.SuratKeramaianResponseModel;
+import com.codelab.helmi.simades.surat.skck.SuratSkckResponseModel;
+import com.codelab.helmi.simades.surat.tidak_mampu.SuratTidakMampuResponseModel;
 import com.codelab.helmi.simades.surat.usaha.SuratUsahaResponseModel;
+import com.codelab.helmi.simades.surat.wali.SuratWaliResponseModel;
 import com.codelab.helmi.simades.user.UserResponseModel;
 
 import retrofit2.Call;
@@ -46,5 +56,35 @@ public interface RestApi {
 
     @GET("api/surat_usaha")
     Call<SuratUsahaResponseModel> getSuratUsahaData();
+
+    @GET("api/surat_kematian")
+    Call<SuratKematianResponseModel> getSuratKematianData();
+
+    @GET("api/surat_pengantar_skck")
+    Call<SuratSkckResponseModel> getSuratPengantarSkckData();
+
+    @GET("api/surat_wali")
+    Call<SuratWaliResponseModel> getSuratWaliData();
+
+    @GET("api/surat_blm_menikah")
+    Call<SuratBlmMenikahResponseModel> getSuratBlmMenikahData();
+
+    @GET("api/surat_izin_keramaian")
+    Call<SuratKeramaianResponseModel> getSuratIzinKeramaianData();
+
+    @GET("api/surat_bepergian")
+    Call<SuratBepergianResponseModel> getSuratBepergianData();
+
+    @GET("api/surat_kehilangan")
+    Call<SuratKehilanganResponseModel> getSuratKehilanganData();
+
+    @GET("api/surat_tidak_mampu")
+    Call<SuratTidakMampuResponseModel> getSuratTidakMampuData();
+
+    @GET("api/surat_domisili")
+    Call<SuratDomisiliResponseModel> getSuratDomisiliData();
+
+    @GET("api/surat_pengantar_ektp")
+    Call<SuratEktpResponseModel> getSuratPengantarEktpData();
 
 }

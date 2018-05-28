@@ -1,4 +1,7 @@
 package com.codelab.helmi.simades.surat.kehilangan;
 
-public interface SuratKehilanganView {
+import com.codelab.helmi.simades.base.View;
+
+public interface SuratKehilanganView extends View {
+    void onShowData(SuratKehilanganData suratKehilanganData);
 }

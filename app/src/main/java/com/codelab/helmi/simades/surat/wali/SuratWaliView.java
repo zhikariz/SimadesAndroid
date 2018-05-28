@@ -1,4 +1,8 @@
 package com.codelab.helmi.simades.surat.wali;
 
-public interface SuratWaliView {
+import com.codelab.helmi.simades.base.View;
+
+public interface SuratWaliView extends View {
+    void onShowData(SuratWaliData suratWaliData);
+
 }
