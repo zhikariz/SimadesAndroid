@@ -7,7 +7,6 @@ import com.codelab.helmi.simades.api.RestApi;
 import com.codelab.helmi.simades.api.RestServer;
 import com.codelab.helmi.simades.base.Presenter;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +21,7 @@ public class KelahiranPresenter implements Presenter<KelahiranView> {
     private KelahiranView kelahiranView;
     public List<KelahiranData> mItems = new ArrayList<>();
 
-    public KelahiranPresenter(RecyclerView.Adapter mAdapter){
+    public KelahiranPresenter(RecyclerView.Adapter mAdapter) {
         this.mAdapter = mAdapter;
     }
 
@@ -36,8 +35,7 @@ public class KelahiranPresenter implements Presenter<KelahiranView> {
         kelahiranView = null;
     }
 
-    public void showData(final Context ctx, final RecyclerView mRecycler)
-    {
+    public void showData(final Context ctx, final RecyclerView mRecycler) {
         final KelahiranData kelahiranData = new KelahiranData();
         RestApi api = RestServer.getClient().create(RestApi.class);
         Call<KelahiranResponseModel> getData = api.getKelahiranData();
@@ -45,7 +43,7 @@ public class KelahiranPresenter implements Presenter<KelahiranView> {
             @Override
             public void onResponse(Call<KelahiranResponseModel> call, Response<KelahiranResponseModel> response) {
                 mItems = response.body().getResult();
-                mAdapter = new KelahiranRecyclerAdapter(ctx,mItems);
+                mAdapter = new KelahiranRecyclerAdapter(ctx, mItems);
                 mRecycler.setAdapter(mAdapter);
             }
 

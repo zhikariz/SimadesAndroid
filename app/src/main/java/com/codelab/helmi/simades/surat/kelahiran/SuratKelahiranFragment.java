@@ -1,8 +1,8 @@
 package com.codelab.helmi.simades.surat.kelahiran;
 
 
-import android.os.Bundle;
 import android.app.Fragment;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,13 +14,14 @@ import com.codelab.helmi.simades.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SuratKelahiranFragment extends Fragment implements SuratKelahiranView{
+public class SuratKelahiranFragment extends Fragment implements SuratKelahiranView {
 
     private RecyclerView mRecycler;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mManager;
     SuratKelahiranPresenter presenter;
     View view;
+
     public SuratKelahiranFragment() {
         // Required empty public constructor
     }
@@ -56,7 +57,7 @@ public class SuratKelahiranFragment extends Fragment implements SuratKelahiranVi
     @Override
     public void onAttachView() {
         presenter.onAttach(this);
-        presenter.showData(getActivity().getApplicationContext(), mRecycler);
+        presenter.showData(getActivity().getApplicationContext(), mRecycler,getFragmentManager());
     }
 
     @Override

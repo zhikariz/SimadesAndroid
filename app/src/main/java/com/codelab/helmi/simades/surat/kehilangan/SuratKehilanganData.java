@@ -1,6 +1,7 @@
 package com.codelab.helmi.simades.surat.kehilangan;
 
 import com.google.gson.annotations.SerializedName;
+
 @SuppressWarnings("unused")
 public class SuratKehilanganData {
     @SerializedName("id_surat")

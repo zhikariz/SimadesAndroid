@@ -92,7 +92,6 @@ public class ShowProfilActivity extends Fragment implements ProfilView {
 
     @Override
     public void onShowData(ProfilData profilData) {
-        RestServer api = new RestServer();
         kode_desa.setText(profilData.getKode_desa());
         nm_desa.setText(profilData.getNm_desa());
         kecamatan.setText(profilData.getKecamatan());
@@ -103,7 +102,7 @@ public class ShowProfilActivity extends Fragment implements ProfilView {
         alamat_desa.setText(profilData.getAlamat_desa());
         no_telp.setText(profilData.getNo_telp());
         kode_pos.setText(profilData.getKode_pos());
-        Glide.with(this).load(api.getBase_url() + "uploads/image/" + profilData.getImage()).into(image);
+        Glide.with(view.getContext()).load(RestServer.getBase_url() + "uploads/image/" + profilData.getImage()).into(image);
 
 
     }

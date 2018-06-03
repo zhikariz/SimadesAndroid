@@ -1,6 +1,5 @@
 package com.codelab.helmi.simades.surat.kematian;
 
-import com.codelab.helmi.simades.surat.kelahiran.SuratKelahiranData;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;

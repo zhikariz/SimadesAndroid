@@ -184,37 +184,38 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:text="Logo Desa"
             android:textColor="#000"
-            android:textSize="12sp"
-            android:text="Logo Desa"/>
+            android:textSize="12sp" />
 
         <Button
-            android:layout_marginTop="5dp"
             android:id="@+id/buttonChoose"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:drawableRight="@android:drawable/ic_menu_gallery"
             android:text="Choose Image" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:orientation="horizontal">
+
             <Button
                 android:id="@+id/btnEditSimpan"
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="Simpan"/>
+                android:layout_weight="1"
+                android:text="Simpan" />
+
             <Button
                 android:id="@+id/btnEditBatal"
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="Batal"
-                />
+                android:layout_weight="1"
+                android:text="Batal" />
         </LinearLayout>
-
 
 
     </LinearLayout>

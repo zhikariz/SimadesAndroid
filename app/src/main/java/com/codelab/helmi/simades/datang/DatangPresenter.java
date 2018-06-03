@@ -7,7 +7,6 @@ import com.codelab.helmi.simades.api.RestApi;
 import com.codelab.helmi.simades.api.RestServer;
 import com.codelab.helmi.simades.base.Presenter;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +21,7 @@ public class DatangPresenter implements Presenter<DatangView> {
     DatangView datangView;
     public List<DatangData> mItems = new ArrayList<>();
 
-    public DatangPresenter(RecyclerView.Adapter mAdapter){
+    public DatangPresenter(RecyclerView.Adapter mAdapter) {
         this.mAdapter = mAdapter;
     }
 
@@ -36,7 +35,7 @@ public class DatangPresenter implements Presenter<DatangView> {
         datangView = null;
     }
 
-    public void showData(final Context ctx, final RecyclerView mRecycler){
+    public void showData(final Context ctx, final RecyclerView mRecycler) {
         final DatangData datangData = new DatangData();
         RestApi api = RestServer.getClient().create(RestApi.class);
         Call<DatangResponseModel> getData = api.getDatangData();
@@ -44,7 +43,7 @@ public class DatangPresenter implements Presenter<DatangView> {
             @Override
             public void onResponse(Call<DatangResponseModel> call, Response<DatangResponseModel> response) {
                 mItems = response.body().getResult();
-                mAdapter = new DatangRecyclerAdapter(ctx,mItems);
+                mAdapter = new DatangRecyclerAdapter(ctx, mItems);
                 mRecycler.setAdapter(mAdapter);
             }
 

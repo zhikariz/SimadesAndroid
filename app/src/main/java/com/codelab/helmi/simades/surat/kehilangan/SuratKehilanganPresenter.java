@@ -3,7 +3,6 @@ package com.codelab.helmi.simades.surat.kehilangan;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 
-import com.codelab.helmi.simades.R;
 import com.codelab.helmi.simades.api.RestApi;
 import com.codelab.helmi.simades.api.RestServer;
 import com.codelab.helmi.simades.base.Presenter;
@@ -15,7 +14,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SuratKehilanganPresenter implements Presenter<SuratKehilanganView>{
+public class SuratKehilanganPresenter implements Presenter<SuratKehilanganView> {
     private SuratKehilanganView suratKehilanganView;
     public List<SuratKehilanganData> mItems = new ArrayList<>();
     RecyclerView.Adapter mAdapter;
@@ -26,7 +25,7 @@ public class SuratKehilanganPresenter implements Presenter<SuratKehilanganView>{
 
     @Override
     public void onAttach(SuratKehilanganView view) {
-     suratKehilanganView = view;
+        suratKehilanganView = view;
     }
 
     @Override
@@ -34,7 +33,7 @@ public class SuratKehilanganPresenter implements Presenter<SuratKehilanganView>{
         suratKehilanganView = null;
     }
 
-    public void showData(final Context ctx, final RecyclerView mRecycler){
+    public void showData(final Context ctx, final RecyclerView mRecycler) {
         final SuratKehilanganData suratKehilanganData = new SuratKehilanganData();
         RestApi api = RestServer.getClient().create(RestApi.class);
         Call<SuratKehilanganResponseModel> getData = api.getSuratKehilanganData();

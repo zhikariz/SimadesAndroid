@@ -33,7 +33,7 @@ public class SuratSkckPresenter implements Presenter<SuratSkckView> {
         suratSkckView = null;
     }
 
-    public void showData(final Context ctx, final RecyclerView mRecycler){
+    public void showData(final Context ctx, final RecyclerView mRecycler) {
         final SuratSkckData suratSkckData = new SuratSkckData();
         RestApi api = RestServer.getClient().create(RestApi.class);
         Call<SuratSkckResponseModel> getData = api.getSuratPengantarSkckData();

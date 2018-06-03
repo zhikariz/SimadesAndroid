@@ -7,8 +7,6 @@ import android.support.v7.widget.RecyclerView;
 import com.codelab.helmi.simades.api.RestApi;
 import com.codelab.helmi.simades.api.RestServer;
 import com.codelab.helmi.simades.base.Presenter;
-import com.codelab.helmi.simades.penduduk.PendudukData;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +21,7 @@ public class KkPresenter implements Presenter<KkView> {
     RecyclerView.Adapter mAdapter;
     public List<KkData> mItems = new ArrayList<>();
 
-    public KkPresenter(RecyclerView.Adapter mAdapter){
+    public KkPresenter(RecyclerView.Adapter mAdapter) {
         this.mAdapter = mAdapter;
     }
 
@@ -37,7 +35,7 @@ public class KkPresenter implements Presenter<KkView> {
         kkView = null;
     }
 
-    public void showData(final Context ctx, final RecyclerView mRecycler, final FragmentManager fragmentManager){
+    public void showData(final Context ctx, final RecyclerView mRecycler, final FragmentManager fragmentManager) {
         final KkData kkData = new KkData();
         RestApi api = RestServer.getClient().create(RestApi.class);
         Call<KkResponseModel> getData = api.getKkData();
@@ -45,7 +43,7 @@ public class KkPresenter implements Presenter<KkView> {
             @Override
             public void onResponse(Call<KkResponseModel> call, Response<KkResponseModel> response) {
                 mItems = response.body().getResult();
-                mAdapter = new KkRecyclerAdapter(ctx,mItems,fragmentManager);
+                mAdapter = new KkRecyclerAdapter(ctx, mItems, fragmentManager);
                 mRecycler.setAdapter(mAdapter);
             }
 
@@ -54,7 +52,6 @@ public class KkPresenter implements Presenter<KkView> {
 
             }
         });
-
 
 
         kkView.onShowData(kkData);

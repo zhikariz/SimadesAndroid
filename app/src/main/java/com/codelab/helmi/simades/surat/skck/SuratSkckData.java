@@ -1,6 +1,7 @@
 package com.codelab.helmi.simades.surat.skck;
 
 import com.google.gson.annotations.SerializedName;
+
 @SuppressWarnings("unused")
 public class SuratSkckData {
     @SerializedName("id_surat")

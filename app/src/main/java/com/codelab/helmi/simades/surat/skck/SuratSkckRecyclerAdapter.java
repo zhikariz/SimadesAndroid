@@ -18,7 +18,7 @@ public class SuratSkckRecyclerAdapter extends RecyclerView.Adapter<SuratSkckRecy
     List<SuratSkckData> mList;
     Context ctx;
 
-    public SuratSkckRecyclerAdapter(Context ctx,List<SuratSkckData> mList ) {
+    public SuratSkckRecyclerAdapter(Context ctx, List<SuratSkckData> mList) {
         this.mList = mList;
         this.ctx = ctx;
     }
@@ -26,24 +26,24 @@ public class SuratSkckRecyclerAdapter extends RecyclerView.Adapter<SuratSkckRecy
     @NonNull
     @Override
     public MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View layout = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_surat_skck,parent,false);
+        View layout = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_surat_skck, parent, false);
         MyHolder holder = new MyHolder(layout);
         return holder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull final MyHolder holder, int position) {
-      holder.kode_surat.setText(mList.get(position).getKd_surat());
-      holder.no_surat.setText(mList.get(position).getNo_surat());
-      holder.tgl_surat.setText(mList.get(position).getTgl_surat());
-      holder.status_persetujuan.setText(mList.get(position).getStatus_persetujuan());
+        holder.kode_surat.setText(mList.get(position).getKd_surat());
+        holder.no_surat.setText(mList.get(position).getNo_surat());
+        holder.tgl_surat.setText(mList.get(position).getTgl_surat());
+        holder.status_persetujuan.setText(mList.get(position).getStatus_persetujuan());
 
-      holder.itemView.setOnClickListener(new View.OnClickListener() {
-          @Override
-          public void onClick(View v) {
-              Toast.makeText(ctx, ""+holder.no_surat.getText().toString(), Toast.LENGTH_SHORT).show();
-          }
-      });
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(ctx, "" + holder.no_surat.getText().toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 
@@ -55,6 +55,7 @@ public class SuratSkckRecyclerAdapter extends RecyclerView.Adapter<SuratSkckRecy
     public class MyHolder extends RecyclerView.ViewHolder {
         TextView id_surat, kode_surat, no_surat, jenis_surat;
         TextView tgl_surat, waktu, status_persetujuan;
+
         public MyHolder(View v) {
             super(v);
             kode_surat = v.findViewById(R.id.tv_kode_surat_pengantar_skck);

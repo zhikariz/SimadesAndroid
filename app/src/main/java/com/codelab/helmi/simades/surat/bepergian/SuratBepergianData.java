@@ -1,6 +1,7 @@
 package com.codelab.helmi.simades.surat.bepergian;
 
 import com.google.gson.annotations.SerializedName;
+
 @SuppressWarnings("unused")
 public class SuratBepergianData {
     @SerializedName("id_surat")

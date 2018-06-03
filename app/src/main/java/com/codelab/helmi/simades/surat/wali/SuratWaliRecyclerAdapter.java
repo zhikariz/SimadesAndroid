@@ -13,7 +13,7 @@ import com.codelab.helmi.simades.R;
 
 import java.util.List;
 
-public class SuratWaliRecyclerAdapter extends RecyclerView.Adapter<SuratWaliRecyclerAdapter.MyHolder>{
+public class SuratWaliRecyclerAdapter extends RecyclerView.Adapter<SuratWaliRecyclerAdapter.MyHolder> {
     Context ctx;
     List<SuratWaliData> mList;
 
@@ -25,7 +25,7 @@ public class SuratWaliRecyclerAdapter extends RecyclerView.Adapter<SuratWaliRecy
     @NonNull
     @Override
     public MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View layout = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_surat_wali,parent,false);
+        View layout = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_surat_wali, parent, false);
         MyHolder holder = new MyHolder(layout);
         return holder;
 
@@ -42,7 +42,7 @@ public class SuratWaliRecyclerAdapter extends RecyclerView.Adapter<SuratWaliRecy
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(ctx, ""+holder.no_surat.getText().toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(ctx, "" + holder.no_surat.getText().toString(), Toast.LENGTH_SHORT).show();
             }
         });
     }

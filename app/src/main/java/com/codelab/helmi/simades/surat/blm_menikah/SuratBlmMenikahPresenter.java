@@ -14,7 +14,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SuratBlmMenikahPresenter implements Presenter<SuratBlmMenikahView>{
+public class SuratBlmMenikahPresenter implements Presenter<SuratBlmMenikahView> {
     private SuratBlmMenikahView suratBlmMenikahView;
     public List<SuratBlmMenikahData> mItems = new ArrayList<>();
     RecyclerView.Adapter mAdapter;
@@ -33,7 +33,7 @@ public class SuratBlmMenikahPresenter implements Presenter<SuratBlmMenikahView>{
         suratBlmMenikahView = null;
     }
 
-    public void showData(final Context ctx, final RecyclerView mRecycler){
+    public void showData(final Context ctx, final RecyclerView mRecycler) {
         final SuratBlmMenikahData suratBlmMenikahData = new SuratBlmMenikahData();
         RestApi api = RestServer.getClient().create(RestApi.class);
         Call<SuratBlmMenikahResponseModel> getData = api.getSuratBlmMenikahData();
@@ -41,7 +41,7 @@ public class SuratBlmMenikahPresenter implements Presenter<SuratBlmMenikahView>{
             @Override
             public void onResponse(Call<SuratBlmMenikahResponseModel> call, Response<SuratBlmMenikahResponseModel> response) {
                 mItems = response.body().getResult();
-                mAdapter = new SuratBlmMenikahRecyclerAdapter(ctx,mItems);
+                mAdapter = new SuratBlmMenikahRecyclerAdapter(ctx, mItems);
                 mRecycler.setAdapter(mAdapter);
             }
 

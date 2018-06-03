@@ -1,4 +1,5 @@
 package com.codelab.helmi.simades.kematian;
+
 @SuppressWarnings("unused")
 public class KematianData {
     private String id_mati;

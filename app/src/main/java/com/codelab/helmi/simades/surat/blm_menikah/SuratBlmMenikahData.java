@@ -1,6 +1,7 @@
 package com.codelab.helmi.simades.surat.blm_menikah;
 
 import com.google.gson.annotations.SerializedName;
+
 @SuppressWarnings("unused")
 public class SuratBlmMenikahData {
     @SerializedName("id_surat")

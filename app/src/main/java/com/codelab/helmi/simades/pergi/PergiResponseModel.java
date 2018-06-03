@@ -10,11 +10,11 @@ public class PergiResponseModel {
     @SerializedName("result")
     List<PergiData> result;
 
-    public List<PergiData> getResult(){
+    public List<PergiData> getResult() {
         return result;
     }
 
-    public void setResult(List<PergiData> result){
+    public void setResult(List<PergiData> result) {
         this.result = result;
     }
 }

@@ -1,6 +1,7 @@
 package com.codelab.helmi.simades.surat.domisili;
 
 import com.google.gson.annotations.SerializedName;
+
 @SuppressWarnings("unused")
 public class SuratDomisiliData {
     @SerializedName("id_surat")

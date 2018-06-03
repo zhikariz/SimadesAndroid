@@ -4,7 +4,7 @@ import com.codelab.helmi.simades.datang.DatangResponseModel;
 import com.codelab.helmi.simades.kelahiran.KelahiranResponseModel;
 import com.codelab.helmi.simades.kematian.KematianResponseModel;
 import com.codelab.helmi.simades.kk.KkResponseModel;
-import com.codelab.helmi.simades.penduduk.PendudukResponseModel;
+import com.codelab.helmi.simades.penduduk.ShowPendudukResponseModel;
 import com.codelab.helmi.simades.pergi.PergiResponseModel;
 import com.codelab.helmi.simades.profil.ProfilResponseModel;
 import com.codelab.helmi.simades.surat.bepergian.SuratBepergianResponseModel;
@@ -21,14 +21,10 @@ import com.codelab.helmi.simades.surat.usaha.SuratUsahaResponseModel;
 import com.codelab.helmi.simades.surat.wali.SuratWaliResponseModel;
 import com.codelab.helmi.simades.user.UserResponseModel;
 
-import java.util.Map;
-
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
-import retrofit2.http.Path;
 import retrofit2.http.Query;
-import retrofit2.http.QueryMap;
 
 public interface RestApi {
     @Headers({
@@ -48,7 +44,7 @@ public interface RestApi {
     Call<KkResponseModel> getKkData();
 
     @GET("api/penduduk")
-    Call<PendudukResponseModel> getPendudukData(@Query("no_kk") String id);
+    Call<ShowPendudukResponseModel> getPendudukData(@Query("no_kk") String id);
 
     @GET("api/kematian")
     Call<KematianResponseModel> getKematianData();

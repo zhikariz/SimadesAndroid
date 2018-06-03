@@ -1,8 +1,8 @@
 package com.codelab.helmi.simades.surat.usaha;
 
 
-import android.os.Bundle;
 import android.app.Fragment;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,7 +14,7 @@ import com.codelab.helmi.simades.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SuratUsahaFragment extends Fragment implements SuratUsahaView{
+public class SuratUsahaFragment extends Fragment implements SuratUsahaView {
     View view;
     private RecyclerView mRecycler;
     private RecyclerView.Adapter mAdapter;

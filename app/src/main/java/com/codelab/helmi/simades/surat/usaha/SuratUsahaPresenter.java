@@ -6,7 +6,6 @@ import android.support.v7.widget.RecyclerView;
 import com.codelab.helmi.simades.api.RestApi;
 import com.codelab.helmi.simades.api.RestServer;
 import com.codelab.helmi.simades.base.Presenter;
-import com.codelab.helmi.simades.surat.kelahiran.SuratKelahiranRecyclerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +33,7 @@ public class SuratUsahaPresenter implements Presenter<SuratUsahaView> {
         suratUsahaView = null;
     }
 
-    public void showData(final Context ctx, final RecyclerView mRecycler){
+    public void showData(final Context ctx, final RecyclerView mRecycler) {
         final SuratUsahaData suratUsahaData = new SuratUsahaData();
         RestApi api = RestServer.getClient().create(RestApi.class);
         Call<SuratUsahaResponseModel> getData = api.getSuratUsahaData();

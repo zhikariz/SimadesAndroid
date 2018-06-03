@@ -1,6 +1,7 @@
 package com.codelab.helmi.simades.surat.ektp;
 
 import com.google.gson.annotations.SerializedName;
+
 @SuppressWarnings("unused")
 public class SuratEktpData {
     @SerializedName("id_surat")

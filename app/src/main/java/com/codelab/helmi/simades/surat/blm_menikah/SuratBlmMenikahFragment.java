@@ -1,8 +1,8 @@
 package com.codelab.helmi.simades.surat.blm_menikah;
 
 
-import android.os.Bundle;
 import android.app.Fragment;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,7 +14,7 @@ import com.codelab.helmi.simades.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SuratBlmMenikahFragment extends Fragment implements SuratBlmMenikahView{
+public class SuratBlmMenikahFragment extends Fragment implements SuratBlmMenikahView {
     View view;
     private RecyclerView mRecycler;
     private RecyclerView.Adapter mAdapter;
@@ -30,7 +30,7 @@ public class SuratBlmMenikahFragment extends Fragment implements SuratBlmMenikah
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view =  inflater.inflate(R.layout.recycle_content, container, false);
+        view = inflater.inflate(R.layout.recycle_content, container, false);
         initPresenter();
         initView();
         onAttachView();

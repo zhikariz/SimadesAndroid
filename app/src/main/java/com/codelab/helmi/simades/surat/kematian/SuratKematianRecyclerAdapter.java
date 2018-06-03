@@ -17,15 +17,15 @@ public class SuratKematianRecyclerAdapter extends RecyclerView.Adapter<SuratKema
     List<SuratKematianData> mList;
     Context ctx;
 
-    public SuratKematianRecyclerAdapter(Context ctx,List<SuratKematianData> mList) {
+    public SuratKematianRecyclerAdapter(Context ctx, List<SuratKematianData> mList) {
         this.mList = mList;
         this.ctx = ctx;
     }
 
     @NonNull
     @Override
-    public MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType){
-        View layout = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_surat_kematian,parent,false);
+    public MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View layout = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_surat_kematian, parent, false);
         MyHolder holder = new MyHolder(layout);
 
         return holder;
@@ -42,7 +42,7 @@ public class SuratKematianRecyclerAdapter extends RecyclerView.Adapter<SuratKema
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(ctx, ""+holder.no_surat.getText().toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(ctx, "" + holder.no_surat.getText().toString(), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -52,7 +52,7 @@ public class SuratKematianRecyclerAdapter extends RecyclerView.Adapter<SuratKema
         return mList.size();
     }
 
-    public class MyHolder extends RecyclerView.ViewHolder{
+    public class MyHolder extends RecyclerView.ViewHolder {
         TextView id_surat, kode_surat, no_surat, jenis_surat;
         TextView tgl_surat, waktu, status_persetujuan;
 

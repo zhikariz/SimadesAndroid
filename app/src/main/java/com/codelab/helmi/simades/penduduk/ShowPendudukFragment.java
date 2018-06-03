@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import com.codelab.helmi.simades.R;
 
 public class ShowPendudukFragment extends Fragment implements PendudukView {
-    PendudukPresenter presenter;
+    ShowPendudukPresenter presenter;
     View view;
     private RecyclerView mRecycler;
     private RecyclerView.Adapter mAdapter;
@@ -27,7 +27,7 @@ public class ShowPendudukFragment extends Fragment implements PendudukView {
         initPresenter();
         initView();
         onAttachView();
-        getActivity().setTitle("Penduduk");
+        getActivity().setTitle("Anggota Keluarga");
 
         return view;
 
@@ -40,7 +40,7 @@ public class ShowPendudukFragment extends Fragment implements PendudukView {
     }
 
     private void initPresenter() {
-        presenter = new PendudukPresenter(mAdapter);
+        presenter = new ShowPendudukPresenter(mAdapter);
     }
 
     @Override
@@ -51,7 +51,7 @@ public class ShowPendudukFragment extends Fragment implements PendudukView {
     @Override
     public void onAttachView() {
         presenter.onAttach(this);
-        presenter.showData(getActivity().getApplicationContext(), mRecycler, getArguments().getString(EXTRA_NIK));
+        presenter.showData(getActivity().getApplicationContext(), mRecycler, getArguments().getString(EXTRA_NIK), getFragmentManager());
 
     }
 

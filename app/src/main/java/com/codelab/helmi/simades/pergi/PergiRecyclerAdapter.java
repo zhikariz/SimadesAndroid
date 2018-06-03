@@ -13,12 +13,12 @@ import com.codelab.helmi.simades.R;
 
 import java.util.List;
 
-public class PergiRecyclerAdapter extends RecyclerView.Adapter<PergiRecyclerAdapter.MyHolder>{
+public class PergiRecyclerAdapter extends RecyclerView.Adapter<PergiRecyclerAdapter.MyHolder> {
 
     List<PergiData> mList;
     Context ctx;
 
-    public PergiRecyclerAdapter(Context ctx, List<PergiData> mList){
+    public PergiRecyclerAdapter(Context ctx, List<PergiData> mList) {
         this.mList = mList;
         this.ctx = ctx;
     }
@@ -26,7 +26,7 @@ public class PergiRecyclerAdapter extends RecyclerView.Adapter<PergiRecyclerAdap
     @NonNull
     @Override
     public MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View layout = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_pergi,parent, false);
+        View layout = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_pergi, parent, false);
         MyHolder holder = new MyHolder(layout);
         return holder;
     }
@@ -41,20 +41,21 @@ public class PergiRecyclerAdapter extends RecyclerView.Adapter<PergiRecyclerAdap
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(ctx, ""+holder.nik_pergi.getText().toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(ctx, "" + holder.nik_pergi.getText().toString(), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     @Override
-    public int getItemCount(){
+    public int getItemCount() {
         return mList.size();
     }
 
     public class MyHolder extends RecyclerView.ViewHolder {
-        TextView nik_pergi, alamat_tuju, kode_pos,alasan, tgl_pergi;
+        TextView nik_pergi, alamat_tuju, kode_pos, alasan, tgl_pergi;
         PergiData pergiData;
-        public MyHolder(View v){
+
+        public MyHolder(View v) {
             super(v);
 
             nik_pergi = (TextView) v.findViewById(R.id.tvNikPergi);

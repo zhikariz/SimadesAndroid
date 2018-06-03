@@ -1,8 +1,8 @@
 package com.codelab.helmi.simades.surat.kehilangan;
 
 
-import android.os.Bundle;
 import android.app.Fragment;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,7 +14,7 @@ import com.codelab.helmi.simades.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SuratKehilanganFragment extends Fragment implements SuratKehilanganView{
+public class SuratKehilanganFragment extends Fragment implements SuratKehilanganView {
 
     private RecyclerView mRecycler;
     private RecyclerView.Adapter mAdapter;
@@ -31,7 +31,7 @@ public class SuratKehilanganFragment extends Fragment implements SuratKehilangan
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view= inflater.inflate(R.layout.recycle_content, container, false);
+        view = inflater.inflate(R.layout.recycle_content, container, false);
         initPresenter();
         initView();
         onAttachView();

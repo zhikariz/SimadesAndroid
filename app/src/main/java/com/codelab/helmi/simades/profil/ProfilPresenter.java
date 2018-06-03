@@ -56,7 +56,7 @@ public class ProfilPresenter implements Presenter<ProfilView> {
 
 
                     pView.onShowData(profilData);
-                } catch (Exception e){
+                } catch (Exception e) {
                     Toast.makeText(ctx, "Anda Tidak Terkoneksi Internet !", Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
                 }
@@ -64,7 +64,7 @@ public class ProfilPresenter implements Presenter<ProfilView> {
 
             @Override
             public void onFailure(Call<ProfilResponseModel> call, Throwable t) {
-               // Log.d("Error", t.getMessage());
+                Log.d("Error", t.getMessage());
             }
         });
 

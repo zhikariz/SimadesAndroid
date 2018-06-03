@@ -18,7 +18,7 @@ public class DatangRecyclerAdapter extends RecyclerView.Adapter<DatangRecyclerAd
     List<DatangData> mList;
     Context ctx;
 
-    public DatangRecyclerAdapter(Context ctx, List<DatangData> mList){
+    public DatangRecyclerAdapter(Context ctx, List<DatangData> mList) {
         this.mList = mList;
         this.ctx = ctx;
     }
@@ -27,7 +27,7 @@ public class DatangRecyclerAdapter extends RecyclerView.Adapter<DatangRecyclerAd
     @NonNull
     @Override
     public MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View layout = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_datang,parent,false);
+        View layout = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_datang, parent, false);
         MyHolder holder = new MyHolder(layout);
         return holder;
     }
@@ -42,19 +42,21 @@ public class DatangRecyclerAdapter extends RecyclerView.Adapter<DatangRecyclerAd
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(ctx, ""+holder.nik_pendatang.getText().toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(ctx, "" + holder.nik_pendatang.getText().toString(), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     @Override
-    public int getItemCount(){
+    public int getItemCount() {
         return mList.size();
     }
+
     public class MyHolder extends RecyclerView.ViewHolder {
         TextView nik_pendatang, alamat_asal, alasan, pengikut;
         DatangData datangData;
-        public MyHolder(View v){
+
+        public MyHolder(View v) {
             super(v);
             nik_pendatang = (TextView) v.findViewById(R.id.tvNikPendatang);
             alamat_asal = (TextView) v.findViewById(R.id.tv_alamat_asal);

@@ -14,7 +14,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SuratTidakMampuPresenter implements Presenter<SuratTidakMampuView>{
+public class SuratTidakMampuPresenter implements Presenter<SuratTidakMampuView> {
     private SuratTidakMampuView suratTidakMampuView;
     public List<SuratTidakMampuData> mItems = new ArrayList<>();
     RecyclerView.Adapter mAdapter;
@@ -33,7 +33,7 @@ public class SuratTidakMampuPresenter implements Presenter<SuratTidakMampuView>{
         suratTidakMampuView = null;
     }
 
-    public void showData(final Context ctx, final RecyclerView mRecycler){
+    public void showData(final Context ctx, final RecyclerView mRecycler) {
         final SuratTidakMampuData suratTidakMampuData = new SuratTidakMampuData();
         RestApi api = RestServer.getClient().create(RestApi.class);
         Call<SuratTidakMampuResponseModel> getData = api.getSuratTidakMampuData();

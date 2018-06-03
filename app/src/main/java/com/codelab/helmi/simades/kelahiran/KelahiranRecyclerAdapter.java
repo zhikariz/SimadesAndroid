@@ -15,7 +15,7 @@ import java.util.List;
 
 public class KelahiranRecyclerAdapter extends RecyclerView.Adapter<KelahiranRecyclerAdapter.MyHolder> {
 
-    List<KelahiranData> mList ;
+    List<KelahiranData> mList;
     Context ctx;
 
     public KelahiranRecyclerAdapter(Context ctx, List<KelahiranData> mList) {
@@ -27,7 +27,7 @@ public class KelahiranRecyclerAdapter extends RecyclerView.Adapter<KelahiranRecy
     @NonNull
     @Override
     public KelahiranRecyclerAdapter.MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View layout = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_kelahiran,parent, false);
+        View layout = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_kelahiran, parent, false);
         MyHolder holder = new MyHolder(layout);
         return holder;
     }
@@ -41,22 +41,21 @@ public class KelahiranRecyclerAdapter extends RecyclerView.Adapter<KelahiranRecy
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(ctx, ""+holder.nama.getText().toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(ctx, "" + holder.nama.getText().toString(), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     @Override
-    public int getItemCount()
-    {
+    public int getItemCount() {
         return mList.size();
     }
 
     public class MyHolder extends RecyclerView.ViewHolder {
         TextView nis, nama, tgllahir;
         KelahiranData kelahiranData;
-        public MyHolder(View v)
-        {
+
+        public MyHolder(View v) {
             super(v);
 
             nis = (TextView) v.findViewById(R.id.tvNisBayi);

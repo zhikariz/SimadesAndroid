@@ -13,9 +13,11 @@ public class ProfilResponseModel {
     private int kode;
 
 
-    public List<ProfilData> getResult(){return result;}
+    public List<ProfilData> getResult() {
+        return result;
+    }
 
-    public void setResult(List<ProfilData> result){
+    public void setResult(List<ProfilData> result) {
         this.result = result;
     }
 

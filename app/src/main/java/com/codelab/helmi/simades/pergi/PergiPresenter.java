@@ -7,7 +7,6 @@ import com.codelab.helmi.simades.api.RestApi;
 import com.codelab.helmi.simades.api.RestServer;
 import com.codelab.helmi.simades.base.Presenter;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +20,7 @@ public class PergiPresenter implements Presenter<PergiView> {
     RecyclerView.Adapter mAdapter;
     public List<PergiData> mItems = new ArrayList<>();
 
-    public PergiPresenter(RecyclerView.Adapter mAdapter){
+    public PergiPresenter(RecyclerView.Adapter mAdapter) {
         this.mAdapter = mAdapter;
     }
 
@@ -35,7 +34,7 @@ public class PergiPresenter implements Presenter<PergiView> {
         pergiView = null;
     }
 
-    public void showData(final Context ctx, final RecyclerView mRecycler){
+    public void showData(final Context ctx, final RecyclerView mRecycler) {
 
         final PergiData pergiData = new PergiData();
         RestApi api = RestServer.getClient().create(RestApi.class);

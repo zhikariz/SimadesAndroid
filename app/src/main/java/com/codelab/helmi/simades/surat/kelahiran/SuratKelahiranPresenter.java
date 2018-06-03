@@ -1,5 +1,6 @@
 package com.codelab.helmi.simades.surat.kelahiran;
 
+import android.app.FragmentManager;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 
@@ -31,11 +32,10 @@ public class SuratKelahiranPresenter implements Presenter<SuratKelahiranView> {
 
     @Override
     public void onDetach() {
-        suratKelahiranView=null;
+        suratKelahiranView = null;
     }
 
-    public void showData(final Context ctx, final RecyclerView mRecycler)
-    {
+    public void showData(final Context ctx, final RecyclerView mRecycler, final FragmentManager fragmentManager) {
         final SuratKelahiranData suratKelahiranData = new SuratKelahiranData();
         RestApi api = RestServer.getClient().create(RestApi.class);
         Call<SuratKelahiranResponseModel> getData = api.getSuratKelahiranData();
@@ -43,7 +43,7 @@ public class SuratKelahiranPresenter implements Presenter<SuratKelahiranView> {
             @Override
             public void onResponse(Call<SuratKelahiranResponseModel> call, Response<SuratKelahiranResponseModel> response) {
                 mItems = response.body().getResult();
-                mAdapter = new SuratKelahiranRecyclerAdapter(ctx,mItems);
+                mAdapter = new SuratKelahiranRecyclerAdapter(ctx, mItems,fragmentManager);
                 mRecycler.setAdapter(mAdapter);
             }
 

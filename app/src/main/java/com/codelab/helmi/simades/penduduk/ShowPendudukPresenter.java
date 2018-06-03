@@ -1,5 +1,6 @@
 package com.codelab.helmi.simades.penduduk;
 
+import android.app.FragmentManager;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 
@@ -14,12 +15,12 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class PendudukPresenter implements Presenter<PendudukView> {
+public class ShowPendudukPresenter implements Presenter<PendudukView> {
     private PendudukView pendudukView;
     RecyclerView.Adapter mAdapter;
     public List<PendudukData> mItems = new ArrayList<>();
 
-    public PendudukPresenter(RecyclerView.Adapter mAdapter){
+    public ShowPendudukPresenter(RecyclerView.Adapter mAdapter) {
         this.mAdapter = mAdapter;
     }
 
@@ -33,24 +34,23 @@ public class PendudukPresenter implements Presenter<PendudukView> {
         pendudukView = null;
     }
 
-    public void showData(final Context ctx, final RecyclerView mRecycler,String nik){
+    public void showData(final Context ctx, final RecyclerView mRecycler, String nik, final FragmentManager fragmentManager) {
         final PendudukData pendudukData = new PendudukData();
         RestApi api = RestServer.getClient().create(RestApi.class);
-        Call<PendudukResponseModel> getData = api.getPendudukData(nik);
-        getData.enqueue(new Callback<PendudukResponseModel>() {
+        Call<ShowPendudukResponseModel> getData = api.getPendudukData(nik);
+        getData.enqueue(new Callback<ShowPendudukResponseModel>() {
             @Override
-            public void onResponse(Call<PendudukResponseModel> call, Response<PendudukResponseModel> response) {
+            public void onResponse(Call<ShowPendudukResponseModel> call, Response<ShowPendudukResponseModel> response) {
                 mItems = response.body().getResult();
-                mAdapter = new PendudukRecyclerAdapter(ctx,mItems);
+                mAdapter = new ShowPendudukRecyclerAdapter(ctx, mItems, fragmentManager);
                 mRecycler.setAdapter(mAdapter);
             }
 
             @Override
-            public void onFailure(Call<PendudukResponseModel> call, Throwable t) {
+            public void onFailure(Call<ShowPendudukResponseModel> call, Throwable t) {
 
             }
         });
-
 
 
         pendudukView.onShowData(pendudukData);

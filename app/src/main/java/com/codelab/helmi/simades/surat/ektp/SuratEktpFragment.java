@@ -1,8 +1,8 @@
 package com.codelab.helmi.simades.surat.ektp;
 
 
-import android.os.Bundle;
 import android.app.Fragment;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,7 +14,7 @@ import com.codelab.helmi.simades.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SuratEktpFragment extends Fragment implements SuratEktpView{
+public class SuratEktpFragment extends Fragment implements SuratEktpView {
     View view;
     private RecyclerView mRecycler;
     private RecyclerView.Adapter mAdapter;
@@ -62,7 +62,7 @@ public class SuratEktpFragment extends Fragment implements SuratEktpView{
 
     @Override
     public void onDetachView() {
-    presenter.onDetach();
+        presenter.onDetach();
     }
 
     @Override

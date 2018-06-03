@@ -22,7 +22,7 @@ import com.codelab.helmi.simades.profil.ShowProfilActivity;
 import com.codelab.helmi.simades.surat.HomeSuratFragment;
 import com.codelab.helmi.simades.user.UserActivity;
 
-public class NavigateActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,NavigateView {
+public class NavigateActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, NavigateView {
 
     NavigatePresenter presenter;
     Toolbar toolbar;
@@ -59,7 +59,7 @@ public class NavigateActivity extends AppCompatActivity implements NavigationVie
         }
     }
 
-    public void setNavigasi(){
+    public void setNavigasi() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -83,7 +83,7 @@ public class NavigateActivity extends AppCompatActivity implements NavigationVie
         if (id == R.id.profil) {
             fragment = new ShowProfilActivity();
             callFragment(fragment);
-        }else if (id == R.id.home) {
+        } else if (id == R.id.home) {
             fragment = new HomeActivity();
             callFragment(fragment);
         } else if (id == R.id.penduduk) {
@@ -101,10 +101,10 @@ public class NavigateActivity extends AppCompatActivity implements NavigationVie
         } else if (id == R.id.pergi) {
             fragment = new PergiActivity();
             callFragment(fragment);
-        } else if( id == R.id.user ){
+        } else if (id == R.id.user) {
             fragment = new UserActivity();
             callFragment(fragment);
-        } else if(id == R.id.pengajuan_surat){
+        } else if (id == R.id.pengajuan_surat) {
             fragment = new HomeSuratFragment();
             callFragment(fragment);
         }
@@ -126,7 +126,6 @@ public class NavigateActivity extends AppCompatActivity implements NavigationVie
     public void onAttachView() {
         presenter.onAttach(this);
     }
-
 
 
     @Override

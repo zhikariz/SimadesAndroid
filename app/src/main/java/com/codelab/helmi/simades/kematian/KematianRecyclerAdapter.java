@@ -19,7 +19,7 @@ public class KematianRecyclerAdapter extends RecyclerView.Adapter<KematianRecycl
     List<KematianData> mList;
     Context ctx;
 
-    public KematianRecyclerAdapter(Context ctx, List<KematianData> mList){
+    public KematianRecyclerAdapter(Context ctx, List<KematianData> mList) {
         this.mList = mList;
         this.ctx = ctx;
     }
@@ -27,7 +27,7 @@ public class KematianRecyclerAdapter extends RecyclerView.Adapter<KematianRecycl
     @NonNull
     @Override
     public MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View layout = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_kematian,parent, false);
+        View layout = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_kematian, parent, false);
         MyHolder holder = new MyHolder(layout);
         return holder;
     }
@@ -43,14 +43,13 @@ public class KematianRecyclerAdapter extends RecyclerView.Adapter<KematianRecycl
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(ctx, ""+holder.nik_meninggal.getText().toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(ctx, "" + holder.nik_meninggal.getText().toString(), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     @Override
-    public int getItemCount()
-    {
+    public int getItemCount() {
         return mList.size();
     }
 
@@ -58,7 +57,7 @@ public class KematianRecyclerAdapter extends RecyclerView.Adapter<KematianRecycl
         TextView nik_meninggal, tgl_meninggal, sebab, tpt_meninggal, menerangkan;
         KematianData kematianData;
 
-        public MyHolder(View v){
+        public MyHolder(View v) {
             super(v);
 
             nik_meninggal = (TextView) v.findViewById(R.id.tvNikMeninggal);

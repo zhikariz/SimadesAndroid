@@ -10,11 +10,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.codelab.helmi.simades.R;
-import com.codelab.helmi.simades.api.RestApi;
 
 import java.util.List;
 
-public class SuratTidakMampuRecyclerAdapter extends RecyclerView.Adapter<SuratTidakMampuRecyclerAdapter.MyHolder>{
+public class SuratTidakMampuRecyclerAdapter extends RecyclerView.Adapter<SuratTidakMampuRecyclerAdapter.MyHolder> {
     Context ctx;
     List<SuratTidakMampuData> mList;
 
@@ -26,7 +25,7 @@ public class SuratTidakMampuRecyclerAdapter extends RecyclerView.Adapter<SuratTi
     @NonNull
     @Override
     public MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View layout = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_surat_tidak_mampu,parent,false);
+        View layout = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_surat_tidak_mampu, parent, false);
         MyHolder holder = new MyHolder(layout);
         return holder;
     }
@@ -41,7 +40,7 @@ public class SuratTidakMampuRecyclerAdapter extends RecyclerView.Adapter<SuratTi
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(ctx, ""+holder.no_surat.getText().toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(ctx, "" + holder.no_surat.getText().toString(), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -51,7 +50,7 @@ public class SuratTidakMampuRecyclerAdapter extends RecyclerView.Adapter<SuratTi
         return mList.size();
     }
 
-    public class MyHolder extends RecyclerView.ViewHolder{
+    public class MyHolder extends RecyclerView.ViewHolder {
         TextView id_surat, kode_surat, no_surat, jenis_surat;
         TextView tgl_surat, waktu, status_persetujuan;
 

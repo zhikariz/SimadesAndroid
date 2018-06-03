@@ -1,6 +1,5 @@
 package com.codelab.helmi.simades.surat.blm_menikah;
 
-import com.codelab.helmi.simades.surat.usaha.SuratUsahaData;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;

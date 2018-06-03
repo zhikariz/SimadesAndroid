@@ -1,6 +1,7 @@
 package com.codelab.helmi.simades.surat.kematian;
 
 import com.google.gson.annotations.SerializedName;
+
 @SuppressWarnings("unused")
 public class SuratKematianData {
 

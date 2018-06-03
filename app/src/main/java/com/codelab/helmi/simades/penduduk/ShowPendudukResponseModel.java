@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class PendudukResponseModel {
+public class ShowPendudukResponseModel {
     @SerializedName("result")
     List<PendudukData> result;
 

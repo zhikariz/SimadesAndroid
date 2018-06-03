@@ -9,9 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.codelab.helmi.simades.R;
-import com.codelab.helmi.simades.kk.KkData;
-import com.codelab.helmi.simades.kk.KkPresenter;
-import com.codelab.helmi.simades.kk.KkView;
 
 public class ShowKkFragment extends Fragment implements KkView {
 
@@ -21,6 +18,9 @@ public class ShowKkFragment extends Fragment implements KkView {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mManager;
 
+    public static String SAVED_RECYCLER_VIEW_STATUS_ID = "saved_recycler_view_status_id";
+    public static String SAVED_RECYCLER_VIEW_DATASET_ID = "saved_recyclr_view_dataset_id";
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -29,7 +29,7 @@ public class ShowKkFragment extends Fragment implements KkView {
         view = inflater.inflate(R.layout.recycle_content, container, false);
         initPresenter();
         onAttachView();
-        getActivity().setTitle("Penduduk");
+        getActivity().setTitle("Kartu Keluarga");
 
         return view;
 
@@ -56,7 +56,6 @@ public class ShowKkFragment extends Fragment implements KkView {
         presenter.showData(getActivity().getApplicationContext(), mRecycler, getFragmentManager());
 
 
-
     }
 
     @Override
@@ -69,4 +68,5 @@ public class ShowKkFragment extends Fragment implements KkView {
         onDetachView();
         super.onDestroy();
     }
+
 }

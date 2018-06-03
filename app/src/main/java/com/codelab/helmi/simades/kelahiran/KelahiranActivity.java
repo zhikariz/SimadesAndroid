@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 
 import com.codelab.helmi.simades.R;
 
-public class KelahiranActivity extends Fragment implements KelahiranView{
+public class KelahiranActivity extends Fragment implements KelahiranView {
 
     KelahiranPresenter presenter;
     View view;

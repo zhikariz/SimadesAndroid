@@ -1,6 +1,7 @@
 package com.codelab.helmi.simades.surat.tidak_mampu;
 
 import com.google.gson.annotations.SerializedName;
+
 @SuppressWarnings("unused")
 public class SuratTidakMampuData {
     @SerializedName("id_surat")

@@ -14,7 +14,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SuratBepergianPresenter implements Presenter<SuratBepergianView>{
+public class SuratBepergianPresenter implements Presenter<SuratBepergianView> {
     private SuratBepergianView suratBepergianView;
     public List<SuratBepergianData> mItems = new ArrayList<>();
     RecyclerView.Adapter mAdapter;
@@ -33,7 +33,7 @@ public class SuratBepergianPresenter implements Presenter<SuratBepergianView>{
         suratBepergianView = null;
     }
 
-    public void showData(final Context ctx, final RecyclerView mRecycler){
+    public void showData(final Context ctx, final RecyclerView mRecycler) {
         final SuratBepergianData suratBepergianData = new SuratBepergianData();
         RestApi api = RestServer.getClient().create(RestApi.class);
         Call<SuratBepergianResponseModel> getData = api.getSuratBepergianData();

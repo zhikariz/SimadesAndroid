@@ -9,12 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.codelab.helmi.simades.R;
 import com.codelab.helmi.simades.penduduk.PendudukData;
 import com.codelab.helmi.simades.penduduk.ShowPendudukFragment;
-
 
 import java.util.List;
 
@@ -22,7 +20,7 @@ import java.util.List;
 public class KkRecyclerAdapter extends RecyclerView.Adapter<KkRecyclerAdapter.MyHolder> {
 
 
-    List<KkData> mList ;
+    List<KkData> mList;
     Context ctx;
     FragmentManager fragmentManager;
 
@@ -36,7 +34,7 @@ public class KkRecyclerAdapter extends RecyclerView.Adapter<KkRecyclerAdapter.My
     @NonNull
     @Override
     public MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View layout = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_kk,parent, false);
+        View layout = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_kk, parent, false);
         MyHolder holder = new MyHolder(layout);
         return holder;
     }
@@ -45,17 +43,15 @@ public class KkRecyclerAdapter extends RecyclerView.Adapter<KkRecyclerAdapter.My
     public void onBindViewHolder(@NonNull final KkRecyclerAdapter.MyHolder holder, final int position) {
         holder.no_kk.setText(mList.get(position).getNo_kk());
         holder.alamat.setText(mList.get(position).getAlamat());
-        holder.rt.setText(mList.get(position).getRt());
-        holder.rw.setText(mList.get(position).getRw());
-
+        holder.tvRtRw.setText(mList.get(position).getRt() + " / " + mList.get(position).getRw());
 
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ShowPendudukFragment showPendudukFragment =new ShowPendudukFragment();
+                ShowPendudukFragment showPendudukFragment = new ShowPendudukFragment();
                 Bundle bundle = new Bundle();
-                bundle.putString(showPendudukFragment.EXTRA_NIK, mList.get(position).getNo_kk().toString());
+                bundle.putString(showPendudukFragment.EXTRA_NIK, mList.get(position).getNo_kk());
                 showPendudukFragment.setArguments(bundle);
                 fragmentManager.beginTransaction()
                         .replace(R.id.frame_container, showPendudukFragment, showPendudukFragment.getClass().getSimpleName())
@@ -66,23 +62,20 @@ public class KkRecyclerAdapter extends RecyclerView.Adapter<KkRecyclerAdapter.My
     }
 
     @Override
-    public int getItemCount()
-    {
+    public int getItemCount() {
         return mList.size();
     }
 
     public class MyHolder extends RecyclerView.ViewHolder {
-        TextView no_kk, alamat, id_dusun,rt,rw,kelurahan,kecamatan,kabupaten,propinsi;
+        TextView no_kk, alamat, id_dusun, tvRtRw, rw, kelurahan, kecamatan, kabupaten, propinsi;
         PendudukData pendudukData;
-        public MyHolder(View v)
-        {
+
+        public MyHolder(View v) {
             super(v);
 
             no_kk = (TextView) v.findViewById(R.id.tv_no_kk);
             alamat = (TextView) v.findViewById(R.id.tv_alamat);
-            rt = (TextView) v.findViewById(R.id.tv_rt);
-            rw = (TextView) v.findViewById(R.id.tv_rw);
-
+            tvRtRw = (TextView) v.findViewById(R.id.tv_rt_rw);
 
 
         }
