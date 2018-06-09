@@ -1,7 +1,8 @@
 package com.codelab.helmi.simades.surat.kelahiran;
 
-import android.app.FragmentManager;
+
 import android.content.Context;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.codelab.helmi.simades.api.RestApi;
@@ -45,11 +46,12 @@ public class SuratKelahiranPresenter implements Presenter<SuratKelahiranView> {
                 mItems = response.body().getResult();
                 mAdapter = new SuratKelahiranRecyclerAdapter(ctx, mItems,fragmentManager);
                 mRecycler.setAdapter(mAdapter);
+                suratKelahiranView.swipeRefreshFalse();
             }
 
             @Override
             public void onFailure(Call<SuratKelahiranResponseModel> call, Throwable t) {
-
+                suratKelahiranView.swipeRefreshFalse();
             }
         });
         suratKelahiranView.onShowData(suratKelahiranData);

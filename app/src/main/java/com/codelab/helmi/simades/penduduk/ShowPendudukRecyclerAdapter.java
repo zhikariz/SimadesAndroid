@@ -1,9 +1,10 @@
 package com.codelab.helmi.simades.penduduk;
 
-import android.app.FragmentManager;
+
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -95,10 +96,10 @@ public class ShowPendudukRecyclerAdapter extends RecyclerView.Adapter<ShowPendud
                 detailPendudukFragment.setArguments(bundle);
                 fragmentManager.beginTransaction()
                         .replace(R.id.frame_container, detailPendudukFragment, detailPendudukFragment.getClass().getSimpleName())
-                        .addToBackStack(null)
+                        .addToBackStack(detailPendudukFragment.getClass().getSimpleName())
                         .commit();
 
-                Toast.makeText(ctx, "" + holder.nama.getText().toString(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(ctx, "" + holder.nama.getText().toString(), Toast.LENGTH_SHORT).show();
             }
         });
     }

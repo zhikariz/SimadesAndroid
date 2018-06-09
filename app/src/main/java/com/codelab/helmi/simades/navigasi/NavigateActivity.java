@@ -1,9 +1,11 @@
 package com.codelab.helmi.simades.navigasi;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
+
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -116,8 +118,12 @@ public class NavigateActivity extends AppCompatActivity implements NavigationVie
 
     // untuk mengganti isi kontainer menu yang dipiih
     private void callFragment(Fragment fragment) {
-        fragmentManager = getFragmentManager();
+        fragmentManager = getSupportFragmentManager();
+
+        fragmentManager.popBackStack();
+
         fragmentManager.beginTransaction()
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 .replace(R.id.frame_container, fragment, fragment.getClass().getSimpleName())
                 .commit();
     }

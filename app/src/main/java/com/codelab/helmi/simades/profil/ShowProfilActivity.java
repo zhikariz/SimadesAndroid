@@ -1,15 +1,19 @@
 package com.codelab.helmi.simades.profil;
 
 
-import android.app.Fragment;
-import android.app.FragmentManager;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 
 import com.bumptech.glide.Glide;
 import com.codelab.helmi.simades.R;
@@ -24,6 +28,7 @@ public class ShowProfilActivity extends Fragment implements ProfilView {
     Button btnEditProfilDesa;
     View view;
     FragmentManager fragmentManager;
+
 
 
     @Override

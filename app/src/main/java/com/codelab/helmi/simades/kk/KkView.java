@@ -5,4 +5,6 @@ import com.codelab.helmi.simades.base.View;
 public interface KkView extends View{
     void onShowData(KkData kkData);
     void initPresenter();
+    void swipeRefreshTrue();
+    void swipeRefreshFalse();
 }

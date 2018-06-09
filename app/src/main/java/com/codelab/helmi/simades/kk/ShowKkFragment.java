@@ -1,7 +1,10 @@
 package com.codelab.helmi.simades.kk;
 
-import android.app.Fragment;
+
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,16 +13,16 @@ import android.view.ViewGroup;
 
 import com.codelab.helmi.simades.R;
 
-public class ShowKkFragment extends Fragment implements KkView {
+public class ShowKkFragment extends Fragment implements KkView, SwipeRefreshLayout.OnRefreshListener {
 
     KkPresenter presenter;
     View view;
     private RecyclerView mRecycler;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mManager;
-
-    public static String SAVED_RECYCLER_VIEW_STATUS_ID = "saved_recycler_view_status_id";
-    public static String SAVED_RECYCLER_VIEW_DATASET_ID = "saved_recyclr_view_dataset_id";
+    private final String KEY_RECYCLER_STATE = "recycler_state";
+    private static Bundle mBundleRecyclerViewState;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -28,16 +31,34 @@ public class ShowKkFragment extends Fragment implements KkView {
 
         view = inflater.inflate(R.layout.recycle_content, container, false);
         initPresenter();
+        initView();
         onAttachView();
         getActivity().setTitle("Kartu Keluarga");
+
+
 
         return view;
 
     }
 
+    private void initView() {
+        mRecycler = (RecyclerView) view.findViewById(R.id.recyclerTemp);
+        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
+    }
+
     @Override
     public void initPresenter() {
         presenter = new KkPresenter(mAdapter);
+    }
+
+    @Override
+    public void swipeRefreshTrue() {
+        swipeRefreshLayout.setRefreshing(true);
+    }
+
+    @Override
+    public void swipeRefreshFalse() {
+        swipeRefreshLayout.setRefreshing(false);
     }
 
     @Override
@@ -48,12 +69,9 @@ public class ShowKkFragment extends Fragment implements KkView {
     @Override
     public void onAttachView() {
         presenter.onAttach(this);
-
-        mRecycler = (RecyclerView) view.findViewById(R.id.recyclerTemp);
         mManager = new LinearLayoutManager(getActivity().getApplicationContext());
         mRecycler.setLayoutManager(mManager);
-
-        presenter.showData(getActivity().getApplicationContext(), mRecycler, getFragmentManager());
+        swipeRefreshLayout.setOnRefreshListener(this);
 
 
     }
@@ -67,6 +85,39 @@ public class ShowKkFragment extends Fragment implements KkView {
     public void onDestroy() {
         onDetachView();
         super.onDestroy();
+        mBundleRecyclerViewState = null;
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        mBundleRecyclerViewState = new Bundle();
+        Parcelable listState = mRecycler.getLayoutManager().onSaveInstanceState();
+        mBundleRecyclerViewState.putParcelable(KEY_RECYCLER_STATE, listState);
+        mAdapter = mRecycler.getAdapter();
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+//        // restore RecyclerView state
+        if (mBundleRecyclerViewState != null) {
+            Parcelable listState = mBundleRecyclerViewState.getParcelable(KEY_RECYCLER_STATE);
+            mRecycler.getLayoutManager().onRestoreInstanceState(listState);
+            mRecycler.setAdapter(mAdapter);
+        } else {
+            swipeRefreshTrue();
+            presenter.showData(getActivity().getApplicationContext(), mRecycler, getFragmentManager());
+        }
+    }
+
+    @Override
+    public void onRefresh() {
+        swipeRefreshTrue();
+        mRecycler.removeAllViewsInLayout();
+        presenter.showData(getActivity().getApplicationContext(), mRecycler, getFragmentManager());
+    }
 }

@@ -4,4 +4,6 @@ import com.codelab.helmi.simades.base.View;
 
 public interface PendudukView extends View {
     void onShowData(PendudukData pendudukData);
+    void swipeRefreshTrue();
+    void swipeRefreshFalse();
 }

@@ -100,6 +100,10 @@ public class SuratKelahiranData implements Parcelable {
     private String propinsi;
     @SerializedName("dusun")
     private String dusun;
+    @SerializedName("nama_depan_user")
+    private String nama_depan_user;
+    @SerializedName("nama_belakang_user")
+    private String nama_belakang_user;
 
 
     public String getId_surat() {
@@ -470,6 +474,21 @@ public class SuratKelahiranData implements Parcelable {
         this.dusun = dusun;
     }
 
+    public String getNama_depan_user() {
+        return nama_depan_user;
+    }
+
+    public void setNama_depan_user(String nama_depan_user) {
+        this.nama_depan_user = nama_depan_user;
+    }
+
+    public String getNama_belakang_user() {
+        return nama_belakang_user;
+    }
+
+    public void setNama_belakang_user(String nama_belakang_user) {
+        this.nama_belakang_user = nama_belakang_user;
+    }
 
     @Override
     public int describeContents() {

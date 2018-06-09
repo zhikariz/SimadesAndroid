@@ -1,13 +1,15 @@
 package com.codelab.helmi.simades.surat;
 
 
-import android.app.Fragment;
-import android.app.FragmentManager;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.codelab.helmi.simades.R;
 import com.codelab.helmi.simades.surat.bepergian.SuratBepergianFragment;
@@ -29,7 +31,7 @@ import com.codelab.helmi.simades.surat.wali.SuratWaliFragment;
 public class HomeSuratFragment extends Fragment implements View.OnClickListener {
 
     FragmentManager fragmentManager;
-    ImageView ivKelahiran;
+    LinearLayout lnKelahiran;
     ImageView ivUsaha;
     ImageView ivMeninggal;
     ImageView ivSkck;
@@ -60,20 +62,20 @@ public class HomeSuratFragment extends Fragment implements View.OnClickListener 
     }
 
     public void initView() {
-        ivKelahiran = (ImageView) view.findViewById(R.id.iv_kelahiran);
-        ivUsaha = (ImageView) view.findViewById(R.id.iv_usaha);
-        ivMeninggal = (ImageView) view.findViewById(R.id.iv_meninggal);
-        ivSkck = (ImageView) view.findViewById(R.id.iv_skck);
-        ivWali = (ImageView) view.findViewById(R.id.iv_wali);
-        ivBlmMenikah = (ImageView) view.findViewById(R.id.iv_blm_menikah);
-        ivIzinKeramaian = (ImageView) view.findViewById(R.id.iv_izin_keramaian);
-        ivBepergian = (ImageView) view.findViewById(R.id.iv_bepergian);
-        ivKehilangan = (ImageView) view.findViewById(R.id.iv_kehilangan);
-        ivTidakMampu = (ImageView) view.findViewById(R.id.iv_tidak_mampu);
-        ivDomisili = (ImageView) view.findViewById(R.id.iv_domisili);
-        ivEktp = (ImageView) view.findViewById(R.id.iv_ektp);
+        lnKelahiran = view.findViewById(R.id.ln_kelahiran);
+        ivUsaha = view.findViewById(R.id.iv_usaha);
+        ivMeninggal = view.findViewById(R.id.iv_meninggal);
+        ivSkck = view.findViewById(R.id.iv_skck);
+        ivWali = view.findViewById(R.id.iv_wali);
+        ivBlmMenikah = view.findViewById(R.id.iv_blm_menikah);
+        ivIzinKeramaian = view.findViewById(R.id.iv_izin_keramaian);
+        ivBepergian = view.findViewById(R.id.iv_bepergian);
+        ivKehilangan = view.findViewById(R.id.iv_kehilangan);
+        ivTidakMampu = view.findViewById(R.id.iv_tidak_mampu);
+        ivDomisili = view.findViewById(R.id.iv_domisili);
+        ivEktp = view.findViewById(R.id.iv_ektp);
 
-        ivKelahiran.setOnClickListener(this);
+        lnKelahiran.setOnClickListener(this);
         ivUsaha.setOnClickListener(this);
         ivMeninggal.setOnClickListener(this);
         ivSkck.setOnClickListener(this);
@@ -90,16 +92,19 @@ public class HomeSuratFragment extends Fragment implements View.OnClickListener 
     // untuk mengganti isi kontainer menu yang dipiih
     private void callFragment(Fragment fragment) {
         fragmentManager = getFragmentManager();
+        fragmentManager.popBackStack();
         fragmentManager.beginTransaction()
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 .replace(R.id.frame_container, fragment, fragment.getClass().getSimpleName())
                 .addToBackStack(fragment.getClass().getSimpleName())
                 .commit();
+
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.iv_kelahiran:
+            case R.id.ln_kelahiran:
                 fragment = new SuratKelahiranFragment();
                 callFragment(fragment);
                 break;

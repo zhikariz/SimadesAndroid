@@ -1,7 +1,9 @@
 package com.codelab.helmi.simades.profil;
 
 import android.content.Context;
+import android.support.design.widget.Snackbar;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.codelab.helmi.simades.api.RestApi;
@@ -14,6 +16,7 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import timber.log.Timber;
 
 public class ProfilPresenter implements Presenter<ProfilView> {
 
@@ -64,7 +67,7 @@ public class ProfilPresenter implements Presenter<ProfilView> {
 
             @Override
             public void onFailure(Call<ProfilResponseModel> call, Throwable t) {
-                Log.d("Error", t.getMessage());
+                Timber.d(t);
             }
         });
 

@@ -1,9 +1,11 @@
 package com.codelab.helmi.simades.surat.kelahiran;
 
-import android.app.FragmentManager;
+
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,6 +44,11 @@ public class SuratKelahiranRecyclerAdapter extends RecyclerView.Adapter<SuratKel
         holder.no_surat.setText(mList.get(position).getNo_surat());
         holder.tgl_surat.setText(mList.get(position).getTgl_surat());
         holder.status_persetujuan.setText(mList.get(position).getStatus_persetujuan());
+        if(mList.get(position).getStatus_persetujuan().equals("Belum disetujui")){
+            holder.status_persetujuan.setBackgroundColor(Color.parseColor("#ff0000"));
+        }else if(mList.get(position).getStatus_persetujuan().equals("Disetujui")){
+            holder.status_persetujuan.setBackgroundColor(Color.parseColor("#008000"));
+        }
 
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -87,6 +94,8 @@ public class SuratKelahiranRecyclerAdapter extends RecyclerView.Adapter<SuratKel
                 suratKelahiranData.setKabupaten(mList.get(position).getKabupaten());
                 suratKelahiranData.setPropinsi(mList.get(position).getPropinsi());
                 suratKelahiranData.setDusun(mList.get(position).getDusun());
+                suratKelahiranData.setNama_depan_user(mList.get(position).getNama_depan_user());
+                suratKelahiranData.setNama_belakang_user(mList.get(position).getNama_belakang_user());
 
                 Bundle bundle = new Bundle();
                 bundle.putParcelable(DetailSuratKelahiranFragment.EXTRA_SURAT_KELAHIRAN, suratKelahiranData);

@@ -31,7 +31,7 @@
                 android:title="Kematian" />
             <item
                 android:id="@+id/datang"
-                android:icon="@drawable/ic_menu_manage"
+                android:icon="@drawable/ic_flight_land_black_24dp"
                 android:title="Datang" />
             <item
                 android:id="@+id/pergi"

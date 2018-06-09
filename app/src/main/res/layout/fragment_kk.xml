@@ -16,8 +16,9 @@
             android:padding="16dp">
 
             <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:adjustViewBounds="true"
                 android:layout_marginRight="10dp"
                 android:src="@drawable/ic_collaboration" />
 
@@ -32,19 +33,16 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="140dp"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.5"
                         android:layout_height="wrap_content"
-                        android:text="Nomor KK"
+                        android:text="No KK"
                         android:textSize="17sp" />
 
                     <TextView
-                        android:layout_width="5dp"
-                        android:layout_height="wrap_content"
-                        android:text=":" />
-
-                    <TextView
                         android:id="@+id/tv_no_kk"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:text=""
                         android:textColor="#000"
@@ -59,19 +57,16 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="140dp"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.5"
                         android:layout_height="wrap_content"
                         android:text="Alamat"
                         android:textSize="17sp" />
 
                     <TextView
-                        android:layout_width="5dp"
-                        android:layout_height="wrap_content"
-                        android:text=":" />
-
-                    <TextView
                         android:id="@+id/tv_alamat"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:text=""
                         android:textColor="#000"
@@ -86,20 +81,16 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="140dp"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.5"
                         android:layout_height="wrap_content"
                         android:text="RT / RW"
-
                         android:textSize="17sp" />
 
                     <TextView
-                        android:layout_width="5dp"
-                        android:layout_height="wrap_content"
-                        android:text=":" />
-
-                    <TextView
                         android:id="@+id/tv_rt_rw"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:text=""
                         android:textColor="#000"

@@ -1,7 +1,9 @@
 package com.codelab.helmi.simades.kk;
 
-import android.app.FragmentManager;
+
 import android.content.Context;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 
 import com.codelab.helmi.simades.api.RestApi;
@@ -22,6 +24,7 @@ public class KkPresenter implements Presenter<KkView> {
     public List<KkData> mItems = new ArrayList<>();
 
     public KkPresenter(RecyclerView.Adapter mAdapter) {
+
         this.mAdapter = mAdapter;
     }
 
@@ -45,11 +48,13 @@ public class KkPresenter implements Presenter<KkView> {
                 mItems = response.body().getResult();
                 mAdapter = new KkRecyclerAdapter(ctx, mItems, fragmentManager);
                 mRecycler.setAdapter(mAdapter);
+                kkView.swipeRefreshFalse();
+
             }
 
             @Override
             public void onFailure(Call<KkResponseModel> call, Throwable t) {
-
+                kkView.swipeRefreshFalse();
             }
         });
 

@@ -1,7 +1,8 @@
 package com.codelab.helmi.simades.penduduk;
 
-import android.app.FragmentManager;
+
 import android.content.Context;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.codelab.helmi.simades.api.RestApi;
@@ -44,11 +45,12 @@ public class ShowPendudukPresenter implements Presenter<PendudukView> {
                 mItems = response.body().getResult();
                 mAdapter = new ShowPendudukRecyclerAdapter(ctx, mItems, fragmentManager);
                 mRecycler.setAdapter(mAdapter);
+                pendudukView.swipeRefreshFalse();
             }
 
             @Override
             public void onFailure(Call<ShowPendudukResponseModel> call, Throwable t) {
-
+                pendudukView.swipeRefreshFalse();
             }
         });
 

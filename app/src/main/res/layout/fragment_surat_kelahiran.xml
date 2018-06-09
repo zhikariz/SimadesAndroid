@@ -11,131 +11,133 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/ic_mailing" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="10dp">
+                android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:text="Kode Surat Kelahiran"
-                    android:textColor="#000"
-                    android:textSize="17sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="5dp"
-                    android:layout_height="wrap_content"
-                    android:text=":" />
-
-                <TextView
-                    android:id="@+id/tv_kode_surat_kelahiran"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text=""
-                    android:textColor="#000"
-                    android:textSize="17sp"
-                    android:textStyle="bold" />
+                    android:orientation="horizontal">
 
-            </LinearLayout>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="Kode"
+                        android:textColor="#000"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="10dp">
+                    <TextView
+                        android:id="@+id/tv_kode_surat_kelahiran"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textColor="#000"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
 
-                <TextView
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:text="Nomor Surat Kelahiran"
-                    android:textColor="#000"
-                    android:textSize="17sp"
-                    android:textStyle="bold" />
+                </LinearLayout>
 
-                <TextView
-                    android:layout_width="5dp"
-                    android:layout_height="wrap_content"
-                    android:text=":" />
-
-                <TextView
-                    android:id="@+id/tv_nomor_surat_kelahiran"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text=""
-                    android:textColor="#000"
-                    android:textSize="17sp"
-                    android:textStyle="bold" />
+                    android:orientation="horizontal">
 
-            </LinearLayout>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="No Surat"
+                        android:textColor="#000"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="10dp">
+                    <TextView
+                        android:id="@+id/tv_nomor_surat_kelahiran"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textColor="#000"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
 
-                <TextView
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:text="Tanggal Surat"
-                    android:textColor="#000"
-                    android:textSize="17sp"
-                    android:textStyle="bold" />
+                </LinearLayout>
 
-                <TextView
-                    android:layout_width="5dp"
-                    android:layout_height="wrap_content"
-                    android:text=":" />
-
-                <TextView
-                    android:id="@+id/tv_tanggal_surat_kelahiran"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text=""
-                    android:textColor="#000"
-                    android:textSize="17sp"
-                    android:textStyle="bold" />
+                    android:orientation="horizontal">
 
-            </LinearLayout>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="Tanggal Surat"
+                        android:textColor="#000"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="10dp">
 
-                <TextView
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:text="Status Persetujuan"
-                    android:textColor="#000"
-                    android:textSize="17sp"
-                    android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/tv_tanggal_surat_kelahiran"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textColor="#000"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
 
-                <TextView
-                    android:layout_width="5dp"
-                    android:layout_height="wrap_content"
-                    android:text=":" />
+                </LinearLayout>
 
-                <TextView
-                    android:id="@+id/tv_status_persetujauan_surat_kelahiran"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text=""
-                    android:textColor="#000"
-                    android:textSize="17sp"
-                    android:textStyle="bold" />
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="Status Persetujuan"
+                        android:textColor="#000"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_status_persetujauan_surat_kelahiran"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:text=""
+                        android:textColor="#fff"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
 
             </LinearLayout>
 
         </LinearLayout>
-
     </android.support.v7.widget.CardView>
+
 
 </LinearLayout>

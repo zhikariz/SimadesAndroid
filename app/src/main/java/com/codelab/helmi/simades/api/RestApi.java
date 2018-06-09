@@ -22,8 +22,11 @@ import com.codelab.helmi.simades.surat.wali.SuratWaliResponseModel;
 import com.codelab.helmi.simades.user.UserResponseModel;
 
 import retrofit2.Call;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
+import retrofit2.http.PUT;
 import retrofit2.http.Query;
 
 public interface RestApi {
@@ -90,5 +93,10 @@ public interface RestApi {
 
     @GET("api/surat_pengantar_ektp")
     Call<SuratEktpResponseModel> getSuratPengantarEktpData();
+
+    @PUT("api/surat_kelahiran")
+    @FormUrlEncoded
+    Call<SuratKelahiranResponseModel> putSuratKelahiran(@Field("kd_surat") String kd_surat,
+                                                        @Field("status_persetujuan") String status_persetujuan);
 
 }
