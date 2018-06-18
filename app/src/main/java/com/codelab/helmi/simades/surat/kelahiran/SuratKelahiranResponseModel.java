@@ -6,8 +6,6 @@ import java.util.List;
 
 @SuppressWarnings("unused")
 public class SuratKelahiranResponseModel {
-
-
     @SerializedName("result")
     List<SuratKelahiranData> result;
 

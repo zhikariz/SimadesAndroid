@@ -99,4 +99,59 @@ public interface RestApi {
     Call<SuratKelahiranResponseModel> putSuratKelahiran(@Field("kd_surat") String kd_surat,
                                                         @Field("status_persetujuan") String status_persetujuan);
 
+    @PUT("api/surat_usaha")
+    @FormUrlEncoded
+    Call<SuratUsahaResponseModel> putSuratUsaha(@Field("kd_surat") String kd_surat,
+                                                @Field("status_persetujuan") String status_persetujuan);
+
+    @PUT("api/surat_kematian")
+    @FormUrlEncoded
+    Call<SuratKematianResponseModel> putSuratKematian(@Field("kd_surat") String kd_surat,
+                                                      @Field("status_persetujuan") String status_persetujuan);
+
+    @PUT("api/surat_pengantar_skck")
+    @FormUrlEncoded
+    Call<SuratSkckResponseModel> putSuratPengantarSkck(@Field("kd_surat") String kd_surat,
+                                                       @Field("status_persetujuan") String status_persetujuan);
+
+    @PUT("api/surat_wali")
+    @FormUrlEncoded
+    Call<SuratWaliResponseModel> putSuratWali(@Field("kd_surat") String kd_surat,
+                                              @Field("status_persetujuan") String status_persetujuan);
+
+    @PUT("api/surat_blm_menikah")
+    @FormUrlEncoded
+    Call<SuratBlmMenikahResponseModel> putSuratBlmMenikah(@Field("kd_surat") String kd_surat,
+                                                          @Field("status_persetujuan") String status_persetujuan);
+
+    @PUT("api/surat_izin_keramaian")
+    @FormUrlEncoded
+    Call<SuratKeramaianResponseModel> putSuratIzinKeramaian(@Field("kd_surat") String kd_surat,
+                                                            @Field("status_persetujuan") String status_persetujuan);
+
+    @PUT("api/surat_bepergian")
+    @FormUrlEncoded
+    Call<SuratBepergianResponseModel> putSuratBepergian(@Field("kd_surat") String kd_surat,
+                                                        @Field("status_persetujuan") String status_persetujuan);
+
+    @PUT("api/surat_kehilangan")
+    @FormUrlEncoded
+    Call<SuratKehilanganResponseModel> putSuratKehilangan(@Field("kd_surat") String kd_surat,
+                                                          @Field("status_persetujuan") String status_persetujuan);
+
+    @PUT("api/surat_tidak_mampu")
+    @FormUrlEncoded
+    Call<SuratTidakMampuResponseModel> putSuratTidakMampu(@Field("kd_surat") String kd_surat,
+                                                          @Field("status_persetujuan") String status_persetujuan);
+
+    @PUT("api/surat_domisili")
+    @FormUrlEncoded
+    Call<SuratDomisiliResponseModel> putSuratDomisili(@Field("kd_surat") String kd_surat,
+                                                      @Field("status_persetujuan") String status_persetujuan);
+
+    @PUT("api/surat_pengantar_ektp")
+    @FormUrlEncoded
+    Call<SuratEktpResponseModel> putSuratPengantarEktp(@Field("kd_surat") String kd_surat,
+                                                       @Field("status_persetujuan") String status_persetujuan);
+
 }

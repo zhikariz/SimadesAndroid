@@ -1,9 +1,10 @@
 package com.codelab.helmi.simades.surat.kelahiran;
 
 
-
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -24,10 +25,9 @@ public class SuratKelahiranFragment extends Fragment implements SuratKelahiranVi
     private RecyclerView.LayoutManager mManager;
     SuratKelahiranPresenter presenter;
     View view;
-    private final String KEY_RECYCLER_STATE = "recycler_state";
-    public static Bundle mBundleRecyclerViewState;
+    public static final String KEY_RECYCLER_STATE = "recycler_state";
+    public static Bundle mBundleRecyclerViewState = null;
     private SwipeRefreshLayout swipeRefreshLayout;
-    public static final String KEY_STACK = "key_stack";
 
     public SuratKelahiranFragment() {
         // Required empty public constructor
@@ -43,14 +43,15 @@ public class SuratKelahiranFragment extends Fragment implements SuratKelahiranVi
         initView();
         onAttachView();
         getActivity().setTitle("Surat Kelahiran");
+
         return view;
     }
 
     private void initView() {
-        mRecycler = (RecyclerView) view.findViewById(R.id.recyclerTemp);
+        mRecycler = view.findViewById(R.id.recyclerTemp);
         mManager = new LinearLayoutManager(getActivity().getApplicationContext());
         mRecycler.setLayoutManager(mManager);
-        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
+        swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(this);
     }
 
@@ -83,12 +84,13 @@ public class SuratKelahiranFragment extends Fragment implements SuratKelahiranVi
     @Override
     public void onPause() {
         super.onPause();
-
         mBundleRecyclerViewState = new Bundle();
+
         Parcelable listState = mRecycler.getLayoutManager().onSaveInstanceState();
         mBundleRecyclerViewState.putParcelable(KEY_RECYCLER_STATE, listState);
         mAdapter = mRecycler.getAdapter();
     }
+
 
     @Override
     public void onResume() {
@@ -100,7 +102,8 @@ public class SuratKelahiranFragment extends Fragment implements SuratKelahiranVi
             mRecycler.setAdapter(mAdapter);
         } else {
             swipeRefreshTrue();
-            presenter.showData(getActivity().getApplicationContext(), mRecycler,getFragmentManager());
+            mRecycler.removeAllViewsInLayout();
+            presenter.showData(getActivity().getApplicationContext(), mRecycler, getFragmentManager());
         }
     }
 
@@ -118,6 +121,6 @@ public class SuratKelahiranFragment extends Fragment implements SuratKelahiranVi
     public void onRefresh() {
         swipeRefreshTrue();
         mRecycler.removeAllViewsInLayout();
-        presenter.showData(getActivity().getApplicationContext(), mRecycler,getFragmentManager());
+        presenter.showData(getActivity().getApplicationContext(), mRecycler, getFragmentManager());
     }
 }

@@ -9,133 +9,125 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp">
 
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="10dp"
             android:orientation="vertical">
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/tv_kode_surat_domisili"
+                style="@android:style/TextAppearance.DeviceDefault.Medium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="10dp">
-
-                <TextView
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:text="Kode Surat Domisili"
-                    android:textColor="#000"
-                    android:textSize="17sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="5dp"
-                    android:layout_height="wrap_content"
-                    android:text=":" />
-
-                <TextView
-                    android:id="@+id/tv_kode_surat_domisili"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text=""
-                    android:textColor="#000"
-                    android:textSize="17sp"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
+                android:background="#DCDCDC"
+                android:textAlignment="center"
+                android:textColor="#000" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:padding="10dp">
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp">
 
                 <TextView
-                    android:layout_width="200dp"
+                    style="@android:style/TextAppearance.DeviceDefault.Small"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Nomor Surat Domisili"
-                    android:textColor="#000"
-                    android:textSize="17sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="5dp"
-                    android:layout_height="wrap_content"
-                    android:text=":" />
+                    android:layout_weight="1"
+                    android:text="No Surat" />
 
                 <TextView
                     android:id="@+id/tv_nomor_surat_domisili"
-                    android:layout_width="match_parent"
+                    style="@android:style/TextAppearance.DeviceDefault.Small"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text=""
-                    android:textColor="#000"
-                    android:textSize="17sp"
-                    android:textStyle="bold" />
+                    android:textColor="#000" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:padding="10dp">
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp">
 
-                <TextView
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:text="Tanggal Surat"
-                    android:textColor="#000"
-                    android:textSize="17sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="5dp"
-                    android:layout_height="wrap_content"
-                    android:text=":" />
-
-                <TextView
-                    android:id="@+id/tv_tanggal_surat_domisili"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text=""
-                    android:textColor="#000"
-                    android:textSize="17sp"
-                    android:textStyle="bold" />
+                    android:orientation="vertical">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@android:style/TextAppearance.DeviceDefault.Small"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Pengaju" />
+
+
+                        <TextView
+                            android:id="@+id/tv_pengaju_surat_domisili"
+                            style="@android:style/TextAppearance.DeviceDefault.Small"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text=""
+                            android:textColor="#000"
+                            android:textStyle="normal" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
 
             </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:orientation="horizontal"
-                android:padding="10dp">
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp">
 
-                <TextView
-                    android:layout_width="200dp"
-                    android:layout_height="wrap_content"
-                    android:text="Status Persetujuan"
-                    android:textColor="#000"
-                    android:textSize="17sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="5dp"
-                    android:layout_height="wrap_content"
-                    android:text=":" />
 
                 <TextView
                     android:id="@+id/tv_status_persetujuan_surat_domisili"
-                    android:layout_width="match_parent"
+                    style="@android:style/TextAppearance.DeviceDefault.Small"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text=""
-                    android:textColor="#000"
-                    android:textSize="17sp"
-                    android:textStyle="bold" />
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:textColor="#fff"
+                    android:textStyle="italic|bold" />
 
+                <TextView
+                    android:id="@+id/tv_tanggal_surat_domisili"
+                    style="@android:style/TextAppearance.DeviceDefault.Small"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="right" />
             </LinearLayout>
+
 
         </LinearLayout>
 
     </android.support.v7.widget.CardView>
+
 
 </LinearLayout>

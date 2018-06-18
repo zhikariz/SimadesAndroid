@@ -1,6 +1,7 @@
 package com.codelab.helmi.simades.surat.kematian;
 
 import android.content.Context;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.codelab.helmi.simades.api.RestApi;
@@ -33,7 +34,7 @@ public class SuratKematianPresenter implements Presenter<SuratKematianView> {
         suratKematianView = null;
     }
 
-    public void showData(final Context ctx, final RecyclerView mRecycler) {
+    public void showData(final Context ctx, final RecyclerView mRecycler, final FragmentManager fragmentManager) {
         final SuratKematianData suratKematianData = new SuratKematianData();
         RestApi api = RestServer.getClient().create(RestApi.class);
         Call<SuratKematianResponseModel> getData = api.getSuratKematianData();
@@ -41,13 +42,14 @@ public class SuratKematianPresenter implements Presenter<SuratKematianView> {
             @Override
             public void onResponse(Call<SuratKematianResponseModel> call, Response<SuratKematianResponseModel> response) {
                 mItems = response.body().getResult();
-                mAdapter = new SuratKematianRecyclerAdapter(ctx, mItems);
+                mAdapter = new SuratKematianRecyclerAdapter(ctx, mItems,fragmentManager);
                 mRecycler.setAdapter(mAdapter);
+                suratKematianView.swipeRefreshFalse();
             }
 
             @Override
             public void onFailure(Call<SuratKematianResponseModel> call, Throwable t) {
-
+                suratKematianView.swipeRefreshFalse();
             }
         });
         suratKematianView.onShowData(suratKematianData);

@@ -24,7 +24,7 @@ import static okhttp3.logging.HttpLoggingInterceptor.Level.NONE;
 public class RestServer {
 
 
-    private static final String base_url = "https://ad4d4b48.ngrok.io/";
+    private static final String base_url = "https://de82dcae.ngrok.io/";
     private static final String CACHE_CONTROL = "Cache-Control";
     private static Retrofit retrofit;
 

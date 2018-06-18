@@ -7,6 +7,7 @@ import com.codelab.helmi.simades.api.RestApi;
 import com.codelab.helmi.simades.api.RestServer;
 import com.codelab.helmi.simades.base.Presenter;
 import com.codelab.helmi.simades.surat.kelahiran.SuratKelahiranData;
+import com.codelab.helmi.simades.surat.kelahiran.SuratKelahiranFragment;
 import com.codelab.helmi.simades.surat.kelahiran.SuratKelahiranRecyclerAdapter;
 import com.codelab.helmi.simades.surat.kelahiran.SuratKelahiranResponseModel;
 
@@ -35,12 +36,10 @@ public class DetailSuratKelahiranPresenter implements Presenter<DetailSuratKelah
             putData.enqueue(new Callback<SuratKelahiranResponseModel>() {
                 @Override
                 public void onResponse(Call<SuratKelahiranResponseModel> call, Response<SuratKelahiranResponseModel> response) {
-
                 }
 
                 @Override
                 public void onFailure(Call<SuratKelahiranResponseModel> call, Throwable t) {
-
                 }
                 });
     }

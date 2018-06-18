@@ -4,4 +4,6 @@ import com.codelab.helmi.simades.base.View;
 
 public interface SuratKematianView extends View {
     void onShowData(SuratKematianData suratKematianData);
+    void swipeRefreshTrue();
+    void swipeRefreshFalse();
 }

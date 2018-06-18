@@ -1,6 +1,9 @@
 package com.codelab.helmi.simades.surat.skck;
 
+
+
 import android.content.Context;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.codelab.helmi.simades.api.RestApi;
@@ -15,6 +18,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class SuratSkckPresenter implements Presenter<SuratSkckView> {
+
     private SuratSkckView suratSkckView;
     public List<SuratSkckData> mItems = new ArrayList<>();
     RecyclerView.Adapter mAdapter;
@@ -33,7 +37,7 @@ public class SuratSkckPresenter implements Presenter<SuratSkckView> {
         suratSkckView = null;
     }
 
-    public void showData(final Context ctx, final RecyclerView mRecycler) {
+    public void showData(final Context ctx, final RecyclerView mRecycler, final FragmentManager fragmentManager) {
         final SuratSkckData suratSkckData = new SuratSkckData();
         RestApi api = RestServer.getClient().create(RestApi.class);
         Call<SuratSkckResponseModel> getData = api.getSuratPengantarSkckData();
@@ -41,14 +45,14 @@ public class SuratSkckPresenter implements Presenter<SuratSkckView> {
             @Override
             public void onResponse(Call<SuratSkckResponseModel> call, Response<SuratSkckResponseModel> response) {
                 mItems = response.body().getResult();
-
-                mAdapter = new SuratSkckRecyclerAdapter(ctx, mItems);
+                mAdapter = new SuratSkckRecyclerAdapter(ctx, mItems,fragmentManager);
                 mRecycler.setAdapter(mAdapter);
+                suratSkckView.swipeRefreshFalse();
             }
 
             @Override
             public void onFailure(Call<SuratSkckResponseModel> call, Throwable t) {
-
+                suratSkckView.swipeRefreshFalse();
             }
         });
         suratSkckView.onShowData(suratSkckData);

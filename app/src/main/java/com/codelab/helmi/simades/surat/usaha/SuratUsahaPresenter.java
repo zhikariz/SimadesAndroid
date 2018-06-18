@@ -1,6 +1,7 @@
 package com.codelab.helmi.simades.surat.usaha;
 
 import android.content.Context;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.codelab.helmi.simades.api.RestApi;
@@ -33,7 +34,7 @@ public class SuratUsahaPresenter implements Presenter<SuratUsahaView> {
         suratUsahaView = null;
     }
 
-    public void showData(final Context ctx, final RecyclerView mRecycler) {
+    public void showData(final Context ctx, final RecyclerView mRecycler, final FragmentManager fragmentManager) {
         final SuratUsahaData suratUsahaData = new SuratUsahaData();
         RestApi api = RestServer.getClient().create(RestApi.class);
         Call<SuratUsahaResponseModel> getData = api.getSuratUsahaData();
@@ -41,13 +42,14 @@ public class SuratUsahaPresenter implements Presenter<SuratUsahaView> {
             @Override
             public void onResponse(Call<SuratUsahaResponseModel> call, Response<SuratUsahaResponseModel> response) {
                 mItems = response.body().getResult();
-                mAdapter = new SuratUsahaRecyclerAdapter(ctx, mItems);
+                mAdapter = new SuratUsahaRecyclerAdapter(ctx, mItems, fragmentManager);
                 mRecycler.setAdapter(mAdapter);
+                suratUsahaView.swipeRefreshFalse();
             }
 
             @Override
             public void onFailure(Call<SuratUsahaResponseModel> call, Throwable t) {
-
+                suratUsahaView.swipeRefreshFalse();
             }
         });
         suratUsahaView.onShowData(suratUsahaData);

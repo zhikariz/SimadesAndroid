@@ -149,4 +149,6 @@ public class NavigateActivity extends AppCompatActivity implements NavigationVie
     public void onShowFragment() {
 
     }
+
+
 }

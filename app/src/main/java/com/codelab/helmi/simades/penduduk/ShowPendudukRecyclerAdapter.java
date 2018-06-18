@@ -117,10 +117,10 @@ public class ShowPendudukRecyclerAdapter extends RecyclerView.Adapter<ShowPendud
         public MyHolder(View v) {
             super(v);
 
-            nik = (TextView) v.findViewById(R.id.tvNik);
-            nama = (TextView) v.findViewById(R.id.tvNamaPenduduk);
-            umur = (TextView) v.findViewById(R.id.tvUmur);
-            ivPenduduk = (ImageView) v.findViewById(R.id.iv_penduduk);
+            nik = v.findViewById(R.id.tvNik);
+            nama = v.findViewById(R.id.tvNamaPenduduk);
+            umur = v.findViewById(R.id.tvUmur);
+            ivPenduduk = v.findViewById(R.id.iv_penduduk);
 
 
         }
