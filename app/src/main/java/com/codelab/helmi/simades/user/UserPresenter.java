@@ -3,6 +3,7 @@ package com.codelab.helmi.simades.user;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.widget.Toast;
 
 import com.codelab.helmi.simades.api.RestApi;
 import com.codelab.helmi.simades.api.RestServer;
@@ -44,9 +45,23 @@ public class UserPresenter implements Presenter<UserView> {
         getdata.enqueue(new Callback<UserResponseModel>() {
             @Override
             public void onResponse(Call<UserResponseModel> call, Response<UserResponseModel> response) {
-                mItems = response.body().getResult();
-                mAdapter = new UserRecyclerAdapter(ctx,mItems);
-                mRecycler.setAdapter(mAdapter);
+                if(response.isSuccessful()) {
+                    mItems = response.body().getResult();
+                    mAdapter = new UserRecyclerAdapter(ctx, mItems);
+                    mRecycler.setAdapter(mAdapter);
+                }else{
+                    switch (response.code()) {
+                        case 404:
+                            Toast.makeText(ctx, "404 Not Found", Toast.LENGTH_SHORT).show();
+                            break;
+                        case 500:
+                            Toast.makeText(ctx, "500 Internal Server Error", Toast.LENGTH_SHORT).show();
+                            break;
+                        default:
+                            Toast.makeText(ctx, "Unknown Error", Toast.LENGTH_SHORT).show();
+                            break;
+                    }
+                }
             }
 
             @Override

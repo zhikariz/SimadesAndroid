@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.codelab.helmi.simades.R;
 import com.codelab.helmi.simades.penduduk.PendudukData;
 
@@ -74,9 +75,9 @@ public class DetailPendudukFragment extends Fragment implements DetailPendudukVi
         }
 
         if (pendudukData.getJekel().equals("Laki-laki")) {
-            ivPenduduk.setImageResource(R.drawable.ic_boy);
+            Glide.with(getActivity().getApplicationContext()).load(R.drawable.ic_boy).into(ivPenduduk);
         } else if (pendudukData.getJekel().equals("Perempuan")) {
-            ivPenduduk.setImageResource(R.drawable.ic_girl);
+            Glide.with(getActivity().getApplicationContext()).load(R.drawable.ic_girl).into(ivPenduduk);
         }
 
         tvTglLahir.setText(pendudukData.getTempat_lhr() + ", " + pendudukData.getTanggal_lhr());

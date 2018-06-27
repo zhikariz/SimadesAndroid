@@ -29,7 +29,7 @@ import static okhttp3.logging.HttpLoggingInterceptor.Level.NONE;
 public class RestServer {
 
 
-    private static final String base_url = "https://1c7ea977.ngrok.io/";
+    private static final String base_url = "https://b9d2c9ed.ngrok.io/";
     private static final String CACHE_CONTROL = "Cache-Control";
     private static Retrofit retrofit;
 
@@ -55,6 +55,8 @@ public class RestServer {
                 .addInterceptor(provideOfflineCacheInterceptor())
                 .addNetworkInterceptor(provideCacheInterceptor())
                 .cache(provideCache())
+                .connectTimeout(100,TimeUnit.SECONDS)
+                .readTimeout(100,TimeUnit.SECONDS)
                 .build();
     }
 

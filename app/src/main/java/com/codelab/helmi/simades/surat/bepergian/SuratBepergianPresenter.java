@@ -3,6 +3,7 @@ package com.codelab.helmi.simades.surat.bepergian;
 import android.content.Context;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.Toast;
 
 import com.codelab.helmi.simades.api.RestApi;
 import com.codelab.helmi.simades.api.RestServer;
@@ -41,10 +42,27 @@ public class SuratBepergianPresenter implements Presenter<SuratBepergianView> {
         getData.enqueue(new Callback<SuratBepergianResponseModel>() {
             @Override
             public void onResponse(Call<SuratBepergianResponseModel> call, Response<SuratBepergianResponseModel> response) {
-                mItems = response.body().getResult();
-                mAdapter = new SuratBepergianRecyclerAdapter(ctx, mItems, fragmentManager);
-                mRecycler.setAdapter(mAdapter);
-                suratBepergianView.swipeRefreshFalse();
+                if(response.isSuccessful()) {
+                    mItems = response.body().getResult();
+                    mAdapter = new SuratBepergianRecyclerAdapter(ctx, mItems, fragmentManager);
+                    mRecycler.setAdapter(mAdapter);
+                    suratBepergianView.swipeRefreshFalse();
+                }else{
+                    switch (response.code()) {
+                        case 404:
+                            Toast.makeText(ctx, "404 Not Found", Toast.LENGTH_SHORT).show();
+                            suratBepergianView.swipeRefreshFalse();
+                            break;
+                        case 500:
+                            Toast.makeText(ctx, "500 Internal Server Error", Toast.LENGTH_SHORT).show();
+                            suratBepergianView.swipeRefreshFalse();
+                            break;
+                        default:
+                            Toast.makeText(ctx, "Unknown Error", Toast.LENGTH_SHORT).show();
+                            suratBepergianView.swipeRefreshFalse();
+                            break;
+                    }
+                }
             }
 
             @Override

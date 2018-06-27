@@ -11,7 +11,9 @@ import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.codelab.helmi.simades.R;
 
 import java.util.ArrayList;
@@ -40,8 +42,6 @@ public class ShowKkFragment extends Fragment implements KkView, SwipeRefreshLayo
         initView();
         onAttachView();
         getActivity().setTitle("Kartu Keluarga");
-
-
         return view;
 
     }
@@ -50,8 +50,6 @@ public class ShowKkFragment extends Fragment implements KkView, SwipeRefreshLayo
         mRecycler = view.findViewById(R.id.recyclerTemp);
         swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_layout);
         searchView = view.findViewById(R.id.search_view);
-
-
     }
 
     @Override
@@ -67,8 +65,8 @@ public class ShowKkFragment extends Fragment implements KkView, SwipeRefreshLayo
     @Override
     public void swipeRefreshFalse() {
         swipeRefreshLayout.setRefreshing(false);
-        swipeRefreshLayout.destroyDrawingCache();
-        swipeRefreshLayout.clearAnimation();
+//        swipeRefreshLayout.destroyDrawingCache();
+//        swipeRefreshLayout.clearAnimation();
     }
 
     @Override
@@ -87,8 +85,6 @@ public class ShowKkFragment extends Fragment implements KkView, SwipeRefreshLayo
         mManager = new LinearLayoutManager(getActivity().getApplicationContext());
         mRecycler.setLayoutManager(mManager);
         swipeRefreshLayout.setOnRefreshListener(this);
-
-
     }
 
     @Override

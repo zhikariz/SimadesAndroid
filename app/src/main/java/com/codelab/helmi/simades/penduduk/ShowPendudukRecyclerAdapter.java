@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.codelab.helmi.simades.R;
 import com.codelab.helmi.simades.penduduk.detail.DetailPendudukFragment;
 
@@ -50,9 +51,9 @@ public class ShowPendudukRecyclerAdapter extends RecyclerView.Adapter<ShowPendud
         holder.umur.setText(mList.get(position).getUmur());
 
         if(mList.get(position).getJekel().equals("Laki-laki")){
-            holder.ivPenduduk.setImageResource(R.drawable.ic_boy);
+            Glide.with(this.ctx).load(R.drawable.ic_boy).into(holder.ivPenduduk);
         }else if(mList.get(position).getJekel().equals("Perempuan")){
-            holder.ivPenduduk.setImageResource(R.drawable.ic_girl);
+            Glide.with(this.ctx).load(R.drawable.ic_girl).into(holder.ivPenduduk);
         }
 
 

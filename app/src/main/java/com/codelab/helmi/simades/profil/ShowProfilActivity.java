@@ -73,7 +73,7 @@ public class ShowProfilActivity extends Fragment implements ProfilView {
     @SuppressLint("SetTextI18n")
     @Override
     public void onShowData(ProfilData profilData) {
-        Glide.with(view.getContext()).load(RestServer.getBase_url() + "uploads/image/" + profilData.getImage()).into(image);
+        Glide.with(this).load(RestServer.getBase_url() + "uploads/image/" + profilData.getImage()).into(image);
         tvKabupaten.setText("Pemerintah Kabupaten "+profilData.getKabupaten());
         tvKecamatan.setText("Kecamatan "+profilData.getKecamatan());
         tvDesa.setText("Desa "+profilData.getNm_desa());

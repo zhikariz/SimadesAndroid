@@ -4,6 +4,7 @@ package com.codelab.helmi.simades.penduduk;
 import android.content.Context;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.Toast;
 
 import com.codelab.helmi.simades.api.RestApi;
 import com.codelab.helmi.simades.api.RestServer;
@@ -42,14 +43,32 @@ public class ShowPendudukPresenter implements Presenter<PendudukView> {
         getData.enqueue(new Callback<ShowPendudukResponseModel>() {
             @Override
             public void onResponse(Call<ShowPendudukResponseModel> call, Response<ShowPendudukResponseModel> response) {
-                mItems = response.body().getResult();
-                mAdapter = new ShowPendudukRecyclerAdapter(ctx, mItems, fragmentManager);
-                mRecycler.setAdapter(mAdapter);
-                pendudukView.swipeRefreshFalse();
+                if(response.isSuccessful()) {
+                    mItems = response.body().getResult();
+                    mAdapter = new ShowPendudukRecyclerAdapter(ctx, mItems, fragmentManager);
+                    mRecycler.setAdapter(mAdapter);
+                    pendudukView.swipeRefreshFalse();
+                }else{
+                    switch (response.code()) {
+                        case 404:
+                            Toast.makeText(ctx, "404 Not Found", Toast.LENGTH_SHORT).show();
+                            pendudukView.swipeRefreshFalse();
+                            break;
+                        case 500:
+                            Toast.makeText(ctx, "500 Internal Server Error", Toast.LENGTH_SHORT).show();
+                            pendudukView.swipeRefreshFalse();
+                            break;
+                        default:
+                            Toast.makeText(ctx, "Unknown Error", Toast.LENGTH_SHORT).show();
+                            pendudukView.swipeRefreshFalse();
+                            break;
+                    }
+                }
             }
 
             @Override
             public void onFailure(Call<ShowPendudukResponseModel> call, Throwable t) {
+                Toast.makeText(ctx, "Gagal Mendapatkan Data", Toast.LENGTH_SHORT).show();
                 pendudukView.swipeRefreshFalse();
             }
         });

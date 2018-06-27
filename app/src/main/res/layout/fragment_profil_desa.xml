@@ -19,7 +19,7 @@
             android:layout_height="200dp"
             android:layout_gravity="center_horizontal"
             android:adjustViewBounds="true"
-            android:src="@drawable/ic_launcher_background" />
+            />
 
         <TextView
             android:textSize="20sp"

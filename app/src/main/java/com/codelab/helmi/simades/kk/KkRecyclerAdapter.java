@@ -15,8 +15,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.codelab.helmi.simades.R;
 import com.codelab.helmi.simades.penduduk.PendudukData;
 import com.codelab.helmi.simades.penduduk.ShowPendudukFragment;
@@ -53,6 +55,7 @@ public class KkRecyclerAdapter extends RecyclerView.Adapter<KkRecyclerAdapter.My
         holder.no_kk.setText(mList.get(position).getNo_kk());
         holder.alamat.setText(mList.get(position).getAlamat());
         holder.tvRtRw.setText(mList.get(position).getRt() + " / " + mList.get(position).getRw());
+        Glide.with(this.ctx).load(R.drawable.ic_collaboration).into(holder.ivKK);
 
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -79,10 +82,12 @@ public class KkRecyclerAdapter extends RecyclerView.Adapter<KkRecyclerAdapter.My
     public class MyHolder extends RecyclerView.ViewHolder {
         TextView no_kk, alamat, id_dusun, tvRtRw, rw, kelurahan, kecamatan, kabupaten, propinsi;
         PendudukData pendudukData;
+        ImageView ivKK;
+
 
         public MyHolder(View v) {
             super(v);
-
+            ivKK = (ImageView) v.findViewById(R.id.iv_kk);
             no_kk = (TextView) v.findViewById(R.id.tv_no_kk);
             alamat = (TextView) v.findViewById(R.id.tv_alamat);
             tvRtRw = (TextView) v.findViewById(R.id.tv_rt_rw);

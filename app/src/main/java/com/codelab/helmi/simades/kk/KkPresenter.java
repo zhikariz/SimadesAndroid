@@ -3,14 +3,13 @@ package com.codelab.helmi.simades.kk;
 
 import android.content.Context;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
+import android.widget.Toast;
 
 import com.codelab.helmi.simades.api.RestApi;
 import com.codelab.helmi.simades.api.RestServer;
 import com.codelab.helmi.simades.base.Presenter;
 
-import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,14 +46,32 @@ public class KkPresenter implements Presenter<KkView> {
         getData.enqueue(new Callback<KkResponseModel>() {
             @Override
             public void onResponse(Call<KkResponseModel> call, Response<KkResponseModel> response) {
+                if (response.isSuccessful()) {
                     mItems = response.body().getResult();
                     mAdapter = new KkRecyclerAdapter(ctx, mItems, fragmentManager);
                     mRecycler.setAdapter(mAdapter);
                     kkView.swipeRefreshFalse();
+                } else {
+                    switch (response.code()) {
+                        case 404:
+                            Toast.makeText(ctx, "404 Not Found", Toast.LENGTH_SHORT).show();
+                            kkView.swipeRefreshFalse();
+                            break;
+                        case 500:
+                            Toast.makeText(ctx, "500 Internal Server Error", Toast.LENGTH_SHORT).show();
+                            kkView.swipeRefreshFalse();
+                            break;
+                        default:
+                            Toast.makeText(ctx, "Unknown Error", Toast.LENGTH_SHORT).show();
+                            kkView.swipeRefreshFalse();
+                            break;
+                    }
+                }
             }
 
             @Override
             public void onFailure(Call<KkResponseModel> call, Throwable t) {
+                Toast.makeText(ctx, "Gagal Mendapatkan Data", Toast.LENGTH_SHORT).show();
                 kkView.swipeRefreshFalse();
             }
         });

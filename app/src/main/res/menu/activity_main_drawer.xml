@@ -23,11 +23,11 @@
             <group android:checkableBehavior="single">
             <item
                 android:id="@+id/kelahiran"
-                android:icon="@drawable/ic_menu_manage"
+                android:icon="@drawable/ic_baby_item"
                 android:title="Kelahiran" />
             <item
                 android:id="@+id/kematian"
-                android:icon="@drawable/ic_menu_manage"
+                android:icon="@drawable/ic_kuburan"
                 android:title="Kematian" />
             <item
                 android:id="@+id/datang"

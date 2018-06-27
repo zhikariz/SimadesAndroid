@@ -57,10 +57,9 @@
                         android:padding="10dp">
 
                         <ImageView
-
+                            android:id="@+id/iv_kelahiran"
                             android:layout_width="80dp"
-                            android:layout_height="80dp"
-                            android:src="@drawable/ic_baby" />
+                            android:layout_height="80dp" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -70,6 +69,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/ln_usaha"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -83,8 +83,7 @@
                         <ImageView
                             android:id="@+id/iv_usaha"
                             android:layout_width="80dp"
-                            android:layout_height="80dp"
-                            android:src="@drawable/ic_office" />
+                            android:layout_height="80dp" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -95,6 +94,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/ln_meninggal"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -108,7 +108,7 @@
                             android:id="@+id/iv_meninggal"
                             android:layout_width="80dp"
                             android:layout_height="80dp"
-                            android:src="@drawable/ic_skull" />
+                            />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -130,6 +130,7 @@
                     android:orientation="horizontal">
 
                     <LinearLayout
+                        android:id="@+id/ln_skck"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -144,7 +145,7 @@
                             android:id="@+id/iv_skck"
                             android:layout_width="80dp"
                             android:layout_height="80dp"
-                            android:src="@drawable/ic_police_badge" />
+                             />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -155,6 +156,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/ln_wali"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -168,8 +170,7 @@
                         <ImageView
                             android:id="@+id/iv_wali"
                             android:layout_width="80dp"
-                            android:layout_height="80dp"
-                            android:src="@drawable/ic_parents" />
+                            android:layout_height="80dp" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -179,6 +180,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/ln_blm_menikah"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -192,12 +194,11 @@
                             android:id="@+id/iv_blm_menikah"
                             android:layout_width="80dp"
                             android:layout_height="80dp"
-                            android:src="@drawable/ic_ring" />
+                            />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-
                             android:text="Blm Menikah" />
 
                     </LinearLayout>
@@ -208,52 +209,51 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
+                    android:layout_marginTop="10dp"
                     android:orientation="horizontal">
 
                     <LinearLayout
+                        android:id="@+id/ln_izin_keramaian"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:layout_marginRight="10dp"
                         android:layout_weight="1"
                         android:background="@drawable/layout_bg"
                         android:gravity="center"
-                        android:layout_marginRight="10dp"
                         android:orientation="vertical"
                         android:padding="10dp">
 
                         <ImageView
                             android:id="@+id/iv_izin_keramaian"
                             android:layout_width="80dp"
-                            android:layout_height="80dp"
-                            android:src="@drawable/ic_speaker" />
+                            android:layout_height="80dp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-
                             android:text="Izin Keramaian" />
 
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/ln_bepergian"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:layout_marginRight="10dp"
                         android:layout_weight="1"
                         android:background="@drawable/layout_bg"
-                        android:padding="10dp"
-                        android:layout_marginRight="10dp"
                         android:gravity="center"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:padding="10dp">
 
                         <ImageView
                             android:id="@+id/iv_bepergian"
                             android:layout_width="80dp"
-                            android:layout_height="80dp"
-                            android:src="@drawable/ic_plane" />
+                            android:layout_height="80dp" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -263,25 +263,24 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/ln_kehilangan"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_weight="1"
                         android:background="@drawable/layout_bg"
-                        android:padding="10dp"
                         android:gravity="center"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:padding="10dp">
 
                         <ImageView
                             android:id="@+id/iv_kehilangan"
                             android:layout_width="80dp"
-                            android:layout_height="80dp"
-                            android:src="@drawable/ic_thief" />
+                            android:layout_height="80dp"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-
                             android:text="Kehilangan" />
 
                     </LinearLayout>
@@ -292,53 +291,53 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="16dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginTop="10dp"
                     android:layout_marginBottom="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="10dp"
                     android:orientation="horizontal">
 
                     <LinearLayout
+                        android:id="@+id/ln_tidak_mampu"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_weight="1"
-                        android:padding="10dp"
-                        android:background="@drawable/layout_bg"
                         android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/layout_bg"
                         android:gravity="center"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:padding="10dp">
 
                         <ImageView
                             android:id="@+id/iv_tidak_mampu"
                             android:layout_width="80dp"
                             android:layout_height="80dp"
-                            android:src="@drawable/ic_mailing" />
+                            />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-
                             android:text="Tidak Mampu" />
 
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/ln_domisili"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:background="@drawable/layout_bg"
-                        android:padding="10dp"
                         android:layout_marginRight="10dp"
-                        android:orientation="vertical">
+                        android:layout_weight="1"
+                        android:background="@drawable/layout_bg"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="10dp">
 
                         <ImageView
                             android:id="@+id/iv_domisili"
                             android:layout_width="80dp"
-                            android:layout_height="80dp"
-                            android:src="@drawable/ic_rumah" />
+                            android:layout_height="80dp" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -349,20 +348,20 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/ln_ektp"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_weight="1"
                         android:background="@drawable/layout_bg"
-                        android:padding="10dp"
                         android:gravity="center"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:padding="10dp">
 
                         <ImageView
                             android:id="@+id/iv_ektp"
                             android:layout_width="80dp"
-                            android:layout_height="80dp"
-                            android:src="@drawable/ic_identity_card" />
+                            android:layout_height="80dp" />
 
                         <TextView
                             android:layout_width="wrap_content"

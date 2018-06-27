@@ -41,7 +41,7 @@ public class ProfilPresenter implements Presenter<ProfilView> {
         getdata.enqueue(new Callback<ProfilResponseModel>() {
             @Override
             public void onResponse(Call<ProfilResponseModel> call, Response<ProfilResponseModel> response) {
-                try {
+                if(response.isSuccessful()){
                     int kode = response.body().getKode();
 
                     mItems = response.body().getResult();
@@ -59,9 +59,18 @@ public class ProfilPresenter implements Presenter<ProfilView> {
 
 
                     pView.onShowData(profilData);
-                } catch (Exception e) {
-                    Toast.makeText(ctx, "Anda Tidak Terkoneksi Internet !", Toast.LENGTH_SHORT).show();
-                    e.printStackTrace();
+                } else{
+                    switch (response.code()) {
+                        case 404:
+                            Toast.makeText(ctx, "404 Not Found", Toast.LENGTH_SHORT).show();
+                            break;
+                        case 500:
+                            Toast.makeText(ctx, "500 Internal Server Error", Toast.LENGTH_SHORT).show();
+                            break;
+                        default:
+                            Toast.makeText(ctx, "Unknown Error", Toast.LENGTH_SHORT).show();
+                            break;
+                    }
                 }
             }
 

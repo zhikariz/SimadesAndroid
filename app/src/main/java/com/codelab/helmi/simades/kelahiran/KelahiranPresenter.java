@@ -2,6 +2,7 @@ package com.codelab.helmi.simades.kelahiran;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.widget.Toast;
 
 import com.codelab.helmi.simades.api.RestApi;
 import com.codelab.helmi.simades.api.RestServer;
@@ -42,9 +43,23 @@ public class KelahiranPresenter implements Presenter<KelahiranView> {
         getData.enqueue(new Callback<KelahiranResponseModel>() {
             @Override
             public void onResponse(Call<KelahiranResponseModel> call, Response<KelahiranResponseModel> response) {
+                if(response.isSuccessful()){
                 mItems = response.body().getResult();
                 mAdapter = new KelahiranRecyclerAdapter(ctx, mItems);
-                mRecycler.setAdapter(mAdapter);
+                mRecycler.setAdapter(mAdapter);}
+                else{
+                    switch (response.code()) {
+                        case 404:
+                            Toast.makeText(ctx, "404 Not Found", Toast.LENGTH_SHORT).show();
+                            break;
+                        case 500:
+                            Toast.makeText(ctx, "500 Internal Server Error", Toast.LENGTH_SHORT).show();
+                            break;
+                        default:
+                            Toast.makeText(ctx, "Unknown Error", Toast.LENGTH_SHORT).show();
+                            break;
+                    }
+                }
             }
 
             @Override
