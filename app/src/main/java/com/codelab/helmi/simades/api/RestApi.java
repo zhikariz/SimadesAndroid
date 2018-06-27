@@ -46,8 +46,14 @@ public interface RestApi {
     @GET("api/kk")
     Call<KkResponseModel> getKkData();
 
+    @GET("api/kk")
+    Call<KkResponseModel> filterKkData(@Query("no_kk") String no_kk);
+
     @GET("api/penduduk")
-    Call<ShowPendudukResponseModel> getPendudukData(@Query("no_kk") String id);
+    Call<ShowPendudukResponseModel> getPendudukData(@Query("no_kk") String no_kk);
+
+    @GET("api/penduduk")
+    Call<ShowPendudukResponseModel> filterPendudukData(@Query("nik") String nik);
 
     @GET("api/kematian")
     Call<KematianResponseModel> getKematianData();

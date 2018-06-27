@@ -7,22 +7,24 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.codelab.helmi.simades.R;
 
-public class ShowPendudukFragment extends Fragment implements PendudukView, SwipeRefreshLayout.OnRefreshListener {
+public class ShowPendudukFragment extends Fragment implements PendudukView, SwipeRefreshLayout.OnRefreshListener, SearchView.OnQueryTextListener, View.OnClickListener {
     ShowPendudukPresenter presenter;
     View view;
     private RecyclerView mRecycler;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mManager;
-    public static String EXTRA_NIK = "extra_nik";
+    public static String EXTRA_NO_KK = "extra_no_kk";
     private final String KEY_RECYCLER_STATE = "recycler_state";
     private static Bundle mBundleRecyclerViewState;
     private SwipeRefreshLayout swipeRefreshLayout;
+    SearchView searchView;
 
 
     @Override
@@ -45,6 +47,7 @@ public class ShowPendudukFragment extends Fragment implements PendudukView, Swip
         mManager = new LinearLayoutManager(getActivity().getApplicationContext());
         mRecycler.setLayoutManager(mManager);
         swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
+        searchView = (SearchView) view.findViewById(R.id.search_view);
     }
 
     private void initPresenter() {
@@ -72,6 +75,8 @@ public class ShowPendudukFragment extends Fragment implements PendudukView, Swip
     public void onAttachView() {
         presenter.onAttach(this);
         swipeRefreshLayout.setOnRefreshListener(this);
+        searchView.setOnQueryTextListener(this);
+        searchView.setOnClickListener(this);
 
     }
 
@@ -107,7 +112,7 @@ public class ShowPendudukFragment extends Fragment implements PendudukView, Swip
             mRecycler.setAdapter(mAdapter);
         }else if(mBundleRecyclerViewState == null){
             swipeRefreshTrue();
-            presenter.showData(getActivity().getApplicationContext(), mRecycler, getArguments().getString(EXTRA_NIK), getFragmentManager());
+            presenter.showData(getActivity().getApplicationContext(), mRecycler, getArguments().getString(EXTRA_NO_KK), getFragmentManager());
         }
     }
 
@@ -115,6 +120,28 @@ public class ShowPendudukFragment extends Fragment implements PendudukView, Swip
     public void onRefresh() {
         swipeRefreshTrue();
         mRecycler.removeAllViewsInLayout();
-        presenter.showData(getActivity().getApplicationContext(), mRecycler, getArguments().getString(EXTRA_NIK), getFragmentManager());
+        presenter.showData(getActivity().getApplicationContext(), mRecycler, getArguments().getString(EXTRA_NO_KK), getFragmentManager());
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        mRecycler.removeAllViewsInLayout();
+        swipeRefreshTrue();
+        presenter.filterData(getActivity().getApplicationContext(), mRecycler, newText, getFragmentManager());
+        return true;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.search_view:
+                searchView.setIconified(false);
+                break;
+        }
     }
 }

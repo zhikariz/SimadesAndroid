@@ -36,19 +36,19 @@ public class ShowPendudukPresenter implements Presenter<PendudukView> {
         pendudukView = null;
     }
 
-    public void showData(final Context ctx, final RecyclerView mRecycler, String nik, final FragmentManager fragmentManager) {
+    public void showData(final Context ctx, final RecyclerView mRecycler, String no_kk, final FragmentManager fragmentManager) {
         final PendudukData pendudukData = new PendudukData();
         RestApi api = RestServer.getClient().create(RestApi.class);
-        Call<ShowPendudukResponseModel> getData = api.getPendudukData(nik);
+        Call<ShowPendudukResponseModel> getData = api.getPendudukData(no_kk);
         getData.enqueue(new Callback<ShowPendudukResponseModel>() {
             @Override
             public void onResponse(Call<ShowPendudukResponseModel> call, Response<ShowPendudukResponseModel> response) {
-                if(response.isSuccessful()) {
+                if (response.isSuccessful()) {
                     mItems = response.body().getResult();
                     mAdapter = new ShowPendudukRecyclerAdapter(ctx, mItems, fragmentManager);
                     mRecycler.setAdapter(mAdapter);
                     pendudukView.swipeRefreshFalse();
-                }else{
+                } else {
                     switch (response.code()) {
                         case 404:
                             Toast.makeText(ctx, "404 Not Found", Toast.LENGTH_SHORT).show();
@@ -75,5 +75,45 @@ public class ShowPendudukPresenter implements Presenter<PendudukView> {
 
 
         pendudukView.onShowData(pendudukData);
+    }
+
+    public void filterData(final Context ctx, final RecyclerView mRecycler, String nik, final FragmentManager fragmentManager) {
+
+        final PendudukData pendudukData = new PendudukData();
+        RestApi api = RestServer.getClient().create(RestApi.class);
+        Call<ShowPendudukResponseModel> filterPendudukData = api.filterPendudukData(nik);
+        filterPendudukData.enqueue(new Callback<ShowPendudukResponseModel>() {
+            @Override
+            public void onResponse(Call<ShowPendudukResponseModel> call, Response<ShowPendudukResponseModel> response) {
+                if (response.isSuccessful()) {
+                    mItems = response.body().getResult();
+                    mAdapter = new ShowPendudukRecyclerAdapter(ctx, mItems, fragmentManager);
+                    mRecycler.setAdapter(mAdapter);
+                    pendudukView.swipeRefreshFalse();
+                } else {
+                    switch (response.code()) {
+                        case 404:
+                            Toast.makeText(ctx, "404 Not Found", Toast.LENGTH_SHORT).show();
+                            pendudukView.swipeRefreshFalse();
+                            break;
+                        case 500:
+                            Toast.makeText(ctx, "500 Internal Server Error", Toast.LENGTH_SHORT).show();
+                            pendudukView.swipeRefreshFalse();
+                            break;
+                        default:
+                            Toast.makeText(ctx, "Unknown Error", Toast.LENGTH_SHORT).show();
+                            pendudukView.swipeRefreshFalse();
+                            break;
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ShowPendudukResponseModel> call, Throwable t) {
+                Toast.makeText(ctx, "Gagal Mendapatkan Data", Toast.LENGTH_SHORT).show();
+                pendudukView.swipeRefreshFalse();
+            }
+        });
+
     }
 }

@@ -63,7 +63,7 @@ public class KkRecyclerAdapter extends RecyclerView.Adapter<KkRecyclerAdapter.My
             public void onClick(View v) {
                 ShowPendudukFragment showPendudukFragment = new ShowPendudukFragment();
                 Bundle bundle = new Bundle();
-                bundle.putString(showPendudukFragment.EXTRA_NIK, mList.get(position).getNo_kk());
+                bundle.putString(showPendudukFragment.EXTRA_NO_KK, mList.get(position).getNo_kk());
                 showPendudukFragment.setArguments(bundle);
                 fragmentManager.beginTransaction()
                         .replace(R.id.frame_container, showPendudukFragment, showPendudukFragment.getClass().getSimpleName())

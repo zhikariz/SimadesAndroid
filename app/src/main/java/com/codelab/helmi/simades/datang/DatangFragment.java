@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 
 import com.codelab.helmi.simades.R;
 
-public class DatangActivity extends Fragment implements DatangView {
+public class DatangFragment extends Fragment implements DatangView {
 
     DatangPresenter presenter;
     View view;

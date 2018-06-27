@@ -43,6 +43,7 @@ public class KkPresenter implements Presenter<KkView> {
         RestApi api = RestServer.getClient().create(RestApi.class);
         Call<KkResponseModel> getData = api.getKkData();
 
+
         getData.enqueue(new Callback<KkResponseModel>() {
             @Override
             public void onResponse(Call<KkResponseModel> call, Response<KkResponseModel> response) {
@@ -78,5 +79,43 @@ public class KkPresenter implements Presenter<KkView> {
 
 
         kkView.onShowData(kkData);
+    }
+
+    public void filterData(final Context ctx, final RecyclerView mRecycler, String no_kk, final FragmentManager fragmentManager) {
+        final KkData kkData = new KkData();
+        RestApi api = RestServer.getClient().create(RestApi.class);
+        Call<KkResponseModel> filterKkData = api.filterKkData(no_kk);
+        filterKkData.enqueue(new Callback<KkResponseModel>() {
+            @Override
+            public void onResponse(Call<KkResponseModel> call, Response<KkResponseModel> response) {
+                if (response.isSuccessful()) {
+                    mItems = response.body().getResult();
+                    mAdapter = new KkRecyclerAdapter(ctx, mItems, fragmentManager);
+                    mRecycler.setAdapter(mAdapter);
+                    kkView.swipeRefreshFalse();
+                } else {
+                    switch (response.code()) {
+                        case 404:
+                            Toast.makeText(ctx, "404 Not Found", Toast.LENGTH_SHORT).show();
+                            kkView.swipeRefreshFalse();
+                            break;
+                        case 500:
+                            Toast.makeText(ctx, "500 Internal Server Error", Toast.LENGTH_SHORT).show();
+                            kkView.swipeRefreshFalse();
+                            break;
+                        default:
+                            Toast.makeText(ctx, "Unknown Error", Toast.LENGTH_SHORT).show();
+                            kkView.swipeRefreshFalse();
+                            break;
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<KkResponseModel> call, Throwable t) {
+                Toast.makeText(ctx, "Gagal Mendapatkan Data", Toast.LENGTH_SHORT).show();
+                kkView.swipeRefreshFalse();
+            }
+        });
     }
 }

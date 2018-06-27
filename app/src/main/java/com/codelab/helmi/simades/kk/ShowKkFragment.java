@@ -11,15 +11,13 @@ import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
 import com.codelab.helmi.simades.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShowKkFragment extends Fragment implements KkView, SwipeRefreshLayout.OnRefreshListener {
+public class ShowKkFragment extends Fragment implements KkView, SwipeRefreshLayout.OnRefreshListener, SearchView.OnQueryTextListener, View.OnClickListener {
 
     KkPresenter presenter;
     View view;
@@ -85,6 +83,8 @@ public class ShowKkFragment extends Fragment implements KkView, SwipeRefreshLayo
         mManager = new LinearLayoutManager(getActivity().getApplicationContext());
         mRecycler.setLayoutManager(mManager);
         swipeRefreshLayout.setOnRefreshListener(this);
+        searchView.setOnQueryTextListener(this);
+        searchView.setOnClickListener(this);
     }
 
     @Override
@@ -122,7 +122,6 @@ public class ShowKkFragment extends Fragment implements KkView, SwipeRefreshLayo
         } else {
             swipeRefreshTrue();
             presenter.showData(getActivity().getApplicationContext(), mRecycler, getFragmentManager());
-
         }
     }
 
@@ -131,5 +130,32 @@ public class ShowKkFragment extends Fragment implements KkView, SwipeRefreshLayo
         swipeRefreshTrue();
         mRecycler.removeAllViewsInLayout();
         presenter.showData(getActivity().getApplicationContext(), mRecycler, getFragmentManager());
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+//                    mRecycler.removeAllViewsInLayout();
+//            swipeRefreshTrue();
+//            presenter.filterData(getActivity().getApplicationContext(), mRecycler,query,getFragmentManager());
+//        return true;
+        return false;
+    }
+
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        mRecycler.removeAllViewsInLayout();
+        swipeRefreshTrue();
+        presenter.filterData(getActivity().getApplicationContext(), mRecycler, newText, getFragmentManager());
+        return true;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.search_view:
+                searchView.setIconified(false);
+                break;
+        }
     }
 }
