@@ -10,6 +10,7 @@ import com.codelab.helmi.simades.api.RestApi;
 import com.codelab.helmi.simades.api.RestServer;
 import com.codelab.helmi.simades.base.Presenter;
 
+import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,14 +43,14 @@ public class KkPresenter implements Presenter<KkView> {
         final KkData kkData = new KkData();
         RestApi api = RestServer.getClient().create(RestApi.class);
         Call<KkResponseModel> getData = api.getKkData();
+
         getData.enqueue(new Callback<KkResponseModel>() {
             @Override
             public void onResponse(Call<KkResponseModel> call, Response<KkResponseModel> response) {
-                mItems = response.body().getResult();
-                mAdapter = new KkRecyclerAdapter(ctx, mItems, fragmentManager);
-                mRecycler.setAdapter(mAdapter);
-                kkView.swipeRefreshFalse();
-
+                    mItems = response.body().getResult();
+                    mAdapter = new KkRecyclerAdapter(ctx, mItems, fragmentManager);
+                    mRecycler.setAdapter(mAdapter);
+                    kkView.swipeRefreshFalse();
             }
 
             @Override

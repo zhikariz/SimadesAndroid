@@ -4,4 +4,6 @@ import com.codelab.helmi.simades.base.View;
 
 public interface SuratBlmMenikahView extends View {
     void onShowData(SuratBlmMenikahData suratBlmMenikahData);
+    void swipeRefreshTrue();
+    void swipeRefreshFalse();
 }

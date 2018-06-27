@@ -63,9 +63,7 @@ public class SuratSkckFragment extends Fragment implements SuratSkckView, SwipeR
 
     @Override
     public void onAttachView() {
-
         presenter.onAttach(this);
-        presenter.showData(getActivity().getApplicationContext(), mRecycler,getFragmentManager());
     }
 
     @Override
@@ -78,6 +76,17 @@ public class SuratSkckFragment extends Fragment implements SuratSkckView, SwipeR
         super.onDestroy();
         onDetachView();
         mBundleRecyclerViewState = null;
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mBundleRecyclerViewState = new Bundle();
+
+        Parcelable listState = mRecycler.getLayoutManager().onSaveInstanceState();
+        mBundleRecyclerViewState.putParcelable(KEY_RECYCLER_STATE, listState);
+        mAdapter = mRecycler.getAdapter();
+
     }
 
     public void onResume() {

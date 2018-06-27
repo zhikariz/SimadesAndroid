@@ -1,5 +1,4 @@
-package com.codelab.helmi.simades.profil;
-
+package com.codelab.helmi.simades.user.detail;
 
 
 import android.os.Bundle;
@@ -13,10 +12,10 @@ import com.codelab.helmi.simades.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class EditProfilFragment extends Fragment {
+public class DetailUserFragment extends Fragment {
 
 
-    public EditProfilFragment() {
+    public DetailUserFragment() {
         // Required empty public constructor
     }
 
@@ -25,10 +24,7 @@ public class EditProfilFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_edit_profil, container, false);
-        getActivity().setTitle("Edit Profil Desa");
-
-        return view;
+        return inflater.inflate(R.layout.fragment_detail_user, container, false);
     }
 
 }

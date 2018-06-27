@@ -4,4 +4,6 @@ import com.codelab.helmi.simades.base.View;
 
 public interface SuratBepergianView extends View {
     void onShowData(SuratBepergianData suratBepergianData);
+    void swipeRefreshTrue();
+    void swipeRefreshFalse();
 }

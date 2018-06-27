@@ -7,11 +7,15 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.codelab.helmi.simades.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ShowKkFragment extends Fragment implements KkView, SwipeRefreshLayout.OnRefreshListener {
 
@@ -23,6 +27,8 @@ public class ShowKkFragment extends Fragment implements KkView, SwipeRefreshLayo
     private final String KEY_RECYCLER_STATE = "recycler_state";
     private static Bundle mBundleRecyclerViewState;
     private SwipeRefreshLayout swipeRefreshLayout;
+    SearchView searchView;
+    public List<KkData> mItems = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -36,14 +42,16 @@ public class ShowKkFragment extends Fragment implements KkView, SwipeRefreshLayo
         getActivity().setTitle("Kartu Keluarga");
 
 
-
         return view;
 
     }
 
     private void initView() {
-        mRecycler = (RecyclerView) view.findViewById(R.id.recyclerTemp);
-        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
+        mRecycler = view.findViewById(R.id.recyclerTemp);
+        swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_layout);
+        searchView = view.findViewById(R.id.search_view);
+
+
     }
 
     @Override
@@ -59,6 +67,13 @@ public class ShowKkFragment extends Fragment implements KkView, SwipeRefreshLayo
     @Override
     public void swipeRefreshFalse() {
         swipeRefreshLayout.setRefreshing(false);
+        swipeRefreshLayout.destroyDrawingCache();
+        swipeRefreshLayout.clearAnimation();
+    }
+
+    @Override
+    public void setDataList(List<KkData> mItems) {
+        this.mItems = mItems;
     }
 
     @Override
@@ -95,7 +110,7 @@ public class ShowKkFragment extends Fragment implements KkView, SwipeRefreshLayo
         mBundleRecyclerViewState = new Bundle();
         Parcelable listState = mRecycler.getLayoutManager().onSaveInstanceState();
         mBundleRecyclerViewState.putParcelable(KEY_RECYCLER_STATE, listState);
-        mAdapter = mRecycler.getAdapter();
+        mAdapter = (KkRecyclerAdapter) mRecycler.getAdapter();
     }
 
 
@@ -111,6 +126,7 @@ public class ShowKkFragment extends Fragment implements KkView, SwipeRefreshLayo
         } else {
             swipeRefreshTrue();
             presenter.showData(getActivity().getApplicationContext(), mRecycler, getFragmentManager());
+
         }
     }
 

@@ -64,6 +64,8 @@ public class ShowPendudukFragment extends Fragment implements PendudukView, Swip
     @Override
     public void swipeRefreshFalse() {
         swipeRefreshLayout.setRefreshing(false);
+        swipeRefreshLayout.destroyDrawingCache();
+        swipeRefreshLayout.clearAnimation();
     }
 
     @Override

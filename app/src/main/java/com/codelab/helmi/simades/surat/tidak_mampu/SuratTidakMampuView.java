@@ -4,4 +4,6 @@ import com.codelab.helmi.simades.base.View;
 
 public interface SuratTidakMampuView extends View {
     void onShowData(SuratTidakMampuData suratTidakMampuData);
+    void swipeRefreshTrue();
+    void swipeRefreshFalse();
 }

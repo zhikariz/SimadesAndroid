@@ -1,6 +1,7 @@
 package com.codelab.helmi.simades.surat.ektp;
 
 import android.content.Context;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.codelab.helmi.simades.api.RestApi;
@@ -34,7 +35,7 @@ public class SuratEktpPresenter implements Presenter<SuratEktpView> {
         suratEktpView = null;
     }
 
-    public void showData(final Context ctx, final RecyclerView mRecycler) {
+    public void showData(final Context ctx, final RecyclerView mRecycler, final FragmentManager fragmentManager) {
         final SuratEktpData suratEktpData = new SuratEktpData();
         RestApi api = RestServer.getClient().create(RestApi.class);
         Call<SuratEktpResponseModel> getData = api.getSuratPengantarEktpData();
@@ -42,12 +43,14 @@ public class SuratEktpPresenter implements Presenter<SuratEktpView> {
             @Override
             public void onResponse(Call<SuratEktpResponseModel> call, Response<SuratEktpResponseModel> response) {
                 mItems = response.body().getResult();
-                mAdapter = new SuratEktpRecyclerAdapter(ctx, mItems);
+                mAdapter = new SuratEktpRecyclerAdapter(ctx, mItems,fragmentManager);
                 mRecycler.setAdapter(mAdapter);
+                suratEktpView.swipeRefreshFalse();
             }
 
             @Override
             public void onFailure(Call<SuratEktpResponseModel> call, Throwable t) {
+                suratEktpView.swipeRefreshFalse();
 
             }
         });

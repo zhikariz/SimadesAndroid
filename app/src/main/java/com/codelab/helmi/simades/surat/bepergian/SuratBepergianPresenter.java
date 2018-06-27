@@ -1,6 +1,7 @@
 package com.codelab.helmi.simades.surat.bepergian;
 
 import android.content.Context;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.codelab.helmi.simades.api.RestApi;
@@ -33,7 +34,7 @@ public class SuratBepergianPresenter implements Presenter<SuratBepergianView> {
         suratBepergianView = null;
     }
 
-    public void showData(final Context ctx, final RecyclerView mRecycler) {
+    public void showData(final Context ctx, final RecyclerView mRecycler, final FragmentManager fragmentManager) {
         final SuratBepergianData suratBepergianData = new SuratBepergianData();
         RestApi api = RestServer.getClient().create(RestApi.class);
         Call<SuratBepergianResponseModel> getData = api.getSuratBepergianData();
@@ -41,13 +42,14 @@ public class SuratBepergianPresenter implements Presenter<SuratBepergianView> {
             @Override
             public void onResponse(Call<SuratBepergianResponseModel> call, Response<SuratBepergianResponseModel> response) {
                 mItems = response.body().getResult();
-                mAdapter = new SuratBepergianRecyclerAdapter(ctx, mItems);
+                mAdapter = new SuratBepergianRecyclerAdapter(ctx, mItems, fragmentManager);
                 mRecycler.setAdapter(mAdapter);
+                suratBepergianView.swipeRefreshFalse();
             }
 
             @Override
             public void onFailure(Call<SuratBepergianResponseModel> call, Throwable t) {
-
+                suratBepergianView.swipeRefreshFalse();
             }
         });
         suratBepergianView.onShowData(suratBepergianData);

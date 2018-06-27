@@ -1,6 +1,7 @@
 package com.codelab.helmi.simades.surat.kehilangan;
 
 import android.content.Context;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.codelab.helmi.simades.api.RestApi;
@@ -33,7 +34,7 @@ public class SuratKehilanganPresenter implements Presenter<SuratKehilanganView> 
         suratKehilanganView = null;
     }
 
-    public void showData(final Context ctx, final RecyclerView mRecycler) {
+    public void showData(final Context ctx, final RecyclerView mRecycler, final FragmentManager fragmentManager) {
         final SuratKehilanganData suratKehilanganData = new SuratKehilanganData();
         RestApi api = RestServer.getClient().create(RestApi.class);
         Call<SuratKehilanganResponseModel> getData = api.getSuratKehilanganData();
@@ -41,12 +42,14 @@ public class SuratKehilanganPresenter implements Presenter<SuratKehilanganView> 
             @Override
             public void onResponse(Call<SuratKehilanganResponseModel> call, Response<SuratKehilanganResponseModel> response) {
                 mItems = response.body().getResult();
-                mAdapter = new SuratKehilanganRecyclerAdapter(ctx, mItems);
+                mAdapter = new SuratKehilanganRecyclerAdapter(ctx, mItems, fragmentManager);
                 mRecycler.setAdapter(mAdapter);
+                suratKehilanganView.swipeRefreshFalse();
             }
 
             @Override
             public void onFailure(Call<SuratKehilanganResponseModel> call, Throwable t) {
+                suratKehilanganView.swipeRefreshFalse();
 
             }
         });

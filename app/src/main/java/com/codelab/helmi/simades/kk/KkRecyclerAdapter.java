@@ -2,14 +2,19 @@ package com.codelab.helmi.simades.kk;
 
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.LauncherActivity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import com.codelab.helmi.simades.R;
@@ -22,7 +27,7 @@ import java.util.List;
 public class KkRecyclerAdapter extends RecyclerView.Adapter<KkRecyclerAdapter.MyHolder> {
 
 
-    List<KkData> mList;
+    List<KkData> mList,filterList;
     Context ctx;
     FragmentManager fragmentManager;
 
@@ -31,6 +36,7 @@ public class KkRecyclerAdapter extends RecyclerView.Adapter<KkRecyclerAdapter.My
         this.mList = mList;
         this.ctx = ctx;
         this.fragmentManager = fragmentManager;
+        this.filterList = mList;
     }
 
     @NonNull
@@ -68,6 +74,7 @@ public class KkRecyclerAdapter extends RecyclerView.Adapter<KkRecyclerAdapter.My
     public int getItemCount() {
         return mList.size();
     }
+
 
     public class MyHolder extends RecyclerView.ViewHolder {
         TextView no_kk, alamat, id_dusun, tvRtRw, rw, kelurahan, kecamatan, kabupaten, propinsi;

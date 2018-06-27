@@ -1,6 +1,7 @@
 package com.codelab.helmi.simades.surat.blm_menikah;
 
 import android.content.Context;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.codelab.helmi.simades.api.RestApi;
@@ -33,7 +34,7 @@ public class SuratBlmMenikahPresenter implements Presenter<SuratBlmMenikahView> 
         suratBlmMenikahView = null;
     }
 
-    public void showData(final Context ctx, final RecyclerView mRecycler) {
+    public void showData(final Context ctx, final RecyclerView mRecycler, final FragmentManager fragmentManager) {
         final SuratBlmMenikahData suratBlmMenikahData = new SuratBlmMenikahData();
         RestApi api = RestServer.getClient().create(RestApi.class);
         Call<SuratBlmMenikahResponseModel> getData = api.getSuratBlmMenikahData();
@@ -41,13 +42,14 @@ public class SuratBlmMenikahPresenter implements Presenter<SuratBlmMenikahView> 
             @Override
             public void onResponse(Call<SuratBlmMenikahResponseModel> call, Response<SuratBlmMenikahResponseModel> response) {
                 mItems = response.body().getResult();
-                mAdapter = new SuratBlmMenikahRecyclerAdapter(ctx, mItems);
+                mAdapter = new SuratBlmMenikahRecyclerAdapter(ctx, mItems,fragmentManager);
                 mRecycler.setAdapter(mAdapter);
+                suratBlmMenikahView.swipeRefreshFalse();
             }
 
             @Override
             public void onFailure(Call<SuratBlmMenikahResponseModel> call, Throwable t) {
-
+                suratBlmMenikahView.swipeRefreshFalse();
             }
         });
         suratBlmMenikahView.onShowData(suratBlmMenikahData);

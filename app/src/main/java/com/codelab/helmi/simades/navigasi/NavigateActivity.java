@@ -123,7 +123,6 @@ public class NavigateActivity extends AppCompatActivity implements NavigationVie
         fragmentManager.popBackStack();
 
         fragmentManager.beginTransaction()
-                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 .replace(R.id.frame_container, fragment, fragment.getClass().getSimpleName())
                 .commit();
     }

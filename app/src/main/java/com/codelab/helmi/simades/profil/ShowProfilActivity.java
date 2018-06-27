@@ -1,6 +1,7 @@
 package com.codelab.helmi.simades.profil;
 
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
@@ -14,6 +15,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.codelab.helmi.simades.R;
@@ -23,9 +25,8 @@ import com.codelab.helmi.simades.api.RestServer;
 public class ShowProfilActivity extends Fragment implements ProfilView {
 
     ProfilPresenter presenter;
-    EditText kode_desa, nm_desa, kecamatan, kabupaten, provinsi, nm_kepdes, nip_kepdes, alamat_desa, no_telp, kode_pos;
+    TextView tvKabupaten, tvKecamatan, tvDesa, tvAlamat, tvNamaKepdes, tvNipKepdes;
     ImageView image;
-    Button btnEditProfilDesa;
     View view;
     FragmentManager fragmentManager;
 
@@ -37,34 +38,13 @@ public class ShowProfilActivity extends Fragment implements ProfilView {
 
 
         view = inflater.inflate(R.layout.fragment_profil_desa, container, false);
-
         initPresenter();
-
         initView();
-        btnListener();
         onAttachView();
-
         getActivity().setTitle("Profil Desa");
-
-
         return view;
 
 
-    }
-
-    private void btnListener() {
-        btnEditProfilDesa.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                fragmentManager = getFragmentManager();
-                fragmentManager.beginTransaction()
-                        .replace(R.id.frame_container, new EditProfilFragment())
-                        .addToBackStack(null)
-                        .commit();
-
-            }
-        });
     }
 
 
@@ -75,18 +55,13 @@ public class ShowProfilActivity extends Fragment implements ProfilView {
 
 
     public void initView() {
-        kode_desa = view.findViewById(R.id.edtIdDesa);
-        nm_desa = view.findViewById(R.id.edtNamaDesa);
-        kecamatan = view.findViewById(R.id.edtKecamatan);
-        kabupaten = view.findViewById(R.id.edtKabupaten);
-        provinsi = view.findViewById(R.id.edtProvinsi);
-        nm_kepdes = view.findViewById(R.id.edtNamaKepdes);
-        nip_kepdes = view.findViewById(R.id.edtNipKades);
-        alamat_desa = view.findViewById(R.id.edtAlamat);
-        no_telp = view.findViewById(R.id.edtNoTelp);
-        kode_pos = view.findViewById(R.id.edtKodePos);
+        tvKabupaten = view.findViewById(R.id.tv_kabupaten);
+        tvKecamatan = view.findViewById(R.id.tv_kecamatan);
+        tvDesa = view.findViewById(R.id.tv_desa);
+        tvAlamat = view.findViewById(R.id.tv_alamat);
+        tvNipKepdes = view.findViewById(R.id.tv_nip_kepala_desa);
+        tvNamaKepdes = view.findViewById(R.id.tv_nama_kepala_desa);
         image = view.findViewById(R.id.ivGambar);
-        btnEditProfilDesa = view.findViewById(R.id.btnEditProfilDesa);
     }
 
     @Override
@@ -95,19 +70,16 @@ public class ShowProfilActivity extends Fragment implements ProfilView {
         presenter.showData(getActivity().getApplicationContext());
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onShowData(ProfilData profilData) {
-        kode_desa.setText(profilData.getKode_desa());
-        nm_desa.setText(profilData.getNm_desa());
-        kecamatan.setText(profilData.getKecamatan());
-        kabupaten.setText(profilData.getKabupaten());
-        provinsi.setText(profilData.getPropinsi());
-        nm_kepdes.setText(profilData.getNm_kepdes());
-        nip_kepdes.setText(profilData.getNip_kepdes());
-        alamat_desa.setText(profilData.getAlamat_desa());
-        no_telp.setText(profilData.getNo_telp());
-        kode_pos.setText(profilData.getKode_pos());
         Glide.with(view.getContext()).load(RestServer.getBase_url() + "uploads/image/" + profilData.getImage()).into(image);
+        tvKabupaten.setText("Pemerintah Kabupaten "+profilData.getKabupaten());
+        tvKecamatan.setText("Kecamatan "+profilData.getKecamatan());
+        tvDesa.setText("Desa "+profilData.getNm_desa());
+        tvAlamat.setText(profilData.getAlamat_desa() + " Telp. "+profilData.getNo_telp()+" Kode Pos "+profilData.getKode_pos());
+        tvNipKepdes.setText("Nip Kepala Desa : "+profilData.getNip_kepdes());
+        tvNamaKepdes.setText("Nama Kepala Desa : "+profilData.getNm_kepdes());
 
 
     }

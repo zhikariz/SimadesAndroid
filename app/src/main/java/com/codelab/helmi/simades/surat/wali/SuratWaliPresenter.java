@@ -1,6 +1,7 @@
 package com.codelab.helmi.simades.surat.wali;
 
 import android.content.Context;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.codelab.helmi.simades.api.RestApi;
@@ -34,7 +35,7 @@ public class SuratWaliPresenter implements Presenter<SuratWaliView> {
         suratWaliView = null;
     }
 
-    public void showData(final Context ctx, final RecyclerView mRecycler) {
+    public void showData(final Context ctx, final RecyclerView mRecycler, final FragmentManager fragmentManager) {
         final SuratWaliData suratWaliData = new SuratWaliData();
         RestApi api = RestServer.getClient().create(RestApi.class);
         Call<SuratWaliResponseModel> getData = api.getSuratWaliData();
@@ -43,12 +44,14 @@ public class SuratWaliPresenter implements Presenter<SuratWaliView> {
             @Override
             public void onResponse(Call<SuratWaliResponseModel> call, Response<SuratWaliResponseModel> response) {
                 mItems = response.body().getResult();
-                mAdapter = new SuratWaliRecyclerAdapter(ctx, mItems);
+                mAdapter = new SuratWaliRecyclerAdapter(ctx, mItems,fragmentManager);
                 mRecycler.setAdapter(mAdapter);
+                suratWaliView.swipeRefreshFalse();
             }
 
             @Override
             public void onFailure(Call<SuratWaliResponseModel> call, Throwable t) {
+                suratWaliView.swipeRefreshFalse();
 
             }
         });
