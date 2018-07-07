@@ -4,9 +4,8 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/home"
-
             android:icon="@drawable/ic_home_24px"
-            android:title="Home" />
+            android:title="Beranda" />
         <item
             android:id="@+id/penduduk"
             android:icon="@drawable/ic_supervisor_account_24px"
@@ -50,7 +49,7 @@
                 android:title="User" />
             <item
                 android:id="@+id/profil"
-                android:icon="@drawable/ic_menu_manage"
+                android:icon="@drawable/ic_info_outline_black_24dp"
                 android:title="Profil Desa" />
             </group>
         </menu>

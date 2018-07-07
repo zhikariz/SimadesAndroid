@@ -106,11 +106,11 @@ public class ShowPendudukFragment extends Fragment implements PendudukView, Swip
     public void onResume() {
         super.onResume();
 
-        if(mBundleRecyclerViewState != null){
+        if (mBundleRecyclerViewState != null) {
             Parcelable listState = mBundleRecyclerViewState.getParcelable(KEY_RECYCLER_STATE);
             mRecycler.getLayoutManager().onRestoreInstanceState(listState);
             mRecycler.setAdapter(mAdapter);
-        }else if(mBundleRecyclerViewState == null){
+        } else if (mBundleRecyclerViewState == null) {
             swipeRefreshTrue();
             presenter.showData(getActivity().getApplicationContext(), mRecycler, getArguments().getString(EXTRA_NO_KK), getFragmentManager());
         }
@@ -130,15 +130,20 @@ public class ShowPendudukFragment extends Fragment implements PendudukView, Swip
 
     @Override
     public boolean onQueryTextChange(String newText) {
-        mRecycler.removeAllViewsInLayout();
-        swipeRefreshTrue();
-        presenter.filterData(getActivity().getApplicationContext(), mRecycler, newText, getFragmentManager());
-        return true;
+        if (!newText.equals("")) {
+            mRecycler.removeAllViewsInLayout();
+            swipeRefreshTrue();
+            presenter.filterData(getActivity().getApplicationContext(), mRecycler, newText, getArguments().getString(EXTRA_NO_KK), getFragmentManager());
+            return true;
+        } else {
+            presenter.showData(getActivity().getApplicationContext(), mRecycler, getArguments().getString(EXTRA_NO_KK), getFragmentManager());
+            return false;
+        }
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.search_view:
                 searchView.setIconified(false);
                 break;

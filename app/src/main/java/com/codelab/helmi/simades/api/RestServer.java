@@ -1,16 +1,11 @@
 package com.codelab.helmi.simades.api;
 
-import android.widget.Toast;
-
-import com.codelab.helmi.simades.AppControler;
+import com.codelab.helmi.simades.home.AppControler;
 import com.codelab.helmi.simades.BuildConfig;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.UnknownHostException;
 import java.util.concurrent.TimeUnit;
-
-import javax.net.ssl.SSLHandshakeException;
 
 import okhttp3.Cache;
 import okhttp3.CacheControl;
@@ -29,7 +24,7 @@ import static okhttp3.logging.HttpLoggingInterceptor.Level.NONE;
 public class RestServer {
 
 
-    private static final String base_url = "https://b9d2c9ed.ngrok.io/";
+    private static final String base_url = "https://9cb6aa02.ngrok.io/";
     private static final String CACHE_CONTROL = "Cache-Control";
     private static Retrofit retrofit;
 

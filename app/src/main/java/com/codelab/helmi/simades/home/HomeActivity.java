@@ -1,4 +1,4 @@
-package com.codelab.helmi.simades;
+package com.codelab.helmi.simades.home;
 
 import android.annotation.SuppressLint;
 import android.graphics.Color;
@@ -8,12 +8,15 @@ import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.codelab.helmi.simades.R;
 import com.codelab.helmi.simades.datang.DatangFragment;
-import com.codelab.helmi.simades.kelahiran.KelahiranActivity;
+import com.codelab.helmi.simades.kelahiran.KelahiranFragment;
 import com.codelab.helmi.simades.kematian.KematianActivity;
 import com.codelab.helmi.simades.kk.ShowKkFragment;
 import com.codelab.helmi.simades.pergi.PergiActivity;
@@ -34,6 +37,7 @@ public class HomeActivity extends Fragment implements BaseSliderView.OnSliderCli
     ArrayList<String> listName = new ArrayList<>();
     RequestOptions requestOptions = new RequestOptions();
     LinearLayout lnPenduduk, lnPengajuanSurat, lnKelahiran, lnKematian, lnDatang, lnPergi;
+    ImageView ivPenduduk, ivPengajuanSurat, ivKelahiran, ivKematian, ivDatang, ivPergi;
     FragmentManager fragmentManager;
     Fragment fragment;
 
@@ -43,7 +47,7 @@ public class HomeActivity extends Fragment implements BaseSliderView.OnSliderCli
 
 
         view = inflater.inflate(R.layout.fragment_home, container, false);
-        getActivity().setTitle("Home");
+        getActivity().setTitle("Beranda");
         initView();
         initSlider();
         implSlider();
@@ -89,12 +93,27 @@ public class HomeActivity extends Fragment implements BaseSliderView.OnSliderCli
 
     private void initView() {
         mSlider = view.findViewById(R.id.slider);
+
         lnPenduduk = view.findViewById(R.id.ln_home_penduduk);
         lnPengajuanSurat = view.findViewById(R.id.ln_home_pengajuan_surat);
         lnKelahiran = view.findViewById(R.id.ln_home_kelahiran);
         lnKematian = view.findViewById(R.id.ln_home_kematian);
         lnDatang = view.findViewById(R.id.ln_home_datang);
         lnPergi = view.findViewById(R.id.ln_home_pergi);
+
+        ivPenduduk = view.findViewById(R.id.iv_home_penduduk);
+        ivPengajuanSurat = view.findViewById(R.id.iv_home_pengajuan_surat);
+        ivKelahiran = view.findViewById(R.id.iv_home_kelahiran);
+        ivKematian = view.findViewById(R.id.iv_home_kematian);
+        ivDatang = view.findViewById(R.id.iv_home_datang);
+        ivPergi = view.findViewById(R.id.iv_home_pergi);
+
+        Glide.with(this).load(R.drawable.ic_penduduk).into(ivPenduduk);
+        Glide.with(this).load(R.drawable.ic_notepad).into(ivPengajuanSurat);
+        Glide.with(this).load(R.drawable.ic_baby).into(ivKelahiran);
+        Glide.with(this).load(R.drawable.ic_tomb).into(ivKematian);
+        Glide.with(this).load(R.drawable.ic_landing).into(ivDatang);
+        Glide.with(this).load(R.drawable.ic_take_off).into(ivPergi);
 
         lnPenduduk.setOnClickListener(this);
         lnPengajuanSurat.setOnClickListener(this);
@@ -143,7 +162,7 @@ public class HomeActivity extends Fragment implements BaseSliderView.OnSliderCli
                 callFragment(fragment);
                 break;
             case R.id.ln_home_kelahiran:
-                fragment = new KelahiranActivity();
+                fragment = new KelahiranFragment();
                 callFragment(fragment);
                 break;
             case R.id.ln_home_kematian:

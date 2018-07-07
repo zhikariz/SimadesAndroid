@@ -1,9 +1,12 @@
 package com.codelab.helmi.simades.kelahiran;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
 @SuppressWarnings("unused")
-public class KelahiranData {
+public class KelahiranData implements Parcelable {
 
     @SerializedName("id_lahir")
     private String id_lahir;
@@ -29,12 +32,28 @@ public class KelahiranData {
     private String panjang_bayi;
     @SerializedName("nik_ayah")
     private String nik_ayah;
+    @SerializedName("nama_depan_ayah")
+    private String nama_depan_ayah;
+    @SerializedName("nama_belakang_ayah")
+    private String nama_belakang_ayah;
     @SerializedName("nik_ibu")
     private String nik_ibu;
+    @SerializedName("nama_depan_ibu")
+    private String nama_depan_ibu;
+    @SerializedName("nama_belakang_ibu")
+    private String nama_belakang_ibu;
     @SerializedName("nik_saksi1")
     private String nik_saksi1;
+    @SerializedName("nama_depan_saksi1")
+    private String nama_depan_saksi1;
+    @SerializedName("nama_belakang_saksi1")
+    private String nama_belakang_saksi1;
     @SerializedName("nik_saksi2")
     private String nik_saksi2;
+    @SerializedName("nama_depan_saksi2")
+    private String nama_depan_saksi2;
+    @SerializedName("nama_belakang_saksi2")
+    private String nama_belakang_saksi2;
 
     public String getId_lahir() {
         return id_lahir;
@@ -132,12 +151,44 @@ public class KelahiranData {
         this.nik_ayah = nik_ayah;
     }
 
+    public String getNama_depan_ayah() {
+        return nama_depan_ayah;
+    }
+
+    public void setNama_depan_ayah(String nama_depan_ayah) {
+        this.nama_depan_ayah = nama_depan_ayah;
+    }
+
+    public String getNama_belakang_ayah() {
+        return nama_belakang_ayah;
+    }
+
+    public void setNama_belakang_ayah(String nama_belakang_ayah) {
+        this.nama_belakang_ayah = nama_belakang_ayah;
+    }
+
     public String getNik_ibu() {
         return nik_ibu;
     }
 
     public void setNik_ibu(String nik_ibu) {
         this.nik_ibu = nik_ibu;
+    }
+
+    public String getNama_depan_ibu() {
+        return nama_depan_ibu;
+    }
+
+    public void setNama_depan_ibu(String nama_depan_ibu) {
+        this.nama_depan_ibu = nama_depan_ibu;
+    }
+
+    public String getNama_belakang_ibu() {
+        return nama_belakang_ibu;
+    }
+
+    public void setNama_belakang_ibu(String nama_belakang_ibu) {
+        this.nama_belakang_ibu = nama_belakang_ibu;
     }
 
     public String getNik_saksi1() {
@@ -148,6 +199,22 @@ public class KelahiranData {
         this.nik_saksi1 = nik_saksi1;
     }
 
+    public String getNama_depan_saksi1() {
+        return nama_depan_saksi1;
+    }
+
+    public void setNama_depan_saksi1(String nama_depan_saksi1) {
+        this.nama_depan_saksi1 = nama_depan_saksi1;
+    }
+
+    public String getNama_belakang_saksi1() {
+        return nama_belakang_saksi1;
+    }
+
+    public void setNama_belakang_saksi1(String nama_belakang_saksi1) {
+        this.nama_belakang_saksi1 = nama_belakang_saksi1;
+    }
+
     public String getNik_saksi2() {
         return nik_saksi2;
     }
@@ -156,4 +223,93 @@ public class KelahiranData {
         this.nik_saksi2 = nik_saksi2;
     }
 
+    public String getNama_depan_saksi2() {
+        return nama_depan_saksi2;
+    }
+
+    public void setNama_depan_saksi2(String nama_depan_saksi2) {
+        this.nama_depan_saksi2 = nama_depan_saksi2;
+    }
+
+    public String getNama_belakang_saksi2() {
+        return nama_belakang_saksi2;
+    }
+
+    public void setNama_belakang_saksi2(String nama_belakang_saksi2) {
+        this.nama_belakang_saksi2 = nama_belakang_saksi2;
+    }
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.id_lahir);
+        dest.writeString(this.nis_bayi);
+        dest.writeString(this.nama_depan_bayi);
+        dest.writeString(this.nama_belakang_bayi);
+        dest.writeString(this.tgl_lahir);
+        dest.writeString(this.tpt_lahir);
+        dest.writeString(this.jekel);
+        dest.writeString(this.berat_bayi);
+        dest.writeString(this.anak_ke);
+        dest.writeString(this.waktu);
+        dest.writeString(this.panjang_bayi);
+        dest.writeString(this.nik_ayah);
+        dest.writeString(this.nama_depan_ayah);
+        dest.writeString(this.nama_belakang_ayah);
+        dest.writeString(this.nik_ibu);
+        dest.writeString(this.nama_depan_ibu);
+        dest.writeString(this.nama_belakang_ibu);
+        dest.writeString(this.nik_saksi1);
+        dest.writeString(this.nama_depan_saksi1);
+        dest.writeString(this.nama_belakang_saksi1);
+        dest.writeString(this.nik_saksi2);
+        dest.writeString(this.nama_depan_saksi2);
+        dest.writeString(this.nama_belakang_saksi2);
+    }
+
+    public KelahiranData() {
+    }
+
+    protected KelahiranData(Parcel in) {
+        this.id_lahir = in.readString();
+        this.nis_bayi = in.readString();
+        this.nama_depan_bayi = in.readString();
+        this.nama_belakang_bayi = in.readString();
+        this.tgl_lahir = in.readString();
+        this.tpt_lahir = in.readString();
+        this.jekel = in.readString();
+        this.berat_bayi = in.readString();
+        this.anak_ke = in.readString();
+        this.waktu = in.readString();
+        this.panjang_bayi = in.readString();
+        this.nik_ayah = in.readString();
+        this.nama_depan_ayah = in.readString();
+        this.nama_belakang_ayah = in.readString();
+        this.nik_ibu = in.readString();
+        this.nama_depan_ibu = in.readString();
+        this.nama_belakang_ibu = in.readString();
+        this.nik_saksi1 = in.readString();
+        this.nama_depan_saksi1 = in.readString();
+        this.nama_belakang_saksi1 = in.readString();
+        this.nik_saksi2 = in.readString();
+        this.nama_depan_saksi2 = in.readString();
+        this.nama_belakang_saksi2 = in.readString();
+    }
+
+    public static final Parcelable.Creator<KelahiranData> CREATOR = new Parcelable.Creator<KelahiranData>() {
+        @Override
+        public KelahiranData createFromParcel(Parcel source) {
+            return new KelahiranData(source);
+        }
+
+        @Override
+        public KelahiranData[] newArray(int size) {
+            return new KelahiranData[size];
+        }
+    };
 }

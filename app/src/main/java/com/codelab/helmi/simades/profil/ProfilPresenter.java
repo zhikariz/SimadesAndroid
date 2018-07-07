@@ -41,36 +41,40 @@ public class ProfilPresenter implements Presenter<ProfilView> {
         getdata.enqueue(new Callback<ProfilResponseModel>() {
             @Override
             public void onResponse(Call<ProfilResponseModel> call, Response<ProfilResponseModel> response) {
-                if(response.isSuccessful()){
-                    int kode = response.body().getKode();
+                try {
+                    if (response.isSuccessful()) {
+                        int kode = response.body().getKode();
 
-                    mItems = response.body().getResult();
-                    profilData.setKode_desa(mItems.get(0).getKode_desa());
-                    profilData.setNm_desa(mItems.get(0).getNm_desa());
-                    profilData.setKecamatan(mItems.get(0).getKecamatan());
-                    profilData.setKabupaten(mItems.get(0).getKabupaten());
-                    profilData.setPropinsi(mItems.get(0).getPropinsi());
-                    profilData.setNm_kepdes(mItems.get(0).getNm_kepdes());
-                    profilData.setNip_kepdes(mItems.get(0).getNip_kepdes());
-                    profilData.setAlamat_desa(mItems.get(0).getAlamat_desa());
-                    profilData.setNo_telp(mItems.get(0).getNo_telp());
-                    profilData.setKode_pos(mItems.get(0).getKode_pos());
-                    profilData.setImage(mItems.get(0).getImage());
+                        mItems = response.body().getResult();
+                        profilData.setKode_desa(mItems.get(0).getKode_desa());
+                        profilData.setNm_desa(mItems.get(0).getNm_desa());
+                        profilData.setKecamatan(mItems.get(0).getKecamatan());
+                        profilData.setKabupaten(mItems.get(0).getKabupaten());
+                        profilData.setPropinsi(mItems.get(0).getPropinsi());
+                        profilData.setNm_kepdes(mItems.get(0).getNm_kepdes());
+                        profilData.setNip_kepdes(mItems.get(0).getNip_kepdes());
+                        profilData.setAlamat_desa(mItems.get(0).getAlamat_desa());
+                        profilData.setNo_telp(mItems.get(0).getNo_telp());
+                        profilData.setKode_pos(mItems.get(0).getKode_pos());
+                        profilData.setImage(mItems.get(0).getImage());
 
 
-                    pView.onShowData(profilData);
-                } else{
-                    switch (response.code()) {
-                        case 404:
-                            Toast.makeText(ctx, "404 Not Found", Toast.LENGTH_SHORT).show();
-                            break;
-                        case 500:
-                            Toast.makeText(ctx, "500 Internal Server Error", Toast.LENGTH_SHORT).show();
-                            break;
-                        default:
-                            Toast.makeText(ctx, "Unknown Error", Toast.LENGTH_SHORT).show();
-                            break;
+                        pView.onShowData(profilData);
+                    } else {
+                        switch (response.code()) {
+                            case 404:
+                                Toast.makeText(ctx, "404 Not Found", Toast.LENGTH_SHORT).show();
+                                break;
+                            case 500:
+                                Toast.makeText(ctx, "500 Internal Server Error", Toast.LENGTH_SHORT).show();
+                                break;
+                            default:
+                                Toast.makeText(ctx, "Unknown Error", Toast.LENGTH_SHORT).show();
+                                break;
+                        }
                     }
+                }catch (Exception e){
+                    e.printStackTrace();
                 }
             }
 

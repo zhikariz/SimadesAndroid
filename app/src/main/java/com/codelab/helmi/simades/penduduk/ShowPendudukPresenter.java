@@ -77,11 +77,11 @@ public class ShowPendudukPresenter implements Presenter<PendudukView> {
         pendudukView.onShowData(pendudukData);
     }
 
-    public void filterData(final Context ctx, final RecyclerView mRecycler, String nik, final FragmentManager fragmentManager) {
+    public void filterData(final Context ctx, final RecyclerView mRecycler, String nik, String no_kk, final FragmentManager fragmentManager) {
 
         final PendudukData pendudukData = new PendudukData();
         RestApi api = RestServer.getClient().create(RestApi.class);
-        Call<ShowPendudukResponseModel> filterPendudukData = api.filterPendudukData(nik);
+        Call<ShowPendudukResponseModel> filterPendudukData = api.filterPendudukData(nik,no_kk);
         filterPendudukData.enqueue(new Callback<ShowPendudukResponseModel>() {
             @Override
             public void onResponse(Call<ShowPendudukResponseModel> call, Response<ShowPendudukResponseModel> response) {

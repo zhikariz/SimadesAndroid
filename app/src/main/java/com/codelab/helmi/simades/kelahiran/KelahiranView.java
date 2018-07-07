@@ -4,4 +4,6 @@ import com.codelab.helmi.simades.base.View;
 
 public interface KelahiranView extends View{
     void onShowData(KelahiranData kelahiranData);
+    void swipeRefreshTrue();
+    void swipeRefreshFalse();
 }

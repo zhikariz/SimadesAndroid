@@ -12,10 +12,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
-import com.codelab.helmi.simades.HomeActivity;
+import com.codelab.helmi.simades.home.HomeActivity;
 import com.codelab.helmi.simades.R;
 import com.codelab.helmi.simades.datang.DatangFragment;
-import com.codelab.helmi.simades.kelahiran.KelahiranActivity;
+import com.codelab.helmi.simades.kelahiran.KelahiranFragment;
 import com.codelab.helmi.simades.kematian.KematianActivity;
 import com.codelab.helmi.simades.kk.ShowKkFragment;
 import com.codelab.helmi.simades.pergi.PergiActivity;
@@ -91,7 +91,7 @@ public class NavigateActivity extends AppCompatActivity implements NavigationVie
             fragment = new ShowKkFragment();
             callFragment(fragment);
         } else if (id == R.id.kelahiran) {
-            fragment = new KelahiranActivity();
+            fragment = new KelahiranFragment();
             callFragment(fragment);
         } else if (id == R.id.kematian) {
             fragment = new KematianActivity();

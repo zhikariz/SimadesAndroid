@@ -1,4 +1,6 @@
 package com.codelab.helmi.simades.login;
 
-public interface LoginView {
+import com.codelab.helmi.simades.base.View;
+
+public interface LoginView extends View{
 }

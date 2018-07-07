@@ -47,26 +47,30 @@ public class KkPresenter implements Presenter<KkView> {
         getData.enqueue(new Callback<KkResponseModel>() {
             @Override
             public void onResponse(Call<KkResponseModel> call, Response<KkResponseModel> response) {
-                if (response.isSuccessful()) {
-                    mItems = response.body().getResult();
-                    mAdapter = new KkRecyclerAdapter(ctx, mItems, fragmentManager);
-                    mRecycler.setAdapter(mAdapter);
-                    kkView.swipeRefreshFalse();
-                } else {
-                    switch (response.code()) {
-                        case 404:
-                            Toast.makeText(ctx, "404 Not Found", Toast.LENGTH_SHORT).show();
-                            kkView.swipeRefreshFalse();
-                            break;
-                        case 500:
-                            Toast.makeText(ctx, "500 Internal Server Error", Toast.LENGTH_SHORT).show();
-                            kkView.swipeRefreshFalse();
-                            break;
-                        default:
-                            Toast.makeText(ctx, "Unknown Error", Toast.LENGTH_SHORT).show();
-                            kkView.swipeRefreshFalse();
-                            break;
+                try {
+                    if (response.isSuccessful()) {
+                        mItems = response.body().getResult();
+                        mAdapter = new KkRecyclerAdapter(ctx, mItems, fragmentManager);
+                        mRecycler.setAdapter(mAdapter);
+                        kkView.swipeRefreshFalse();
+                    } else {
+                        switch (response.code()) {
+                            case 404:
+                                Toast.makeText(ctx, "404 Not Found", Toast.LENGTH_SHORT).show();
+                                kkView.swipeRefreshFalse();
+                                break;
+                            case 500:
+                                Toast.makeText(ctx, "500 Internal Server Error", Toast.LENGTH_SHORT).show();
+                                kkView.swipeRefreshFalse();
+                                break;
+                            default:
+                                Toast.makeText(ctx, "Unknown Error", Toast.LENGTH_SHORT).show();
+                                kkView.swipeRefreshFalse();
+                                break;
+                        }
                     }
+                }catch (Exception e){
+                    e.printStackTrace();
                 }
             }
 
@@ -88,26 +92,30 @@ public class KkPresenter implements Presenter<KkView> {
         filterKkData.enqueue(new Callback<KkResponseModel>() {
             @Override
             public void onResponse(Call<KkResponseModel> call, Response<KkResponseModel> response) {
-                if (response.isSuccessful()) {
-                    mItems = response.body().getResult();
-                    mAdapter = new KkRecyclerAdapter(ctx, mItems, fragmentManager);
-                    mRecycler.setAdapter(mAdapter);
-                    kkView.swipeRefreshFalse();
-                } else {
-                    switch (response.code()) {
-                        case 404:
-                            Toast.makeText(ctx, "404 Not Found", Toast.LENGTH_SHORT).show();
-                            kkView.swipeRefreshFalse();
-                            break;
-                        case 500:
-                            Toast.makeText(ctx, "500 Internal Server Error", Toast.LENGTH_SHORT).show();
-                            kkView.swipeRefreshFalse();
-                            break;
-                        default:
-                            Toast.makeText(ctx, "Unknown Error", Toast.LENGTH_SHORT).show();
-                            kkView.swipeRefreshFalse();
-                            break;
+                try {
+                    if (response.isSuccessful()) {
+                        mItems = response.body().getResult();
+                        mAdapter = new KkRecyclerAdapter(ctx, mItems, fragmentManager);
+                        mRecycler.setAdapter(mAdapter);
+                        kkView.swipeRefreshFalse();
+                    } else {
+                        switch (response.code()) {
+                            case 404:
+                                Toast.makeText(ctx, "404 Not Found", Toast.LENGTH_SHORT).show();
+                                kkView.swipeRefreshFalse();
+                                break;
+                            case 500:
+                                Toast.makeText(ctx, "500 Internal Server Error", Toast.LENGTH_SHORT).show();
+                                kkView.swipeRefreshFalse();
+                                break;
+                            default:
+                                Toast.makeText(ctx, "Unknown Error", Toast.LENGTH_SHORT).show();
+                                kkView.swipeRefreshFalse();
+                                break;
+                        }
                     }
+                } catch (Exception e){
+                    e.printStackTrace();
                 }
             }
 

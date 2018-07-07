@@ -53,7 +53,7 @@ public interface RestApi {
     Call<ShowPendudukResponseModel> getPendudukData(@Query("no_kk") String no_kk);
 
     @GET("api/penduduk")
-    Call<ShowPendudukResponseModel> filterPendudukData(@Query("nik") String nik);
+    Call<ShowPendudukResponseModel> filterPendudukData(@Query("nik") String nik, @Query("no_kk") String no_kk);
 
     @GET("api/kematian")
     Call<KematianResponseModel> getKematianData();

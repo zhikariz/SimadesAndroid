@@ -1,6 +1,7 @@
 package com.codelab.helmi.simades.kelahiran;
 
 import android.content.Context;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
@@ -36,18 +37,19 @@ public class KelahiranPresenter implements Presenter<KelahiranView> {
         kelahiranView = null;
     }
 
-    public void showData(final Context ctx, final RecyclerView mRecycler) {
+    public void showData(final Context ctx, final RecyclerView mRecycler, final FragmentManager fragmentManager) {
         final KelahiranData kelahiranData = new KelahiranData();
         RestApi api = RestServer.getClient().create(RestApi.class);
         Call<KelahiranResponseModel> getData = api.getKelahiranData();
         getData.enqueue(new Callback<KelahiranResponseModel>() {
             @Override
             public void onResponse(Call<KelahiranResponseModel> call, Response<KelahiranResponseModel> response) {
-                if(response.isSuccessful()){
-                mItems = response.body().getResult();
-                mAdapter = new KelahiranRecyclerAdapter(ctx, mItems);
-                mRecycler.setAdapter(mAdapter);}
-                else{
+                if (response.isSuccessful()) {
+                    mItems = response.body().getResult();
+                    mAdapter = new KelahiranRecyclerAdapter(ctx, mItems, fragmentManager);
+                    mRecycler.setAdapter(mAdapter);
+                    kelahiranView.swipeRefreshFalse();
+                } else {
                     switch (response.code()) {
                         case 404:
                             Toast.makeText(ctx, "404 Not Found", Toast.LENGTH_SHORT).show();
@@ -64,7 +66,7 @@ public class KelahiranPresenter implements Presenter<KelahiranView> {
 
             @Override
             public void onFailure(Call<KelahiranResponseModel> call, Throwable t) {
-
+                kelahiranView.swipeRefreshFalse();
             }
         });
         kelahiranView.onShowData(kelahiranData);

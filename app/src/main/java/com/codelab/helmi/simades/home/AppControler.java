@@ -1,9 +1,11 @@
-package com.codelab.helmi.simades;
+package com.codelab.helmi.simades.home;
 
 import android.app.Application;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+
+import com.codelab.helmi.simades.BuildConfig;
 
 import timber.log.Timber;
 
