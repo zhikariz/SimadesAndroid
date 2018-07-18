@@ -42,19 +42,19 @@ public class DetailPendudukFragment extends Fragment implements DetailPendudukVi
     }
 
     private void initView() {
-        ivPenduduk = (ImageView) view.findViewById(R.id.iv_detail_penduduk);
-        tvNik = (TextView) view.findViewById(R.id.tv_detail_penduduk_nik);
-        tvNama = (TextView) view.findViewById(R.id.tv_detail_penduduk_nama);
-        tvTglLahir = (TextView) view.findViewById(R.id.tv_detail_penduduk_tgl_lahir);
-        tvNamaAyah = (TextView) view.findViewById(R.id.tv_detail_penduduk_nama_ayah);
-        tvNamaIbu = (TextView) view.findViewById(R.id.tv_detail_penduduk_nama_ibu);
-        tvAnakKe = (TextView) view.findViewById(R.id.tv_detail_penduduk_anak_ke);
-        tvAgama = (TextView) view.findViewById(R.id.tv_detail_penduduk_agama);
-        tvGoldar = (TextView) view.findViewById(R.id.tv_detail_penduduk_goldar);
-        tvHubKel = (TextView) view.findViewById(R.id.tv_detail_penduduk_hubkel);
-        tvPekerjaan = (TextView) view.findViewById(R.id.tv_detail_penduduk_pekerjaan);
-        tvPendidikan = (TextView) view.findViewById(R.id.tv_detail_penduduk_pendidikan);
-        tvStatusKawin = (TextView) view.findViewById(R.id.tv_detail_penduduk_status_kawin);
+        ivPenduduk = view.findViewById(R.id.iv_detail_penduduk);
+        tvNik = view.findViewById(R.id.tv_detail_penduduk_nik);
+        tvNama = view.findViewById(R.id.tv_detail_penduduk_nama);
+        tvTglLahir = view.findViewById(R.id.tv_detail_penduduk_tgl_lahir);
+        tvNamaAyah = view.findViewById(R.id.tv_detail_penduduk_nama_ayah);
+        tvNamaIbu = view.findViewById(R.id.tv_detail_penduduk_nama_ibu);
+        tvAnakKe = view.findViewById(R.id.tv_detail_penduduk_anak_ke);
+        tvAgama = view.findViewById(R.id.tv_detail_penduduk_agama);
+        tvGoldar = view.findViewById(R.id.tv_detail_penduduk_goldar);
+        tvHubKel = view.findViewById(R.id.tv_detail_penduduk_hubkel);
+        tvPekerjaan = view.findViewById(R.id.tv_detail_penduduk_pekerjaan);
+        tvPendidikan = view.findViewById(R.id.tv_detail_penduduk_pendidikan);
+        tvStatusKawin = view.findViewById(R.id.tv_detail_penduduk_status_kawin);
 
     }
 
@@ -75,9 +75,9 @@ public class DetailPendudukFragment extends Fragment implements DetailPendudukVi
         }
 
         if (pendudukData.getJekel().equals("Laki-laki")) {
-            Glide.with(getActivity().getApplicationContext()).load(R.drawable.ic_boy).into(ivPenduduk);
+            Glide.with(this).load(R.drawable.ic_boy).into(ivPenduduk);
         } else if (pendudukData.getJekel().equals("Perempuan")) {
-            Glide.with(getActivity().getApplicationContext()).load(R.drawable.ic_girl).into(ivPenduduk);
+            Glide.with(this).load(R.drawable.ic_girl).into(ivPenduduk);
         }
 
         tvTglLahir.setText(pendudukData.getTempat_lhr() + ", " + pendudukData.getTanggal_lhr());

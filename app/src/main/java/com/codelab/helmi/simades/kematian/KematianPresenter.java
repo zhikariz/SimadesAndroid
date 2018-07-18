@@ -18,11 +18,11 @@ import retrofit2.Response;
 public class KematianPresenter implements Presenter<KematianView> {
 
     KematianView kematianView;
-    RecyclerView.Adapter mAdapter;
+    Context context;
     public List<KematianData> mItems = new ArrayList<>();
 
-    public KematianPresenter(RecyclerView.Adapter mAdapter) {
-        this.mAdapter = mAdapter;
+    public KematianPresenter(Context context) {
+        this.context = context;
     }
 
     @Override
@@ -35,37 +35,43 @@ public class KematianPresenter implements Presenter<KematianView> {
         kematianView = null;
     }
 
-    public void showData(final Context ctx, final RecyclerView mRecycler) {
-        final KematianData kematianData = new KematianData();
+    public void showData() {
         RestApi api = RestServer.getClient().create(RestApi.class);
         Call<KematianResponseModel> getData = api.getKematianData();
         getData.enqueue(new Callback<KematianResponseModel>() {
             @Override
             public void onResponse(Call<KematianResponseModel> call, Response<KematianResponseModel> response) {
-                if(response.isSuccessful()) {
-                    mItems = response.body().getResult();
-                    mAdapter = new KematianRecyclerAdapter(ctx, mItems);
-                    mRecycler.setAdapter(mAdapter);
-                }else{
-                    switch (response.code()) {
-                        case 404:
-                            Toast.makeText(ctx, "404 Not Found", Toast.LENGTH_SHORT).show();
-                            break;
-                        case 500:
-                            Toast.makeText(ctx, "500 Internal Server Error", Toast.LENGTH_SHORT).show();
-                            break;
-                        default:
-                            Toast.makeText(ctx, "Unknown Error", Toast.LENGTH_SHORT).show();
-                            break;
+                try {
+                    if (response.isSuccessful()) {
+                        mItems = response.body().getResult();
+                        kematianView.setAdapter(mItems);
+                        kematianView.swipeRefreshFalse();
+                    } else {
+                        switch (response.code()) {
+                            case 404:
+                                Toast.makeText(context, "404 Not Found", Toast.LENGTH_SHORT).show();
+                                kematianView.swipeRefreshFalse();
+                                break;
+                            case 500:
+                                Toast.makeText(context, "500 Internal Server Error", Toast.LENGTH_SHORT).show();
+                                kematianView.swipeRefreshFalse();
+                                break;
+                            default:
+                                Toast.makeText(context, "Unknown Error", Toast.LENGTH_SHORT).show();
+                                kematianView.swipeRefreshFalse();
+                                break;
+                        }
                     }
+                }catch (Exception e){
+                    e.printStackTrace();
+                    kematianView.swipeRefreshFalse();
                 }
             }
 
             @Override
             public void onFailure(Call<KematianResponseModel> call, Throwable t) {
-
+                kematianView.swipeRefreshFalse();
             }
         });
-        kematianView.onShowData(kematianData);
     }
 }

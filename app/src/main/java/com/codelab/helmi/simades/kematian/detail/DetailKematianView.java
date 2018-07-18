@@ -1,4 +1,7 @@
 package com.codelab.helmi.simades.kematian.detail;
 
-public interface DetailKematianView {
+import com.codelab.helmi.simades.base.View;
+
+public interface DetailKematianView extends View {
+    void tampilDataDetail();
 }

@@ -8,6 +8,17 @@ import com.google.gson.annotations.SerializedName;
 @SuppressWarnings("unused")
 public class PendudukData implements Parcelable {
 
+    public static final Parcelable.Creator<PendudukData> CREATOR = new Parcelable.Creator<PendudukData>() {
+        @Override
+        public PendudukData createFromParcel(Parcel source) {
+            return new PendudukData(source);
+        }
+
+        @Override
+        public PendudukData[] newArray(int size) {
+            return new PendudukData[size];
+        }
+    };
     @SerializedName("nik")
     private String nik;
     @SerializedName("no_kk")
@@ -63,6 +74,38 @@ public class PendudukData implements Parcelable {
     @SerializedName("dusun")
     private String dusun;
 
+    public PendudukData() {
+    }
+
+    protected PendudukData(Parcel in) {
+        this.nik = in.readString();
+        this.no_kk = in.readString();
+        this.nama_depan = in.readString();
+        this.nama_belakang = in.readString();
+        this.jekel = in.readString();
+        this.umur = in.readString();
+        this.tempat_lhr = in.readString();
+        this.tanggal_lhr = in.readString();
+        this.nama_ayah = in.readString();
+        this.nama_ibu = in.readString();
+        this.anak_ke = in.readString();
+        this.status = in.readString();
+        this.tgl_mutasi = in.readString();
+        this.agama = in.readString();
+        this.goldar = in.readString();
+        this.hubkel = in.readString();
+        this.kerja = in.readString();
+        this.pendidikan = in.readString();
+        this.stkawin = in.readString();
+        this.alamat = in.readString();
+        this.rt = in.readString();
+        this.rw = in.readString();
+        this.kelurahan = in.readString();
+        this.kecamatan = in.readString();
+        this.kabupaten = in.readString();
+        this.propinsi = in.readString();
+        this.dusun = in.readString();
+    }
 
     public String getNik() {
         return nik;
@@ -280,7 +323,6 @@ public class PendudukData implements Parcelable {
         this.dusun = dusun;
     }
 
-
     @Override
     public int describeContents() {
         return 0;
@@ -316,49 +358,4 @@ public class PendudukData implements Parcelable {
         dest.writeString(this.propinsi);
         dest.writeString(this.dusun);
     }
-
-    public PendudukData() {
-    }
-
-    protected PendudukData(Parcel in) {
-        this.nik = in.readString();
-        this.no_kk = in.readString();
-        this.nama_depan = in.readString();
-        this.nama_belakang = in.readString();
-        this.jekel = in.readString();
-        this.umur = in.readString();
-        this.tempat_lhr = in.readString();
-        this.tanggal_lhr = in.readString();
-        this.nama_ayah = in.readString();
-        this.nama_ibu = in.readString();
-        this.anak_ke = in.readString();
-        this.status = in.readString();
-        this.tgl_mutasi = in.readString();
-        this.agama = in.readString();
-        this.goldar = in.readString();
-        this.hubkel = in.readString();
-        this.kerja = in.readString();
-        this.pendidikan = in.readString();
-        this.stkawin = in.readString();
-        this.alamat = in.readString();
-        this.rt = in.readString();
-        this.rw = in.readString();
-        this.kelurahan = in.readString();
-        this.kecamatan = in.readString();
-        this.kabupaten = in.readString();
-        this.propinsi = in.readString();
-        this.dusun = in.readString();
-    }
-
-    public static final Parcelable.Creator<PendudukData> CREATOR = new Parcelable.Creator<PendudukData>() {
-        @Override
-        public PendudukData createFromParcel(Parcel source) {
-            return new PendudukData(source);
-        }
-
-        @Override
-        public PendudukData[] newArray(int size) {
-            return new PendudukData[size];
-        }
-    };
 }

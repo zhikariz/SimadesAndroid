@@ -16,7 +16,7 @@ import com.codelab.helmi.simades.home.HomeActivity;
 import com.codelab.helmi.simades.R;
 import com.codelab.helmi.simades.datang.DatangFragment;
 import com.codelab.helmi.simades.kelahiran.KelahiranFragment;
-import com.codelab.helmi.simades.kematian.KematianActivity;
+import com.codelab.helmi.simades.kematian.KematianFragment;
 import com.codelab.helmi.simades.kk.ShowKkFragment;
 import com.codelab.helmi.simades.pergi.PergiActivity;
 import com.codelab.helmi.simades.profil.ShowProfilActivity;
@@ -94,7 +94,7 @@ public class NavigateActivity extends AppCompatActivity implements NavigationVie
             fragment = new KelahiranFragment();
             callFragment(fragment);
         } else if (id == R.id.kematian) {
-            fragment = new KematianActivity();
+            fragment = new KematianFragment();
             callFragment(fragment);
         } else if (id == R.id.datang) {
             fragment = new DatangFragment();

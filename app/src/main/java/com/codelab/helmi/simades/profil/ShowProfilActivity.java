@@ -41,6 +41,7 @@ public class ShowProfilActivity extends Fragment implements ProfilView {
         initPresenter();
         initView();
         onAttachView();
+        presenter.showData(getActivity().getApplicationContext());
         getActivity().setTitle("Profil Desa");
         return view;
 
@@ -50,7 +51,6 @@ public class ShowProfilActivity extends Fragment implements ProfilView {
 
     private void initPresenter() {
         presenter = new ProfilPresenter();
-
     }
 
 
@@ -67,7 +67,7 @@ public class ShowProfilActivity extends Fragment implements ProfilView {
     @Override
     public void onAttachView() {
         presenter.onAttach(this);
-        presenter.showData(getActivity().getApplicationContext());
+
     }
 
     @SuppressLint("SetTextI18n")
@@ -84,11 +84,6 @@ public class ShowProfilActivity extends Fragment implements ProfilView {
 
     }
 
-    @Override
-    public void onEditData(ProfilData profilData) {
-
-    }
-
 
     @Override
     public void onDetachView() {
@@ -97,7 +92,7 @@ public class ShowProfilActivity extends Fragment implements ProfilView {
 
     @Override
     public void onDestroy() {
-        onDetachView();
         super.onDestroy();
+        onDetachView();
     }
 }

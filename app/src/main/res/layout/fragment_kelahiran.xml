@@ -26,8 +26,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:gravity="center">
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -40,8 +39,7 @@
                         android:layout_height="wrap_content"
                         android:text="NIS"
                         android:textColor="#000"
-                        android:textSize="17sp"
-                        android:textStyle="bold" />
+                        android:textSize="17sp" />
 
                     <TextView
                         android:id="@+id/tvNisBayi"
@@ -66,8 +64,7 @@
                         android:layout_height="wrap_content"
                         android:text="Nama"
                         android:textColor="#000"
-                        android:textSize="17sp"
-                        android:textStyle="bold" />
+                        android:textSize="17sp" />
 
                     <TextView
                         android:id="@+id/tvNamaBayi"
@@ -92,8 +89,7 @@
                         android:layout_height="wrap_content"
                         android:text="TTL"
                         android:textColor="#000"
-                        android:textSize="17sp"
-                        android:textStyle="bold" />
+                        android:textSize="17sp" />
 
                     <TextView
                         android:id="@+id/tvTTLBayi"

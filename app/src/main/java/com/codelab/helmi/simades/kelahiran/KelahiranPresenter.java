@@ -18,13 +18,12 @@ import retrofit2.Response;
 
 public class KelahiranPresenter implements Presenter<KelahiranView> {
 
-    RecyclerView.Adapter mAdapter;
-
     private KelahiranView kelahiranView;
     public List<KelahiranData> mItems = new ArrayList<>();
+    Context context;
 
-    public KelahiranPresenter(RecyclerView.Adapter mAdapter) {
-        this.mAdapter = mAdapter;
+    public KelahiranPresenter(Context context) {
+        this.context = context;
     }
 
     @Override
@@ -37,30 +36,33 @@ public class KelahiranPresenter implements Presenter<KelahiranView> {
         kelahiranView = null;
     }
 
-    public void showData(final Context ctx, final RecyclerView mRecycler, final FragmentManager fragmentManager) {
-        final KelahiranData kelahiranData = new KelahiranData();
+    public void showData() {
         RestApi api = RestServer.getClient().create(RestApi.class);
         Call<KelahiranResponseModel> getData = api.getKelahiranData();
         getData.enqueue(new Callback<KelahiranResponseModel>() {
             @Override
             public void onResponse(Call<KelahiranResponseModel> call, Response<KelahiranResponseModel> response) {
-                if (response.isSuccessful()) {
-                    mItems = response.body().getResult();
-                    mAdapter = new KelahiranRecyclerAdapter(ctx, mItems, fragmentManager);
-                    mRecycler.setAdapter(mAdapter);
-                    kelahiranView.swipeRefreshFalse();
-                } else {
-                    switch (response.code()) {
-                        case 404:
-                            Toast.makeText(ctx, "404 Not Found", Toast.LENGTH_SHORT).show();
-                            break;
-                        case 500:
-                            Toast.makeText(ctx, "500 Internal Server Error", Toast.LENGTH_SHORT).show();
-                            break;
-                        default:
-                            Toast.makeText(ctx, "Unknown Error", Toast.LENGTH_SHORT).show();
-                            break;
+                try {
+                    if (response.isSuccessful()) {
+                        mItems = response.body().getResult();
+                        kelahiranView.setAdapter(mItems);
+                        kelahiranView.swipeRefreshFalse();
+                    } else {
+                        switch (response.code()) {
+                            case 404:
+                                Toast.makeText(context, "404 Not Found", Toast.LENGTH_SHORT).show();
+                                break;
+                            case 500:
+                                Toast.makeText(context, "500 Internal Server Error", Toast.LENGTH_SHORT).show();
+                                break;
+                            default:
+                                Toast.makeText(context, "Unknown Error", Toast.LENGTH_SHORT).show();
+                                break;
+                        }
                     }
+                }catch (Exception e){
+                    e.printStackTrace();
+                    kelahiranView.swipeRefreshFalse();
                 }
             }
 
@@ -69,6 +71,5 @@ public class KelahiranPresenter implements Presenter<KelahiranView> {
                 kelahiranView.swipeRefreshFalse();
             }
         });
-        kelahiranView.onShowData(kelahiranData);
     }
 }

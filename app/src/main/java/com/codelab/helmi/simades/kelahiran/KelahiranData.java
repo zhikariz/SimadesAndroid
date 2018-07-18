@@ -8,6 +8,17 @@ import com.google.gson.annotations.SerializedName;
 @SuppressWarnings("unused")
 public class KelahiranData implements Parcelable {
 
+    public static final Parcelable.Creator<KelahiranData> CREATOR = new Parcelable.Creator<KelahiranData>() {
+        @Override
+        public KelahiranData createFromParcel(Parcel source) {
+            return new KelahiranData(source);
+        }
+
+        @Override
+        public KelahiranData[] newArray(int size) {
+            return new KelahiranData[size];
+        }
+    };
     @SerializedName("id_lahir")
     private String id_lahir;
     @SerializedName("nis_bayi")
@@ -54,6 +65,35 @@ public class KelahiranData implements Parcelable {
     private String nama_depan_saksi2;
     @SerializedName("nama_belakang_saksi2")
     private String nama_belakang_saksi2;
+
+    public KelahiranData() {
+    }
+
+    protected KelahiranData(Parcel in) {
+        this.id_lahir = in.readString();
+        this.nis_bayi = in.readString();
+        this.nama_depan_bayi = in.readString();
+        this.nama_belakang_bayi = in.readString();
+        this.tgl_lahir = in.readString();
+        this.tpt_lahir = in.readString();
+        this.jekel = in.readString();
+        this.berat_bayi = in.readString();
+        this.anak_ke = in.readString();
+        this.waktu = in.readString();
+        this.panjang_bayi = in.readString();
+        this.nik_ayah = in.readString();
+        this.nama_depan_ayah = in.readString();
+        this.nama_belakang_ayah = in.readString();
+        this.nik_ibu = in.readString();
+        this.nama_depan_ibu = in.readString();
+        this.nama_belakang_ibu = in.readString();
+        this.nik_saksi1 = in.readString();
+        this.nama_depan_saksi1 = in.readString();
+        this.nama_belakang_saksi1 = in.readString();
+        this.nik_saksi2 = in.readString();
+        this.nama_depan_saksi2 = in.readString();
+        this.nama_belakang_saksi2 = in.readString();
+    }
 
     public String getId_lahir() {
         return id_lahir;
@@ -239,7 +279,6 @@ public class KelahiranData implements Parcelable {
         this.nama_belakang_saksi2 = nama_belakang_saksi2;
     }
 
-
     @Override
     public int describeContents() {
         return 0;
@@ -271,45 +310,4 @@ public class KelahiranData implements Parcelable {
         dest.writeString(this.nama_depan_saksi2);
         dest.writeString(this.nama_belakang_saksi2);
     }
-
-    public KelahiranData() {
-    }
-
-    protected KelahiranData(Parcel in) {
-        this.id_lahir = in.readString();
-        this.nis_bayi = in.readString();
-        this.nama_depan_bayi = in.readString();
-        this.nama_belakang_bayi = in.readString();
-        this.tgl_lahir = in.readString();
-        this.tpt_lahir = in.readString();
-        this.jekel = in.readString();
-        this.berat_bayi = in.readString();
-        this.anak_ke = in.readString();
-        this.waktu = in.readString();
-        this.panjang_bayi = in.readString();
-        this.nik_ayah = in.readString();
-        this.nama_depan_ayah = in.readString();
-        this.nama_belakang_ayah = in.readString();
-        this.nik_ibu = in.readString();
-        this.nama_depan_ibu = in.readString();
-        this.nama_belakang_ibu = in.readString();
-        this.nik_saksi1 = in.readString();
-        this.nama_depan_saksi1 = in.readString();
-        this.nama_belakang_saksi1 = in.readString();
-        this.nik_saksi2 = in.readString();
-        this.nama_depan_saksi2 = in.readString();
-        this.nama_belakang_saksi2 = in.readString();
-    }
-
-    public static final Parcelable.Creator<KelahiranData> CREATOR = new Parcelable.Creator<KelahiranData>() {
-        @Override
-        public KelahiranData createFromParcel(Parcel source) {
-            return new KelahiranData(source);
-        }
-
-        @Override
-        public KelahiranData[] newArray(int size) {
-            return new KelahiranData[size];
-        }
-    };
 }

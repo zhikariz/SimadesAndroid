@@ -13,12 +13,14 @@ import android.view.ViewGroup;
 
 import com.codelab.helmi.simades.R;
 
-public class KelahiranFragment extends Fragment implements KelahiranView, SwipeRefreshLayout.OnRefreshListener {
+import java.util.List;
+
+public class KelahiranFragment extends Fragment implements KelahiranView, SwipeRefreshLayout.OnRefreshListener, View.OnClickListener, SearchView.OnQueryTextListener {
 
     KelahiranPresenter presenter;
     View view;
     private RecyclerView mRecycler;
-    private RecyclerView.Adapter mAdapter;
+    KelahiranRecyclerAdapter mAdapter;
     private RecyclerView.LayoutManager mManager;
     private final String KEY_RECYCLER_STATE = "recycler_state";
     private static Bundle mBundleRecyclerViewState;
@@ -41,21 +43,18 @@ public class KelahiranFragment extends Fragment implements KelahiranView, SwipeR
     }
 
     private void initView() {
-        mRecycler = (RecyclerView) view.findViewById(R.id.recyclerTemp);
+        mRecycler = view.findViewById(R.id.recyclerTemp);
         mManager = new LinearLayoutManager(getActivity().getApplicationContext());
         mRecycler.setLayoutManager(mManager);
         swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(this);
+        searchView = view.findViewById(R.id.search_view);
+        searchView.setOnClickListener(this);
+        searchView.setOnQueryTextListener(this);
     }
 
     private void initPresenter() {
-        presenter = new KelahiranPresenter(mAdapter);
-    }
-
-
-    @Override
-    public void onShowData(KelahiranData kelahiranData) {
-
+        presenter = new KelahiranPresenter(getActivity());
     }
 
     @Override
@@ -83,7 +82,6 @@ public class KelahiranFragment extends Fragment implements KelahiranView, SwipeR
         mBundleRecyclerViewState = new Bundle();
         Parcelable listState = mRecycler.getLayoutManager().onSaveInstanceState();
         mBundleRecyclerViewState.putParcelable(KEY_RECYCLER_STATE, listState);
-        mAdapter = mRecycler.getAdapter();
     }
 
     @Override
@@ -97,6 +95,12 @@ public class KelahiranFragment extends Fragment implements KelahiranView, SwipeR
     }
 
     @Override
+    public void setAdapter(List<KelahiranData> kelahiranData) {
+        mAdapter = new KelahiranRecyclerAdapter(getActivity(), kelahiranData, getFragmentManager());
+        mRecycler.setAdapter(mAdapter);
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
 
@@ -106,7 +110,7 @@ public class KelahiranFragment extends Fragment implements KelahiranView, SwipeR
             mRecycler.setAdapter(mAdapter);
         } else {
             swipeRefreshTrue();
-            presenter.showData(getActivity().getApplicationContext(), mRecycler, getFragmentManager());
+            presenter.showData();
         }
     }
 
@@ -114,7 +118,27 @@ public class KelahiranFragment extends Fragment implements KelahiranView, SwipeR
     public void onRefresh() {
         swipeRefreshTrue();
         mRecycler.removeAllViewsInLayout();
-        presenter.showData(getActivity().getApplicationContext(), mRecycler, getFragmentManager());
+        presenter.showData();
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.search_view:
+                searchView.setIconified(false);
+                break;
+        }
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        mAdapter.getFilter().filter(newText);
+        return true;
     }
 }

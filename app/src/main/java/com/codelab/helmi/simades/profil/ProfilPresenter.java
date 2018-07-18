@@ -57,8 +57,6 @@ public class ProfilPresenter implements Presenter<ProfilView> {
                         profilData.setNo_telp(mItems.get(0).getNo_telp());
                         profilData.setKode_pos(mItems.get(0).getKode_pos());
                         profilData.setImage(mItems.get(0).getImage());
-
-
                         pView.onShowData(profilData);
                     } else {
                         switch (response.code()) {

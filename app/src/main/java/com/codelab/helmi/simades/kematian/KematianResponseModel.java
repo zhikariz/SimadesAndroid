@@ -1,20 +1,38 @@
 package com.codelab.helmi.simades.kematian;
 
-
+import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
-
-@SuppressWarnings("unused")
 public class KematianResponseModel {
-    @SerializedName("result")
-    List<KematianData> result;
 
-    public List<KematianData> getResult() {
-        return result;
-    }
+	@SerializedName("result")
+	private List<KematianData> result;
 
-    public void setResult(List<KematianData> result) {
-        this.result = result;
-    }
+	@SerializedName("kode")
+	private int kode;
+
+	public void setResult(List<KematianData> result){
+		this.result = result;
+	}
+
+	public List<KematianData> getResult(){
+		return result;
+	}
+
+	public void setKode(int kode){
+		this.kode = kode;
+	}
+
+	public int getKode(){
+		return kode;
+	}
+
+	@Override
+ 	public String toString(){
+		return 
+			"KematianResponseModel{" +
+			"result = '" + result + '\'' + 
+			",kode = '" + kode + '\'' + 
+			"}";
+		}
 }

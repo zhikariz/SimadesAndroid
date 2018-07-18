@@ -2,8 +2,6 @@ package com.codelab.helmi.simades.kk;
 
 
 import android.content.Context;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
 import com.codelab.helmi.simades.api.RestApi;
@@ -19,13 +17,12 @@ import retrofit2.Response;
 
 public class KkPresenter implements Presenter<KkView> {
 
+    List<KkData> mItems = new ArrayList<>();
+    Context context;
     private KkView kkView;
-    RecyclerView.Adapter mAdapter;
-    public List<KkData> mItems = new ArrayList<>();
 
-    public KkPresenter(RecyclerView.Adapter mAdapter) {
-
-        this.mAdapter = mAdapter;
+    public KkPresenter(Context context) {
+        this.context = context;
     }
 
     @Override
@@ -38,8 +35,7 @@ public class KkPresenter implements Presenter<KkView> {
         kkView = null;
     }
 
-    public void showData(final Context ctx, final RecyclerView mRecycler, final FragmentManager fragmentManager) {
-        final KkData kkData = new KkData();
+    public void showData() {
         RestApi api = RestServer.getClient().create(RestApi.class);
         Call<KkResponseModel> getData = api.getKkData();
 
@@ -50,78 +46,33 @@ public class KkPresenter implements Presenter<KkView> {
                 try {
                     if (response.isSuccessful()) {
                         mItems = response.body().getResult();
-                        mAdapter = new KkRecyclerAdapter(ctx, mItems, fragmentManager);
-                        mRecycler.setAdapter(mAdapter);
+                        kkView.setAdapter(mItems);
                         kkView.swipeRefreshFalse();
                     } else {
                         switch (response.code()) {
                             case 404:
-                                Toast.makeText(ctx, "404 Not Found", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "404 Not Found", Toast.LENGTH_SHORT).show();
                                 kkView.swipeRefreshFalse();
                                 break;
                             case 500:
-                                Toast.makeText(ctx, "500 Internal Server Error", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "500 Internal Server Error", Toast.LENGTH_SHORT).show();
                                 kkView.swipeRefreshFalse();
                                 break;
                             default:
-                                Toast.makeText(ctx, "Unknown Error", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "Unknown Error", Toast.LENGTH_SHORT).show();
                                 kkView.swipeRefreshFalse();
                                 break;
                         }
                     }
-                }catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
+                    kkView.swipeRefreshFalse();
                 }
             }
 
             @Override
             public void onFailure(Call<KkResponseModel> call, Throwable t) {
-                Toast.makeText(ctx, "Gagal Mendapatkan Data", Toast.LENGTH_SHORT).show();
-                kkView.swipeRefreshFalse();
-            }
-        });
-
-
-        kkView.onShowData(kkData);
-    }
-
-    public void filterData(final Context ctx, final RecyclerView mRecycler, String no_kk, final FragmentManager fragmentManager) {
-        final KkData kkData = new KkData();
-        RestApi api = RestServer.getClient().create(RestApi.class);
-        Call<KkResponseModel> filterKkData = api.filterKkData(no_kk);
-        filterKkData.enqueue(new Callback<KkResponseModel>() {
-            @Override
-            public void onResponse(Call<KkResponseModel> call, Response<KkResponseModel> response) {
-                try {
-                    if (response.isSuccessful()) {
-                        mItems = response.body().getResult();
-                        mAdapter = new KkRecyclerAdapter(ctx, mItems, fragmentManager);
-                        mRecycler.setAdapter(mAdapter);
-                        kkView.swipeRefreshFalse();
-                    } else {
-                        switch (response.code()) {
-                            case 404:
-                                Toast.makeText(ctx, "404 Not Found", Toast.LENGTH_SHORT).show();
-                                kkView.swipeRefreshFalse();
-                                break;
-                            case 500:
-                                Toast.makeText(ctx, "500 Internal Server Error", Toast.LENGTH_SHORT).show();
-                                kkView.swipeRefreshFalse();
-                                break;
-                            default:
-                                Toast.makeText(ctx, "Unknown Error", Toast.LENGTH_SHORT).show();
-                                kkView.swipeRefreshFalse();
-                                break;
-                        }
-                    }
-                } catch (Exception e){
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<KkResponseModel> call, Throwable t) {
-                Toast.makeText(ctx, "Gagal Mendapatkan Data", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Gagal Mendapatkan Data", Toast.LENGTH_SHORT).show();
                 kkView.swipeRefreshFalse();
             }
         });
