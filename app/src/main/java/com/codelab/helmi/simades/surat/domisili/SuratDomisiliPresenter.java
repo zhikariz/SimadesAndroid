@@ -1,13 +1,10 @@
 package com.codelab.helmi.simades.surat.domisili;
 
 import android.content.Context;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
-import com.codelab.helmi.simades.api.RestApi;
-import com.codelab.helmi.simades.api.RestServer;
+import com.codelab.helmi.simades.helper.api.RestApi;
+import com.codelab.helmi.simades.helper.api.RestServer;
 import com.codelab.helmi.simades.base.Presenter;
 
 import java.util.ArrayList;
@@ -20,10 +17,10 @@ import retrofit2.Response;
 public class SuratDomisiliPresenter implements Presenter<SuratDomisiliView> {
     private SuratDomisiliView suratDomisiliView;
     public List<SuratDomisiliData> mItems = new ArrayList<>();
-    RecyclerView.Adapter mAdapter;
+    Context context;
 
-    public SuratDomisiliPresenter(RecyclerView.Adapter mAdapter) {
-        this.mAdapter = mAdapter;
+    public SuratDomisiliPresenter(Context context) {
+        this.context = context;
     }
 
     @Override
@@ -36,33 +33,36 @@ public class SuratDomisiliPresenter implements Presenter<SuratDomisiliView> {
         suratDomisiliView = null;
     }
 
-    public void showData(final Context ctx, final RecyclerView mRecycler, final FragmentManager fragmentManager) {
-        final SuratDomisiliData suratDomisiliData = new SuratDomisiliData();
+    public void showData() {
         RestApi api = RestServer.getClient().create(RestApi.class);
         Call<SuratDomisiliResponseModel> getData = api.getSuratDomisiliData();
         getData.enqueue(new Callback<SuratDomisiliResponseModel>() {
             @Override
             public void onResponse(Call<SuratDomisiliResponseModel> call, Response<SuratDomisiliResponseModel> response) {
-                if(response.isSuccessful()) {
-                    mItems = response.body().getResult();
-                    mAdapter = new SuratDomisiliRecyclerAdapter(ctx, mItems, fragmentManager);
-                    mRecycler.setAdapter(mAdapter);
-                    suratDomisiliView.swipeRefreshFalse();
-                }else{
-                    switch (response.code()) {
-                        case 404:
-                            Toast.makeText(ctx, "404 Not Found", Toast.LENGTH_SHORT).show();
-                            suratDomisiliView.swipeRefreshFalse();
-                            break;
-                        case 500:
-                            Toast.makeText(ctx, "500 Internal Server Error", Toast.LENGTH_SHORT).show();
-                            suratDomisiliView.swipeRefreshFalse();
-                            break;
-                        default:
-                            Toast.makeText(ctx, "Unknown Error", Toast.LENGTH_SHORT).show();
-                            suratDomisiliView.swipeRefreshFalse();
-                            break;
+                try {
+                    if (response.isSuccessful()) {
+                        mItems = response.body().getResult();
+                        suratDomisiliView.setAdapter(mItems);
+                        suratDomisiliView.swipeRefreshFalse();
+                    } else {
+                        switch (response.code()) {
+                            case 404:
+                                Toast.makeText(context, "404 Not Found", Toast.LENGTH_SHORT).show();
+                                suratDomisiliView.swipeRefreshFalse();
+                                break;
+                            case 500:
+                                Toast.makeText(context, "500 Internal Server Error", Toast.LENGTH_SHORT).show();
+                                suratDomisiliView.swipeRefreshFalse();
+                                break;
+                            default:
+                                Toast.makeText(context, "Unknown Error", Toast.LENGTH_SHORT).show();
+                                suratDomisiliView.swipeRefreshFalse();
+                                break;
+                        }
                     }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    suratDomisiliView.swipeRefreshFalse();
                 }
             }
 
@@ -72,6 +72,5 @@ public class SuratDomisiliPresenter implements Presenter<SuratDomisiliView> {
 
             }
         });
-        suratDomisiliView.onShowData(suratDomisiliData);
     }
 }

@@ -16,7 +16,26 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/informasi_desa"
+                android:textColor="@android:color/black"
+                android:textSize="17sp"
+                android:background="@drawable/layout_bg"
+                android:padding="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:text="Tunggu Sebentar..." />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:orientation="vertical">
 
@@ -31,6 +50,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
+                    android:layout_marginEnd="10dp"
                     android:layout_weight="1"
                     android:background="@drawable/layout_bg"
                     android:orientation="vertical"
@@ -38,8 +58,8 @@
 
                     <ImageView
                         android:id="@+id/iv_home_penduduk"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
                         android:layout_gravity="center" />
 
                     <TextView
@@ -63,8 +83,8 @@
 
                     <ImageView
                         android:id="@+id/iv_home_pengajuan_surat"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
                         android:layout_gravity="center" />
 
                     <TextView
@@ -91,6 +111,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
+                    android:layout_marginEnd="10dp"
                     android:layout_weight="1"
                     android:background="@drawable/layout_bg"
                     android:orientation="vertical"
@@ -98,8 +119,8 @@
 
                     <ImageView
                         android:id="@+id/iv_home_kelahiran"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
                         android:layout_gravity="center" />
 
                     <TextView
@@ -123,8 +144,8 @@
 
                     <ImageView
                         android:id="@+id/iv_home_kematian"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
                         android:layout_gravity="center" />
 
                     <TextView
@@ -150,6 +171,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
+                    android:layout_marginEnd="10dp"
                     android:layout_weight="1"
                     android:background="@drawable/layout_bg"
                     android:orientation="vertical"
@@ -157,8 +179,8 @@
 
                     <ImageView
                         android:id="@+id/iv_home_datang"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
                         android:layout_gravity="center" />
 
                     <TextView
@@ -182,8 +204,8 @@
 
                     <ImageView
                         android:id="@+id/iv_home_pergi"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
                         android:layout_gravity="center" />
 
                     <TextView
@@ -199,6 +221,8 @@
 
 
         </LinearLayout>
+
+
 
 
     </LinearLayout>

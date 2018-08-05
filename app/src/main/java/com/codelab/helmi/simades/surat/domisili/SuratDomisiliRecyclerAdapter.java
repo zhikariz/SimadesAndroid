@@ -4,29 +4,30 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.codelab.helmi.simades.R;
 import com.codelab.helmi.simades.surat.domisili.detail.DetailSuratDomisiliFragment;
-import com.codelab.helmi.simades.surat.ektp.SuratEktpData;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class SuratDomisiliRecyclerAdapter extends RecyclerView.Adapter<SuratDomisiliRecyclerAdapter.MyHolder> {
+public class SuratDomisiliRecyclerAdapter extends RecyclerView.Adapter<SuratDomisiliRecyclerAdapter.MyHolder> implements Filterable {
     Context ctx;
     List<SuratDomisiliData> mList;
     FragmentManager fragmentManager;
+    List<SuratDomisiliData> mFilterList;
 
     public SuratDomisiliRecyclerAdapter(Context ctx, List<SuratDomisiliData> mList, FragmentManager fragmentManager) {
-
+        this.mFilterList = mList;
         this.ctx = ctx;
         this.mList = mList;
         this.fragmentManager = fragmentManager;
@@ -37,20 +38,19 @@ public class SuratDomisiliRecyclerAdapter extends RecyclerView.Adapter<SuratDomi
     public MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View layout = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_surat_domisili, parent, false);
         MyHolder holder = new MyHolder(layout);
-
         return holder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull final MyHolder holder, final int position) {
-        holder.kode_surat.setText(mList.get(position).getKd_surat());
-        holder.no_surat.setText(mList.get(position).getNo_surat());
-        holder.tgl_surat.setText(mList.get(position).getTgl_surat());
-        holder.status_persetujuan.setText(mList.get(position).getStatus_persetujuan());
-        holder.pengaju.setText(mList.get(position).getNama_depan() + " " + mList.get(position).getNama_belakang());
-        if (mList.get(position).getStatus_persetujuan().equals("Belum disetujui")) {
+        holder.kode_surat.setText(mFilterList.get(position).getKd_surat());
+        holder.no_surat.setText(mFilterList.get(position).getNo_surat());
+        holder.tgl_surat.setText(mFilterList.get(position).getTgl_surat());
+        holder.status_persetujuan.setText(mFilterList.get(position).getStatus_persetujuan());
+        holder.pengaju.setText(mFilterList.get(position).getNama_depan() + " " + mFilterList.get(position).getNama_belakang());
+        if (mFilterList.get(position).getStatus_persetujuan().equals("Belum disetujui")) {
             holder.status_persetujuan.setTextColor(Color.parseColor("#ff0000"));
-        } else if (mList.get(position).getStatus_persetujuan().equals("Disetujui")) {
+        } else if (mFilterList.get(position).getStatus_persetujuan().equals("Disetujui")) {
             holder.status_persetujuan.setTextColor(Color.parseColor("#008000"));
         }
 
@@ -61,15 +61,15 @@ public class SuratDomisiliRecyclerAdapter extends RecyclerView.Adapter<SuratDomi
                 DetailSuratDomisiliFragment detailSuratDomisiliFragment = new DetailSuratDomisiliFragment();
                 SuratDomisiliData suratDomisiliData = new SuratDomisiliData();
 
-                suratDomisiliData.setKd_surat(mList.get(position).getKd_surat());
-                suratDomisiliData.setNo_surat(mList.get(position).getNo_surat());
-                suratDomisiliData.setTgl_surat(mList.get(position).getTgl_surat());
-                suratDomisiliData.setStatus_persetujuan(mList.get(position).getStatus_persetujuan());
-                suratDomisiliData.setNik(mList.get(position).getNik());
-                suratDomisiliData.setNama_depan(mList.get(position).getNama_depan());
-                suratDomisiliData.setNama_belakang(mList.get(position).getNama_belakang());
-                suratDomisiliData.setNama_depan_user(mList.get(position).getNama_depan_user());
-                suratDomisiliData.setNama_belakang_user(mList.get(position).getNama_belakang_user());
+                suratDomisiliData.setKd_surat(mFilterList.get(position).getKd_surat());
+                suratDomisiliData.setNo_surat(mFilterList.get(position).getNo_surat());
+                suratDomisiliData.setTgl_surat(mFilterList.get(position).getTgl_surat());
+                suratDomisiliData.setStatus_persetujuan(mFilterList.get(position).getStatus_persetujuan());
+                suratDomisiliData.setNik(mFilterList.get(position).getNik());
+                suratDomisiliData.setNama_depan(mFilterList.get(position).getNama_depan());
+                suratDomisiliData.setNama_belakang(mFilterList.get(position).getNama_belakang());
+                suratDomisiliData.setNama_depan_user(mFilterList.get(position).getNama_depan_user());
+                suratDomisiliData.setNama_belakang_user(mFilterList.get(position).getNama_belakang_user());
 
                 Bundle bundle = new Bundle();
                 bundle.putParcelable(DetailSuratDomisiliFragment.EXTRA_SURAT_DOMISILI, suratDomisiliData);
@@ -80,7 +80,7 @@ public class SuratDomisiliRecyclerAdapter extends RecyclerView.Adapter<SuratDomi
                         .replace(R.id.frame_container, detailSuratDomisiliFragment, detailSuratDomisiliFragment.getClass().getSimpleName())
                         .addToBackStack(detailSuratDomisiliFragment.getClass().getSimpleName())
                         .commit();
-                
+
 //                Toast.makeText(ctx, "" + holder.no_surat.getText().toString(), Toast.LENGTH_SHORT).show();
             }
         });
@@ -88,12 +88,43 @@ public class SuratDomisiliRecyclerAdapter extends RecyclerView.Adapter<SuratDomi
 
     @Override
     public int getItemCount() {
-        return mList.size();
+        return mFilterList.size();
+    }
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                String charString = constraint.toString();
+                if (charString.isEmpty()) {
+                    mFilterList = mList;
+                } else {
+                    List<SuratDomisiliData> filteredList = new ArrayList<>();
+                    for (SuratDomisiliData suratDomisiliData : mList) {
+                        if (suratDomisiliData.getKd_surat().toLowerCase().contains(charString.toLowerCase()) || suratDomisiliData.getNo_surat().toLowerCase().contains(charString.toLowerCase()) || suratDomisiliData.getNama_depan().toLowerCase().contains(charString.toLowerCase()) || suratDomisiliData.getStatus_persetujuan().toLowerCase().contains(charString.toLowerCase()) || suratDomisiliData.getTgl_surat().toLowerCase().contains(charString.toLowerCase())) {
+                            filteredList.add(suratDomisiliData);
+                        }
+                    }
+                    mFilterList = filteredList;
+                }
+
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = mFilterList;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                mFilterList = (List<SuratDomisiliData>) results.values;
+                notifyDataSetChanged();
+            }
+        };
     }
 
     public class MyHolder extends RecyclerView.ViewHolder {
         TextView id_surat, kode_surat, no_surat, jenis_surat;
-        TextView tgl_surat, waktu, status_persetujuan,pengaju;
+        TextView tgl_surat, waktu, status_persetujuan, pengaju;
 
         public MyHolder(View v) {
             super(v);

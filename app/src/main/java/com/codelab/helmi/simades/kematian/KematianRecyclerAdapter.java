@@ -47,9 +47,9 @@ public class KematianRecyclerAdapter extends RecyclerView.Adapter<KematianRecycl
     @Override
     public void onBindViewHolder(@NonNull final MyHolder holder, final int position) {
         if (mFilterList.get(position).getJekel().equals("Laki-laki")) {
-            Glide.with(this.ctx).load(R.drawable.ic_baby_boy).into(holder.ivGambar);
+            Glide.with(this.ctx).load(R.drawable.ic_boy).into(holder.ivGambar);
         } else if (mFilterList.get(position).getJekel().equals("Perempuan")) {
-            Glide.with(this.ctx).load(R.drawable.ic_baby_girl).into(holder.ivGambar);
+            Glide.with(this.ctx).load(R.drawable.ic_girl).into(holder.ivGambar);
         }
         if (mFilterList.get(position).getNamaBelakang() != null) {
             holder.nama_meninggal.setText(mFilterList.get(position).getNamaDepan() + " " + mFilterList.get(position).getNamaBelakang());

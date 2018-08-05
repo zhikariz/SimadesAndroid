@@ -84,12 +84,8 @@ public class DetailSuratBlmMenikahFragment extends Fragment implements DetailSur
 
         if(suratBlmMenikahData.getStatus_persetujuan().equals("Disetujui")){
             tvStatusPersetujuanSuratBlmMenikah.setTextColor(Color.parseColor("#008000"));
-            btnBatalSetujuiSuratBlmMenikah.setVisibility(View.VISIBLE);
-            btnSetujuiSuratBlmMenikah.setVisibility(View.GONE);
         }else if(suratBlmMenikahData.getStatus_persetujuan().equals("Belum disetujui")){
             tvStatusPersetujuanSuratBlmMenikah.setTextColor(Color.parseColor("#ff0000"));
-            btnBatalSetujuiSuratBlmMenikah.setVisibility(View.GONE);
-            btnSetujuiSuratBlmMenikah.setVisibility(View.VISIBLE);
         }
 
 

@@ -10,23 +10,28 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.codelab.helmi.simades.R;
 import com.codelab.helmi.simades.surat.tidak_mampu.detail.DetailSuratTidakMampuFragment;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class SuratTidakMampuRecyclerAdapter extends RecyclerView.Adapter<SuratTidakMampuRecyclerAdapter.MyHolder> {
+public class SuratTidakMampuRecyclerAdapter extends RecyclerView.Adapter<SuratTidakMampuRecyclerAdapter.MyHolder> implements Filterable{
     Context ctx;
     List<SuratTidakMampuData> mList;
+    List<SuratTidakMampuData> mFilterList;
     FragmentManager fragmentManager;
 
     public SuratTidakMampuRecyclerAdapter(Context ctx, List<SuratTidakMampuData> mList, FragmentManager fragmentManager) {
         this.ctx = ctx;
         this.mList = mList;
         this.fragmentManager = fragmentManager;
+        this.mFilterList = mList;
 
     }
 
@@ -40,14 +45,14 @@ public class SuratTidakMampuRecyclerAdapter extends RecyclerView.Adapter<SuratTi
 
     @Override
     public void onBindViewHolder(@NonNull final MyHolder holder, final int position) {
-        holder.kode_surat.setText(mList.get(position).getKd_surat());
-        holder.no_surat.setText(mList.get(position).getNo_surat());
-        holder.tgl_surat.setText(mList.get(position).getTgl_surat());
-        holder.status_persetujuan.setText(mList.get(position).getStatus_persetujuan());
-        holder.pengaju.setText(mList.get(position).getNama_depan() + " " + mList.get(position).getNama_belakang());
-        if (mList.get(position).getStatus_persetujuan().equals("Belum disetujui")) {
+        holder.kode_surat.setText(mFilterList.get(position).getKd_surat());
+        holder.no_surat.setText(mFilterList.get(position).getNo_surat());
+        holder.tgl_surat.setText(mFilterList.get(position).getTgl_surat());
+        holder.status_persetujuan.setText(mFilterList.get(position).getStatus_persetujuan());
+        holder.pengaju.setText(mFilterList.get(position).getNama_depan() + " " + mFilterList.get(position).getNama_belakang());
+        if (mFilterList.get(position).getStatus_persetujuan().equals("Belum disetujui")) {
             holder.status_persetujuan.setTextColor(Color.parseColor("#ff0000"));
-        } else if (mList.get(position).getStatus_persetujuan().equals("Disetujui")) {
+        } else if (mFilterList.get(position).getStatus_persetujuan().equals("Disetujui")) {
             holder.status_persetujuan.setTextColor(Color.parseColor("#008000"));
         }
 
@@ -57,15 +62,15 @@ public class SuratTidakMampuRecyclerAdapter extends RecyclerView.Adapter<SuratTi
                 DetailSuratTidakMampuFragment detailSuratTidakMampuFragment = new DetailSuratTidakMampuFragment();
                 SuratTidakMampuData suratTidakMampuData = new SuratTidakMampuData();
 
-                suratTidakMampuData.setKd_surat(mList.get(position).getKd_surat());
-                suratTidakMampuData.setNo_surat(mList.get(position).getNo_surat());
-                suratTidakMampuData.setTgl_surat(mList.get(position).getTgl_surat());
-                suratTidakMampuData.setStatus_persetujuan(mList.get(position).getStatus_persetujuan());
-                suratTidakMampuData.setNik(mList.get(position).getNik());
-                suratTidakMampuData.setNama_depan(mList.get(position).getNama_depan());
-                suratTidakMampuData.setNama_belakang(mList.get(position).getNama_belakang());
-                suratTidakMampuData.setNama_depan_user(mList.get(position).getNama_depan_user());
-                suratTidakMampuData.setNama_belakang_user(mList.get(position).getNama_belakang_user());
+                suratTidakMampuData.setKd_surat(mFilterList.get(position).getKd_surat());
+                suratTidakMampuData.setNo_surat(mFilterList.get(position).getNo_surat());
+                suratTidakMampuData.setTgl_surat(mFilterList.get(position).getTgl_surat());
+                suratTidakMampuData.setStatus_persetujuan(mFilterList.get(position).getStatus_persetujuan());
+                suratTidakMampuData.setNik(mFilterList.get(position).getNik());
+                suratTidakMampuData.setNama_depan(mFilterList.get(position).getNama_depan());
+                suratTidakMampuData.setNama_belakang(mFilterList.get(position).getNama_belakang());
+                suratTidakMampuData.setNama_depan_user(mFilterList.get(position).getNama_depan_user());
+                suratTidakMampuData.setNama_belakang_user(mFilterList.get(position).getNama_belakang_user());
 
                 Bundle bundle = new Bundle();
                 bundle.putParcelable(DetailSuratTidakMampuFragment.EXTRA_SURAT_TIDAK_MAMPU, suratTidakMampuData);
@@ -77,14 +82,45 @@ public class SuratTidakMampuRecyclerAdapter extends RecyclerView.Adapter<SuratTi
                         .addToBackStack(detailSuratTidakMampuFragment.getClass().getSimpleName())
                         .commit();
 
-//                Toast.makeText(ctx, "" + holder.no_surat.getText().toString(), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return mList.size();
+        return mFilterList.size();
+    }
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                String charString = constraint.toString();
+                if(charString.isEmpty())
+                {
+                    mFilterList = mList;
+                } else {
+                    List<SuratTidakMampuData> filteredList = new ArrayList<>();
+                    for(SuratTidakMampuData suratTidakMampuData : mList)
+                    {
+                        if(suratTidakMampuData.getKd_surat().toLowerCase().contains(charString.toLowerCase()) || suratTidakMampuData.getNo_surat().toLowerCase().contains(charString.toLowerCase()) || suratTidakMampuData.getNama_depan().toLowerCase().contains(charString.toLowerCase()) || suratTidakMampuData.getStatus_persetujuan().toLowerCase().contains(charString.toLowerCase()) || suratTidakMampuData.getTgl_surat().toLowerCase().contains(charString.toLowerCase())){
+                            filteredList.add(suratTidakMampuData);
+                        }
+                    }
+                    mFilterList = filteredList;
+                }
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = mFilterList;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                mFilterList = (List<SuratTidakMampuData>) results.values;
+                notifyDataSetChanged();
+            }
+        };
     }
 
     public class MyHolder extends RecyclerView.ViewHolder {

@@ -3,12 +3,10 @@ package com.codelab.helmi.simades.surat.skck;
 
 
 import android.content.Context;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
-import com.codelab.helmi.simades.api.RestApi;
-import com.codelab.helmi.simades.api.RestServer;
+import com.codelab.helmi.simades.helper.api.RestApi;
+import com.codelab.helmi.simades.helper.api.RestServer;
 import com.codelab.helmi.simades.base.Presenter;
 
 import java.util.ArrayList;
@@ -22,10 +20,10 @@ public class SuratSkckPresenter implements Presenter<SuratSkckView> {
 
     private SuratSkckView suratSkckView;
     public List<SuratSkckData> mItems = new ArrayList<>();
-    RecyclerView.Adapter mAdapter;
+    Context context;
 
-    public SuratSkckPresenter(RecyclerView.Adapter mAdapter) {
-        this.mAdapter = mAdapter;
+    public SuratSkckPresenter(Context context) {
+        this.context = context;
     }
 
     @Override
@@ -38,7 +36,7 @@ public class SuratSkckPresenter implements Presenter<SuratSkckView> {
         suratSkckView = null;
     }
 
-    public void showData(final Context ctx, final RecyclerView mRecycler, final FragmentManager fragmentManager) {
+    public void showData() {
         final SuratSkckData suratSkckData = new SuratSkckData();
         RestApi api = RestServer.getClient().create(RestApi.class);
         Call<SuratSkckResponseModel> getData = api.getSuratPengantarSkckData();
@@ -47,21 +45,20 @@ public class SuratSkckPresenter implements Presenter<SuratSkckView> {
             public void onResponse(Call<SuratSkckResponseModel> call, Response<SuratSkckResponseModel> response) {
                 if (response.isSuccessful()) {
                     mItems = response.body().getResult();
-                    mAdapter = new SuratSkckRecyclerAdapter(ctx, mItems, fragmentManager);
-                    mRecycler.setAdapter(mAdapter);
+                    suratSkckView.setAdapter(mItems);
                     suratSkckView.swipeRefreshFalse();
                 }else{
                     switch (response.code()) {
                         case 404:
-                            Toast.makeText(ctx, "404 Not Found", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "404 Not Found", Toast.LENGTH_SHORT).show();
                             suratSkckView.swipeRefreshFalse();
                             break;
                         case 500:
-                            Toast.makeText(ctx, "500 Internal Server Error", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "500 Internal Server Error", Toast.LENGTH_SHORT).show();
                             suratSkckView.swipeRefreshFalse();
                             break;
                         default:
-                            Toast.makeText(ctx, "Unknown Error", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "Unknown Error", Toast.LENGTH_SHORT).show();
                             suratSkckView.swipeRefreshFalse();
                             break;
                     }
@@ -73,6 +70,5 @@ public class SuratSkckPresenter implements Presenter<SuratSkckView> {
                 suratSkckView.swipeRefreshFalse();
             }
         });
-        suratSkckView.onShowData(suratSkckData);
     }
 }

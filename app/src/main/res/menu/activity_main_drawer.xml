@@ -6,6 +6,12 @@
             android:id="@+id/home"
             android:icon="@drawable/ic_home_24px"
             android:title="Beranda" />
+
+        <item
+            android:id="@+id/layanan"
+            android:icon="@drawable/ic_check_circle_black_24dp"
+            android:title="Layanan" />
+
         <item
             android:id="@+id/penduduk"
             android:icon="@drawable/ic_supervisor_account_24px"
@@ -40,17 +46,21 @@
         </menu>
     </item>
 
-    <item android:title="Manajemen">
+    <item android:title="Informasi">
         <menu>
             <group android:checkableBehavior="single">
-            <item
-                android:id="@+id/user"
-                android:icon="@drawable/ic_account_box_18px"
-                android:title="User" />
+            <!--<item-->
+                <!--android:id="@+id/user"-->
+                <!--android:icon="@drawable/ic_account_box_18px"-->
+                <!--android:title="User" />-->
             <item
                 android:id="@+id/profil"
                 android:icon="@drawable/ic_info_outline_black_24dp"
                 android:title="Profil Desa" />
+                <item
+                    android:id="@+id/logout"
+                    android:icon="@drawable/ic_logout_black_24dp"
+                    android:title="Logout" />
             </group>
         </menu>
     </item>

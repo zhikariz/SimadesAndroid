@@ -8,24 +8,28 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.codelab.helmi.simades.R;
 
+import java.util.List;
+
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SuratEktpFragment extends Fragment implements SuratEktpView, SwipeRefreshLayout.OnRefreshListener {
+public class SuratEktpFragment extends Fragment implements SuratEktpView, SwipeRefreshLayout.OnRefreshListener, SearchView.OnQueryTextListener, View.OnClickListener {
     View view;
     private RecyclerView mRecycler;
-    private RecyclerView.Adapter mAdapter;
+    SuratEktpRecyclerAdapter mAdapter;
     private RecyclerView.LayoutManager mManager;
     SuratEktpPresenter presenter;
     public static final String KEY_RECYCLER_STATE = "recycler_state";
     public static Bundle mBundleRecyclerViewState = null;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private SearchView searchView;
 
 
     public SuratEktpFragment() {
@@ -44,22 +48,26 @@ public class SuratEktpFragment extends Fragment implements SuratEktpView, SwipeR
         getActivity().setTitle("Surat Pengantar Ektp");
         return view;
     }
-
-    private void initView() {
-        mRecycler = (RecyclerView) view.findViewById(R.id.recyclerTemp);
+    @Override
+    public void initView() {
+        mRecycler = view.findViewById(R.id.recyclerTemp);
         mManager = new LinearLayoutManager(getActivity().getApplicationContext());
         mRecycler.setLayoutManager(mManager);
         swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(this);
+        searchView = view.findViewById(R.id.search_view);
+        searchView.setOnQueryTextListener(this);
+        searchView.setOnClickListener(this);
     }
-
-    private void initPresenter() {
-        presenter = new SuratEktpPresenter(mAdapter);
+    @Override
+    public void initPresenter() {
+        presenter = new SuratEktpPresenter(getActivity());
     }
 
     @Override
-    public void onShowData(SuratEktpData suratEktpData) {
-
+    public void setAdapter(List<SuratEktpData> suratEktpData) {
+        mAdapter = new SuratEktpRecyclerAdapter(getActivity(), suratEktpData, getFragmentManager());
+        mRecycler.setAdapter(mAdapter);
     }
 
     @Override
@@ -98,7 +106,6 @@ public class SuratEktpFragment extends Fragment implements SuratEktpView, SwipeR
 
         Parcelable listState = mRecycler.getLayoutManager().onSaveInstanceState();
         mBundleRecyclerViewState.putParcelable(KEY_RECYCLER_STATE, listState);
-        mAdapter = mRecycler.getAdapter();
     }
 
     @Override
@@ -111,7 +118,7 @@ public class SuratEktpFragment extends Fragment implements SuratEktpView, SwipeR
         } else {
             swipeRefreshTrue();
             mRecycler.removeAllViewsInLayout();
-            presenter.showData(getActivity().getApplicationContext(), mRecycler, getFragmentManager());
+            presenter.showData();
         }
     }
 
@@ -119,6 +126,28 @@ public class SuratEktpFragment extends Fragment implements SuratEktpView, SwipeR
     public void onRefresh() {
         swipeRefreshTrue();
         mRecycler.removeAllViewsInLayout();
-        presenter.showData(getActivity().getApplicationContext(), mRecycler, getFragmentManager());
+        presenter.showData();
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        mAdapter.getFilter().filter(newText);
+        return true;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId())
+        {
+            case R.id.search_view:
+                searchView.setIconified(false);
+                break;
+        }
+
     }
 }

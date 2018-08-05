@@ -25,7 +25,7 @@ public class DetailSuratWaliFragment extends Fragment implements DetailSuratWali
     View view;
     DetailSuratWaliPresenter presenter;
     Bundle bundle;
-    TextView tvKodeSuratWali, tvNomorSuratWali, tvStatusPersetujuanSuratWali, tvTanggalSurat, tvNikPengaju,tvNamaPengaju, tvNamaPejabat;
+    TextView tvKodeSuratWali, tvNomorSuratWali, tvStatusPersetujuanSuratWali, tvTanggalSurat, tvNikPengaju, tvNamaPengaju, tvNamaPejabat;
     Button btnSetujuiSuratWali, btnBatalSetujuiSuratWali;
     SuratWaliData suratWaliData;
 
@@ -38,7 +38,7 @@ public class DetailSuratWaliFragment extends Fragment implements DetailSuratWali
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view =  inflater.inflate(R.layout.fragment_detail_surat_wali, container, false);
+        view = inflater.inflate(R.layout.fragment_detail_surat_wali, container, false);
         initPresenter();
         initView();
         onAttachView();
@@ -81,18 +81,12 @@ public class DetailSuratWaliFragment extends Fragment implements DetailSuratWali
         tvNikPengaju.setText(suratWaliData.getNik());
         tvNamaPejabat.setText(suratWaliData.getNama_depan_user() + " " + suratWaliData.getNama_belakang_user());
 
-        if(suratWaliData.getStatus_persetujuan().equals("Disetujui")){
+        if (suratWaliData.getStatus_persetujuan().equals("Disetujui")) {
             tvStatusPersetujuanSuratWali.setTextColor(Color.parseColor("#008000"));
-            btnBatalSetujuiSuratWali.setVisibility(View.VISIBLE);
-            btnSetujuiSuratWali.setVisibility(View.GONE);
-        }else if(suratWaliData.getStatus_persetujuan().equals("Belum disetujui")){
+        } else if (suratWaliData.getStatus_persetujuan().equals("Belum disetujui")) {
             tvStatusPersetujuanSuratWali.setTextColor(Color.parseColor("#ff0000"));
-            btnBatalSetujuiSuratWali.setVisibility(View.GONE);
-            btnSetujuiSuratWali.setVisibility(View.VISIBLE);
 
         }
-
-
 
 
     }
@@ -120,7 +114,7 @@ public class DetailSuratWaliFragment extends Fragment implements DetailSuratWali
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.btn_detail_surat_wali_setujui:
                 presenter.putStatusPersetujuan(suratWaliData.getKd_surat(), "Disetujui");
                 SuratWaliFragment.mBundleRecyclerViewState = null;

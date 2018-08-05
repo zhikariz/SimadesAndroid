@@ -11,16 +11,20 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.codelab.helmi.simades.R;
 import com.codelab.helmi.simades.surat.kematian.detail.DetailSuratKematianFragment;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class SuratKematianRecyclerAdapter extends RecyclerView.Adapter<SuratKematianRecyclerAdapter.MyHolder> {
+public class SuratKematianRecyclerAdapter extends RecyclerView.Adapter<SuratKematianRecyclerAdapter.MyHolder> implements Filterable {
     List<SuratKematianData> mList;
+    List<SuratKematianData> mFilterList;
     Context ctx;
     FragmentManager fragmentManager;
 
@@ -28,6 +32,7 @@ public class SuratKematianRecyclerAdapter extends RecyclerView.Adapter<SuratKema
         this.mList = mList;
         this.ctx = ctx;
         this.fragmentManager = fragmentManager;
+        this.mFilterList = mList;
     }
 
     @NonNull
@@ -41,15 +46,15 @@ public class SuratKematianRecyclerAdapter extends RecyclerView.Adapter<SuratKema
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull final MyHolder holder, final int position) {
-        holder.kode_surat.setText(mList.get(position).getKd_surat());
-        holder.no_surat.setText(mList.get(position).getNo_surat());
-        holder.tgl_surat.setText(mList.get(position).getTgl_surat());
-        holder.status_persetujuan.setText(mList.get(position).getStatus_persetujuan());
-        holder.pengaju.setText(mList.get(position).getNama_depan_pengaju() + mList.get(position).getNama_belakang_pengaju());
+        holder.kode_surat.setText(mFilterList.get(position).getKd_surat());
+        holder.no_surat.setText(mFilterList.get(position).getNo_surat());
+        holder.tgl_surat.setText(mFilterList.get(position).getTgl_surat());
+        holder.status_persetujuan.setText(mFilterList.get(position).getStatus_persetujuan());
+        holder.pengaju.setText(mFilterList.get(position).getNama_depan_pengaju() + mFilterList.get(position).getNama_belakang_pengaju());
 
-        if(mList.get(position).getStatus_persetujuan().equals("Belum disetujui")){
+        if(mFilterList.get(position).getStatus_persetujuan().equals("Belum disetujui")){
             holder.status_persetujuan.setTextColor(Color.parseColor("#ff0000"));
-        }else if(mList.get(position).getStatus_persetujuan().equals("Disetujui")){
+        }else if(mFilterList.get(position).getStatus_persetujuan().equals("Disetujui")){
             holder.status_persetujuan.setTextColor(Color.parseColor("#008000"));
         }
 
@@ -61,16 +66,16 @@ public class SuratKematianRecyclerAdapter extends RecyclerView.Adapter<SuratKema
                 DetailSuratKematianFragment detailSuratKematianFragment = new DetailSuratKematianFragment();
                 SuratKematianData suratKematianData = new SuratKematianData();
 
-                suratKematianData.setKd_surat(mList.get(position).getKd_surat());
-                suratKematianData.setNo_surat(mList.get(position).getNo_surat());
-                suratKematianData.setTgl_surat(mList.get(position).getTgl_surat());
-                suratKematianData.setWaktu(mList.get(position).getWaktu());
-                suratKematianData.setStatus_persetujuan(mList.get(position).getStatus_persetujuan());
-                suratKematianData.setNik(mList.get(position).getNik());
-                suratKematianData.setNama_depan_pengaju(mList.get(position).getNama_depan_pengaju());
-                suratKematianData.setNama_belakang_pengaju(mList.get(position).getNama_belakang_pengaju());
-                suratKematianData.setNama_depan_user(mList.get(position).getNama_depan_user());
-                suratKematianData.setNama_belakang_user(mList.get(position).getNama_belakang_user());
+                suratKematianData.setKd_surat(mFilterList.get(position).getKd_surat());
+                suratKematianData.setNo_surat(mFilterList.get(position).getNo_surat());
+                suratKematianData.setTgl_surat(mFilterList.get(position).getTgl_surat());
+                suratKematianData.setWaktu(mFilterList.get(position).getWaktu());
+                suratKematianData.setStatus_persetujuan(mFilterList.get(position).getStatus_persetujuan());
+                suratKematianData.setNik(mFilterList.get(position).getNik());
+                suratKematianData.setNama_depan_pengaju(mFilterList.get(position).getNama_depan_pengaju());
+                suratKematianData.setNama_belakang_pengaju(mFilterList.get(position).getNama_belakang_pengaju());
+                suratKematianData.setNama_depan_user(mFilterList.get(position).getNama_depan_user());
+                suratKematianData.setNama_belakang_user(mFilterList.get(position).getNama_belakang_user());
 
                 Bundle bundle = new Bundle();
                 bundle.putParcelable(DetailSuratKematianFragment.EXTRA_SURAT_KEMATIAN, suratKematianData);
@@ -81,15 +86,48 @@ public class SuratKematianRecyclerAdapter extends RecyclerView.Adapter<SuratKema
                         .replace(R.id.frame_container, detailSuratKematianFragment, detailSuratKematianFragment.getClass().getSimpleName())
                         .addToBackStack(detailSuratKematianFragment.getClass().getSimpleName())
                         .commit();
-
-//                Toast.makeText(ctx, "" + holder.no_surat.getText().toString(), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return mList.size();
+        return mFilterList.size();
+    }
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                String charString = constraint.toString();
+                if(charString.isEmpty())
+                {
+                    mFilterList = mList;
+                }
+                else
+                {
+                    List<SuratKematianData> filteredList = new ArrayList<>();
+                    for(SuratKematianData suratKematianData : mList)
+                    {
+                        if(suratKematianData.getKd_surat().toLowerCase().contains(charString.toLowerCase()) || suratKematianData.getNo_surat().toLowerCase().contains(charString.toLowerCase()) || suratKematianData.getNama_depan_pengaju().toLowerCase().contains(charString.toLowerCase()) || suratKematianData.getStatus_persetujuan().toLowerCase().contains(charString.toLowerCase()) || suratKematianData.getTgl_surat().toLowerCase().contains(charString.toLowerCase())){
+                            filteredList.add(suratKematianData);
+                        }
+                    }
+                    mFilterList = filteredList;
+                }
+
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = mFilterList;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                mFilterList = (List<SuratKematianData>) results.values;
+                notifyDataSetChanged();
+            }
+        };
     }
 
     public class MyHolder extends RecyclerView.ViewHolder {

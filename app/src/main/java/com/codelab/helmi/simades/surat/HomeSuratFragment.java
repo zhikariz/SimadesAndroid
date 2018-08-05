@@ -115,7 +115,7 @@ public class HomeSuratFragment extends Fragment implements View.OnClickListener 
 
         Glide.with(this).load(R.drawable.ic_baby).into(ivKelahiran);
         Glide.with(this).load(R.drawable.ic_office).into(ivUsaha);
-        Glide.with(this).load(R.drawable.ic_skull).into(ivMeninggal);
+        Glide.with(this).load(R.drawable.ic_tomb).into(ivMeninggal);
         Glide.with(this).load(R.drawable.ic_police_badge).into(ivSkck);
         Glide.with(this).load(R.drawable.ic_parents).into(ivWali);
         Glide.with(this).load(R.drawable.ic_ring).into(ivBlmMenikah);

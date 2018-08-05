@@ -12,22 +12,27 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.codelab.helmi.simades.R;
 import com.codelab.helmi.simades.surat.usaha.detail.DetailSuratUsahaFragment;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class SuratUsahaRecyclerAdapter extends RecyclerView.Adapter<SuratUsahaRecyclerAdapter.MyHolder> {
+public class SuratUsahaRecyclerAdapter extends RecyclerView.Adapter<SuratUsahaRecyclerAdapter.MyHolder> implements Filterable{
 
     List<SuratUsahaData> mList;
     Context ctx;
     FragmentManager fragmentManager;
+    List<SuratUsahaData> mFilterList;
 
     public SuratUsahaRecyclerAdapter(Context ctx, List<SuratUsahaData> mList, FragmentManager fragmentManager) {
         this.mList = mList;
+        this.mFilterList = mList;
         this.ctx = ctx;
         this.fragmentManager = fragmentManager;
     }
@@ -43,16 +48,16 @@ public class SuratUsahaRecyclerAdapter extends RecyclerView.Adapter<SuratUsahaRe
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull final MyHolder holder, final int position) {
-        holder.kode_surat.setText(mList.get(position).getKd_surat());
-        holder.no_surat.setText(mList.get(position).getNo_surat());
-        holder.tgl_surat.setText(mList.get(position).getTgl_surat());
-        holder.status_persetujuan.setText(mList.get(position).getStatus_persetujuan());
-        holder.pengaju.setText(mList.get(position).getNama_depan() + " "+ mList.get(position).getNama_belakang());
+        holder.kode_surat.setText(mFilterList.get(position).getKd_surat());
+        holder.no_surat.setText(mFilterList.get(position).getNo_surat());
+        holder.tgl_surat.setText(mFilterList.get(position).getTgl_surat());
+        holder.status_persetujuan.setText(mFilterList.get(position).getStatus_persetujuan());
+        holder.pengaju.setText(mFilterList.get(position).getNama_depan() + " "+ mFilterList.get(position).getNama_belakang());
 
-        holder.pengaju.setText(mList.get(position).getNama_depan() + " " + mList.get(position).getNama_belakang());
-        if (mList.get(position).getStatus_persetujuan().equals("Belum disetujui")) {
+        holder.pengaju.setText(mFilterList.get(position).getNama_depan() + " " + mFilterList.get(position).getNama_belakang());
+        if (mFilterList.get(position).getStatus_persetujuan().equals("Belum disetujui")) {
             holder.status_persetujuan.setTextColor(Color.parseColor("#ff0000"));
-        } else if (mList.get(position).getStatus_persetujuan().equals("Disetujui")) {
+        } else if (mFilterList.get(position).getStatus_persetujuan().equals("Disetujui")) {
             holder.status_persetujuan.setTextColor(Color.parseColor("#008000"));
         }
 
@@ -64,20 +69,20 @@ public class SuratUsahaRecyclerAdapter extends RecyclerView.Adapter<SuratUsahaRe
                 SuratUsahaData suratUsahaData = new SuratUsahaData();
 
 
-                suratUsahaData.setKd_surat(mList.get(position).getKd_surat());
-                suratUsahaData.setNo_surat(mList.get(position).getNo_surat());
-                suratUsahaData.setTgl_surat(mList.get(position).getTgl_surat());
-                suratUsahaData.setWaktu(mList.get(position).getWaktu());
-                suratUsahaData.setStatus_persetujuan(mList.get(position).getStatus_persetujuan());
-                suratUsahaData.setNik(mList.get(position).getNik());
-                suratUsahaData.setNama_usaha(mList.get(position).getNama_usaha());
-                suratUsahaData.setKeperluan(mList.get(position).getKeperluan());
-                suratUsahaData.setTgl_mulai(mList.get(position).getTgl_mulai());
-                suratUsahaData.setTgl_akhir(mList.get(position).getTgl_akhir());
-                suratUsahaData.setNama_depan(mList.get(position).getNama_depan());
-                suratUsahaData.setNama_belakang(mList.get(position).getNama_belakang());
-                suratUsahaData.setNama_depan_user(mList.get(position).getNama_depan_user());
-                suratUsahaData.setNama_belakang_user(mList.get(position).getNama_belakang_user());
+                suratUsahaData.setKd_surat(mFilterList.get(position).getKd_surat());
+                suratUsahaData.setNo_surat(mFilterList.get(position).getNo_surat());
+                suratUsahaData.setTgl_surat(mFilterList.get(position).getTgl_surat());
+                suratUsahaData.setWaktu(mFilterList.get(position).getWaktu());
+                suratUsahaData.setStatus_persetujuan(mFilterList.get(position).getStatus_persetujuan());
+                suratUsahaData.setNik(mFilterList.get(position).getNik());
+                suratUsahaData.setNama_usaha(mFilterList.get(position).getNama_usaha());
+                suratUsahaData.setKeperluan(mFilterList.get(position).getKeperluan());
+                suratUsahaData.setTgl_mulai(mFilterList.get(position).getTgl_mulai());
+                suratUsahaData.setTgl_akhir(mFilterList.get(position).getTgl_akhir());
+                suratUsahaData.setNama_depan(mFilterList.get(position).getNama_depan());
+                suratUsahaData.setNama_belakang(mFilterList.get(position).getNama_belakang());
+                suratUsahaData.setNama_depan_user(mFilterList.get(position).getNama_depan_user());
+                suratUsahaData.setNama_belakang_user(mFilterList.get(position).getNama_belakang_user());
 
                 Bundle bundle = new Bundle();
                 bundle.putParcelable(DetailSuratUsahaFragment.EXTRA_SURAT_USAHA, suratUsahaData);
@@ -88,18 +93,44 @@ public class SuratUsahaRecyclerAdapter extends RecyclerView.Adapter<SuratUsahaRe
                         .replace(R.id.frame_container, detailSuratUsahaFragment,detailSuratUsahaFragment.getClass().getSimpleName())
                         .addToBackStack(detailSuratUsahaFragment.getClass().getSimpleName())
                         .commit();
-
-
-
-
-//                Toast.makeText(ctx, "" + holder.no_surat.getText().toString(), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return mList.size();
+        return mFilterList.size();
+    }
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                String charString = constraint.toString();
+                if(charString.isEmpty())
+                {
+                    mFilterList = mList;
+                } else {
+                    List<SuratUsahaData> filteredList = new ArrayList<>();
+                    for(SuratUsahaData suratUsahaData : mList){
+                        if(suratUsahaData.getKd_surat().toLowerCase().contains(charString.toLowerCase()) || suratUsahaData.getNo_surat().toLowerCase().contains(charString.toLowerCase()) || suratUsahaData.getNama_depan().toLowerCase().contains(charString.toLowerCase()) || suratUsahaData.getStatus_persetujuan().toLowerCase().contains(charString.toLowerCase()) || suratUsahaData.getTgl_surat().toLowerCase().contains(charString.toLowerCase())){
+                            filteredList.add(suratUsahaData);
+                        }
+                    }
+                    mFilterList = filteredList;
+                }
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = mFilterList;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                mFilterList = (List<SuratUsahaData>) results.values;
+                notifyDataSetChanged();
+            }
+        };
     }
 
     public class MyHolder extends RecyclerView.ViewHolder {

@@ -1,9 +1,8 @@
 package com.codelab.helmi.simades.surat.keramaian.detail;
 
-import com.codelab.helmi.simades.api.RestApi;
-import com.codelab.helmi.simades.api.RestServer;
+import com.codelab.helmi.simades.helper.api.RestApi;
+import com.codelab.helmi.simades.helper.api.RestServer;
 import com.codelab.helmi.simades.base.Presenter;
-import com.codelab.helmi.simades.surat.blm_menikah.detail.DetailSuratBlmMenikahView;
 import com.codelab.helmi.simades.surat.keramaian.SuratKeramaianData;
 import com.codelab.helmi.simades.surat.keramaian.SuratKeramaianResponseModel;
 

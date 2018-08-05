@@ -1,12 +1,10 @@
 package com.codelab.helmi.simades.surat.wali;
 
 import android.content.Context;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
-import com.codelab.helmi.simades.api.RestApi;
-import com.codelab.helmi.simades.api.RestServer;
+import com.codelab.helmi.simades.helper.api.RestApi;
+import com.codelab.helmi.simades.helper.api.RestServer;
 import com.codelab.helmi.simades.base.Presenter;
 
 import java.util.ArrayList;
@@ -20,10 +18,10 @@ public class SuratWaliPresenter implements Presenter<SuratWaliView> {
 
     private SuratWaliView suratWaliView;
     public List<SuratWaliData> mItems = new ArrayList<>();
-    RecyclerView.Adapter mAdapter;
+    Context context;
 
-    public SuratWaliPresenter(RecyclerView.Adapter mAdapter) {
-        this.mAdapter = mAdapter;
+    public SuratWaliPresenter(Context context) {
+        this.context = context;
     }
 
     @Override
@@ -36,8 +34,7 @@ public class SuratWaliPresenter implements Presenter<SuratWaliView> {
         suratWaliView = null;
     }
 
-    public void showData(final Context ctx, final RecyclerView mRecycler, final FragmentManager fragmentManager) {
-        final SuratWaliData suratWaliData = new SuratWaliData();
+    public void showData() {
         RestApi api = RestServer.getClient().create(RestApi.class);
         Call<SuratWaliResponseModel> getData = api.getSuratWaliData();
 
@@ -46,21 +43,20 @@ public class SuratWaliPresenter implements Presenter<SuratWaliView> {
             public void onResponse(Call<SuratWaliResponseModel> call, Response<SuratWaliResponseModel> response) {
                 if(response.isSuccessful()) {
                     mItems = response.body().getResult();
-                    mAdapter = new SuratWaliRecyclerAdapter(ctx, mItems, fragmentManager);
-                    mRecycler.setAdapter(mAdapter);
+                    suratWaliView.setAdapter(mItems);
                     suratWaliView.swipeRefreshFalse();
                 }else{
                     switch (response.code()) {
                         case 404:
-                            Toast.makeText(ctx, "404 Not Found", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "404 Not Found", Toast.LENGTH_SHORT).show();
                             suratWaliView.swipeRefreshFalse();
                             break;
                         case 500:
-                            Toast.makeText(ctx, "500 Internal Server Error", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "500 Internal Server Error", Toast.LENGTH_SHORT).show();
                             suratWaliView.swipeRefreshFalse();
                             break;
                         default:
-                            Toast.makeText(ctx, "Unknown Error", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "Unknown Error", Toast.LENGTH_SHORT).show();
                             suratWaliView.swipeRefreshFalse();
                             break;
                     }
@@ -73,7 +69,6 @@ public class SuratWaliPresenter implements Presenter<SuratWaliView> {
 
             }
         });
-        suratWaliView.onShowData(suratWaliData);
     }
 
 

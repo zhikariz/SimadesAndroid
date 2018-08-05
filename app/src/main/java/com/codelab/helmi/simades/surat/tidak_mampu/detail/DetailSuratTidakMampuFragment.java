@@ -78,12 +78,8 @@ public class DetailSuratTidakMampuFragment extends Fragment implements DetailSur
 
         if(suratTidakMampuData.getStatus_persetujuan().equals("Disetujui")){
             tvStatusPersetujuanSuratTidakMampu.setTextColor(Color.parseColor("#008000"));
-            btnBatalSetujuiSuratTidakMampu.setVisibility(View.VISIBLE);
-            btnSetujuiSuratTidakMampu.setVisibility(View.GONE);
         } else if(suratTidakMampuData.getStatus_persetujuan().equals("Belum disetujui")){
             tvStatusPersetujuanSuratTidakMampu.setTextColor(Color.parseColor("#ff0000"));
-            btnBatalSetujuiSuratTidakMampu.setVisibility(View.GONE);
-            btnSetujuiSuratTidakMampu.setVisibility(View.VISIBLE);
 
         }
 

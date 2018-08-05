@@ -1,7 +1,7 @@
 package com.codelab.helmi.simades.surat.tidak_mampu.detail;
 
-import com.codelab.helmi.simades.api.RestApi;
-import com.codelab.helmi.simades.api.RestServer;
+import com.codelab.helmi.simades.helper.api.RestApi;
+import com.codelab.helmi.simades.helper.api.RestServer;
 import com.codelab.helmi.simades.base.Presenter;
 import com.codelab.helmi.simades.surat.tidak_mampu.SuratTidakMampuData;
 import com.codelab.helmi.simades.surat.tidak_mampu.SuratTidakMampuResponseModel;

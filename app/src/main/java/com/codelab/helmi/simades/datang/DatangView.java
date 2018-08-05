@@ -2,7 +2,10 @@ package com.codelab.helmi.simades.datang;
 
 import com.codelab.helmi.simades.base.View;
 
-public interface DatangView extends View {
+import java.util.List;
 
-    void onShowData(DatangData datangData);
+public interface DatangView extends View {
+    void swipeRefreshTrue();
+    void swipeRefreshFalse();
+    void setAdapter(List<DatangData> datangData);
 }

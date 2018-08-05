@@ -81,12 +81,8 @@ public class DetailSuratSkckFragment extends Fragment implements DetailSuratSkck
 
         if(suratSkckData.getStatus_persetujuan().equals("Disetujui")){
             tvStatusPersetujuanSuratSkck.setTextColor(Color.parseColor("#008000"));
-            btnBatalSetujuiSuratSkck.setVisibility(View.VISIBLE);
-            btnSetujuiSuratSkck.setVisibility(View.GONE);
         }else if(suratSkckData.getStatus_persetujuan().equals("Belum disetujui")){
             tvStatusPersetujuanSuratSkck.setTextColor(Color.parseColor("#ff0000"));
-            btnBatalSetujuiSuratSkck.setVisibility(View.GONE);
-            btnSetujuiSuratSkck.setVisibility(View.VISIBLE);
 
         }
 

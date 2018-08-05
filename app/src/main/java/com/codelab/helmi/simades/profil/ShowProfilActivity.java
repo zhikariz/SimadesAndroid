@@ -3,23 +3,19 @@ package com.codelab.helmi.simades.profil;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.codelab.helmi.simades.R;
-import com.codelab.helmi.simades.api.RestServer;
+import com.codelab.helmi.simades.helper.api.RestServer;
+
+import java.util.List;
 
 
 public class ShowProfilActivity extends Fragment implements ProfilView {
@@ -41,7 +37,7 @@ public class ShowProfilActivity extends Fragment implements ProfilView {
         initPresenter();
         initView();
         onAttachView();
-        presenter.showData(getActivity().getApplicationContext());
+        presenter.showData(getActivity());
         getActivity().setTitle("Profil Desa");
         return view;
 
@@ -70,20 +66,6 @@ public class ShowProfilActivity extends Fragment implements ProfilView {
 
     }
 
-    @SuppressLint("SetTextI18n")
-    @Override
-    public void onShowData(ProfilData profilData) {
-        Glide.with(this).load(RestServer.getBase_url() + "uploads/image/" + profilData.getImage()).into(image);
-        tvKabupaten.setText("Pemerintah Kabupaten "+profilData.getKabupaten());
-        tvKecamatan.setText("Kecamatan "+profilData.getKecamatan());
-        tvDesa.setText("Desa "+profilData.getNm_desa());
-        tvAlamat.setText(profilData.getAlamat_desa() + " Telp. "+profilData.getNo_telp()+" Kode Pos "+profilData.getKode_pos());
-        tvNipKepdes.setText("Nip Kepala Desa : "+profilData.getNip_kepdes());
-        tvNamaKepdes.setText("Nama Kepala Desa : "+profilData.getNm_kepdes());
-
-
-    }
-
 
     @Override
     public void onDetachView() {
@@ -94,5 +76,17 @@ public class ShowProfilActivity extends Fragment implements ProfilView {
     public void onDestroy() {
         super.onDestroy();
         onDetachView();
+    }
+
+    @SuppressLint("SetTextI18n")
+    @Override
+    public void onShowData(List<ProfilData> profilData) {
+        Glide.with(this).load(RestServer.getBase_url() + "uploads/image/" + profilData.get(0).getImage()).into(image);
+        tvKabupaten.setText("Pemerintah Kabupaten "+profilData.get(0).getKabupaten());
+        tvKecamatan.setText("Kecamatan "+profilData.get(0).getKecamatan());
+        tvDesa.setText("Desa "+profilData.get(0).getNm_desa());
+        tvAlamat.setText(profilData.get(0).getAlamat_desa() + " Telp. "+profilData.get(0).getNo_telp()+" Kode Pos "+profilData.get(0).getKode_pos());
+        tvNipKepdes.setText("Nip Kepala Desa : "+profilData.get(0).getNip_kepdes());
+        tvNamaKepdes.setText("Nama Kepala Desa : "+profilData.get(0).getNm_kepdes());
     }
 }

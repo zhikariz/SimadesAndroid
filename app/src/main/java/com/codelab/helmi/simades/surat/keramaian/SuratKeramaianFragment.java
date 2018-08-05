@@ -8,24 +8,29 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.codelab.helmi.simades.R;
+import com.codelab.helmi.simades.surat.kematian.SuratKematianRecyclerAdapter;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SuratKeramaianFragment extends Fragment implements SuratKeramaianView, SwipeRefreshLayout.OnRefreshListener {
+public class SuratKeramaianFragment extends Fragment implements SuratKeramaianView, SwipeRefreshLayout.OnRefreshListener, SearchView.OnQueryTextListener, View.OnClickListener {
     private RecyclerView mRecycler;
-    private RecyclerView.Adapter mAdapter;
+    SuratKeramaianRecyclerAdapter mAdapter;
     private RecyclerView.LayoutManager mManager;
     View view;
     SuratKeramaianPresenter presenter;
     public static final String KEY_RECYCLER_STATE = "recycler_state";
     public static Bundle mBundleRecyclerViewState = null;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private SearchView searchView;
 
 
     public SuratKeramaianFragment() {
@@ -46,34 +51,37 @@ public class SuratKeramaianFragment extends Fragment implements SuratKeramaianVi
 
         return view;
     }
-
-    private void initView() {
-        mRecycler = (RecyclerView) view.findViewById(R.id.recyclerTemp);
-        mManager = new LinearLayoutManager(getActivity().getApplicationContext());
+    @Override
+    public void initView() {
+        mRecycler = view.findViewById(R.id.recyclerTemp);
+        mManager = new LinearLayoutManager(getActivity());
         mRecycler.setLayoutManager(mManager);
         swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(this);
+        searchView = view.findViewById(R.id.search_view);
+        searchView.setOnQueryTextListener(this);
+        searchView.setOnClickListener(this);
     }
-
-    private void initPresenter() {
-        presenter = new SuratKeramaianPresenter(mAdapter);
+    @Override
+    public void initPresenter() {
+        presenter = new SuratKeramaianPresenter(getActivity());
     }
 
     @Override
-    public void onShowData(SuratKeramaianData suratKeramaianData) {
-
+    public void setAdapter(List<SuratKeramaianData> suratKeramaianData) {
+        mAdapter = new SuratKeramaianRecyclerAdapter(getActivity(), suratKeramaianData, getFragmentManager());
+        mRecycler.setAdapter(mAdapter);
     }
+
 
     @Override
     public void swipeRefreshTrue() {
         swipeRefreshLayout.setRefreshing(true);
-
     }
 
     @Override
     public void swipeRefreshFalse() {
         swipeRefreshLayout.setRefreshing(false);
-
     }
 
     @Override
@@ -84,7 +92,6 @@ public class SuratKeramaianFragment extends Fragment implements SuratKeramaianVi
     @Override
     public void onDetachView() {
         presenter.onDetach();
-
     }
 
     @Override
@@ -100,7 +107,6 @@ public class SuratKeramaianFragment extends Fragment implements SuratKeramaianVi
         mBundleRecyclerViewState = new Bundle();
         Parcelable listState = mRecycler.getLayoutManager().onSaveInstanceState();
         mBundleRecyclerViewState.putParcelable(KEY_RECYCLER_STATE, listState);
-        mAdapter = mRecycler.getAdapter();
     }
 
     @Override
@@ -113,7 +119,7 @@ public class SuratKeramaianFragment extends Fragment implements SuratKeramaianVi
         } else {
             swipeRefreshTrue();
             mRecycler.removeAllViewsInLayout();
-            presenter.showData(getActivity().getApplicationContext(), mRecycler, getFragmentManager());
+            presenter.showData();
         }
     }
 
@@ -121,7 +127,28 @@ public class SuratKeramaianFragment extends Fragment implements SuratKeramaianVi
     public void onRefresh() {
         swipeRefreshTrue();
         mRecycler.removeAllViewsInLayout();
-        presenter.showData(getActivity().getApplicationContext(), mRecycler, getFragmentManager());
+        presenter.showData();
 
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        mAdapter.getFilter().filter(newText);
+        return true;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId())
+        {
+            case R.id.search_view:
+                searchView.setIconified(false);
+                break;
+        }
     }
 }

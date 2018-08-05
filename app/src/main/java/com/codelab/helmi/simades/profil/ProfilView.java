@@ -5,6 +5,8 @@ import android.widget.ScrollView;
 
 import com.codelab.helmi.simades.base.View;
 
+import java.util.List;
+
 public interface ProfilView extends View {
-    void onShowData(ProfilData profilData);
+    void onShowData(List<ProfilData> profilData);
 }

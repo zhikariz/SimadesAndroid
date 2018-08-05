@@ -8,6 +8,16 @@ import java.util.List;
 public class SuratBepergianResponseModel {
     @SerializedName("result")
     List<SuratBepergianData> result;
+    @SerializedName("status")
+    String status;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public List<SuratBepergianData> getResult() {
         return result;

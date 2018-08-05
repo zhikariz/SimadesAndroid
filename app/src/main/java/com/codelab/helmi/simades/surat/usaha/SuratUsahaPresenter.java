@@ -1,12 +1,10 @@
 package com.codelab.helmi.simades.surat.usaha;
 
 import android.content.Context;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
-import com.codelab.helmi.simades.api.RestApi;
-import com.codelab.helmi.simades.api.RestServer;
+import com.codelab.helmi.simades.helper.api.RestApi;
+import com.codelab.helmi.simades.helper.api.RestServer;
 import com.codelab.helmi.simades.base.Presenter;
 
 import java.util.ArrayList;
@@ -19,10 +17,10 @@ import retrofit2.Response;
 public class SuratUsahaPresenter implements Presenter<SuratUsahaView> {
     private SuratUsahaView suratUsahaView;
     public List<SuratUsahaData> mItems = new ArrayList<>();
-    RecyclerView.Adapter mAdapter;
+    Context context;
 
-    public SuratUsahaPresenter(RecyclerView.Adapter mAdapter) {
-        this.mAdapter = mAdapter;
+    public SuratUsahaPresenter(Context context) {
+        this.context = context;
     }
 
     @Override
@@ -35,8 +33,7 @@ public class SuratUsahaPresenter implements Presenter<SuratUsahaView> {
         suratUsahaView = null;
     }
 
-    public void showData(final Context ctx, final RecyclerView mRecycler, final FragmentManager fragmentManager) {
-        final SuratUsahaData suratUsahaData = new SuratUsahaData();
+    public void showData() {
         RestApi api = RestServer.getClient().create(RestApi.class);
         Call<SuratUsahaResponseModel> getData = api.getSuratUsahaData();
         getData.enqueue(new Callback<SuratUsahaResponseModel>() {
@@ -44,21 +41,20 @@ public class SuratUsahaPresenter implements Presenter<SuratUsahaView> {
             public void onResponse(Call<SuratUsahaResponseModel> call, Response<SuratUsahaResponseModel> response) {
                 if(response.isSuccessful()) {
                     mItems = response.body().getResult();
-                    mAdapter = new SuratUsahaRecyclerAdapter(ctx, mItems, fragmentManager);
-                    mRecycler.setAdapter(mAdapter);
+                    suratUsahaView.setAdapter(mItems);
                     suratUsahaView.swipeRefreshFalse();
                 }else {
                     switch (response.code()) {
                         case 404:
-                            Toast.makeText(ctx, "404 Not Found", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "404 Not Found", Toast.LENGTH_SHORT).show();
                             suratUsahaView.swipeRefreshFalse();
                             break;
                         case 500:
-                            Toast.makeText(ctx, "500 Internal Server Error", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "500 Internal Server Error", Toast.LENGTH_SHORT).show();
                             suratUsahaView.swipeRefreshFalse();
                             break;
                         default:
-                            Toast.makeText(ctx, "Unknown Error", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "Unknown Error", Toast.LENGTH_SHORT).show();
                             suratUsahaView.swipeRefreshFalse();
                             break;
                     }
@@ -70,6 +66,5 @@ public class SuratUsahaPresenter implements Presenter<SuratUsahaView> {
                 suratUsahaView.swipeRefreshFalse();
             }
         });
-        suratUsahaView.onShowData(suratUsahaData);
     }
 }

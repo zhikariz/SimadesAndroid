@@ -84,12 +84,8 @@ public class DetailSuratKelahiranFragment extends Fragment implements DetailSura
 
         if (suratKelahiranData.getStatus_persetujuan().equals("Disetujui")) {
             tvStatusPersetujuanSuratKelahiran.setTextColor(Color.parseColor("#008000"));
-            btnBatalSetujuiSuratKelahiran.setVisibility(View.VISIBLE);
-            btnSetujuiSuratKelahiran.setVisibility(View.GONE);
         } else if (suratKelahiranData.getStatus_persetujuan().equals("Belum disetujui")) {
             tvStatusPersetujuanSuratKelahiran.setTextColor(Color.parseColor("#ff0000"));
-            btnSetujuiSuratKelahiran.setVisibility(View.VISIBLE);
-            btnBatalSetujuiSuratKelahiran.setVisibility(View.GONE);
         }
     }
 

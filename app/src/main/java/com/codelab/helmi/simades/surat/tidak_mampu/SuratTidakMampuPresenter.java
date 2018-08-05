@@ -1,15 +1,12 @@
 package com.codelab.helmi.simades.surat.tidak_mampu;
 
 import android.content.Context;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
-import com.codelab.helmi.simades.api.RestApi;
-import com.codelab.helmi.simades.api.RestServer;
+import com.codelab.helmi.simades.helper.api.RestApi;
+import com.codelab.helmi.simades.helper.api.RestServer;
 import com.codelab.helmi.simades.base.Presenter;
 
-import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,11 +16,11 @@ import retrofit2.Response;
 
 public class SuratTidakMampuPresenter implements Presenter<SuratTidakMampuView> {
     private SuratTidakMampuView suratTidakMampuView;
-    public List<SuratTidakMampuData> mItems = new ArrayList<>();
-    RecyclerView.Adapter mAdapter;
+    List<SuratTidakMampuData> mItems = new ArrayList<>();
+    Context context;
 
-    public SuratTidakMampuPresenter(RecyclerView.Adapter mAdapter) {
-        this.mAdapter = mAdapter;
+    public SuratTidakMampuPresenter(Context context) {
+        this.context = context;
     }
 
     @Override
@@ -36,9 +33,8 @@ public class SuratTidakMampuPresenter implements Presenter<SuratTidakMampuView> 
         suratTidakMampuView = null;
     }
 
-    public void showData(final Context ctx, final RecyclerView mRecycler, final FragmentManager fragmentManager) {
+    public void showData() {
 
-        final SuratTidakMampuData suratTidakMampuData = new SuratTidakMampuData();
 
         RestApi api = RestServer.getClient().create(RestApi.class);
         Call<SuratTidakMampuResponseModel> getData = api.getSuratTidakMampuData();
@@ -47,21 +43,20 @@ public class SuratTidakMampuPresenter implements Presenter<SuratTidakMampuView> 
             public void onResponse(Call<SuratTidakMampuResponseModel> call, Response<SuratTidakMampuResponseModel> response) {
                 if (response.isSuccessful()) {
                     mItems = response.body().getResult();
-                    mAdapter = new SuratTidakMampuRecyclerAdapter(ctx, mItems, fragmentManager);
-                    mRecycler.setAdapter(mAdapter);
+                    suratTidakMampuView.setAdapter(mItems);
                     suratTidakMampuView.swipeRefreshFalse();
                 }else{
                     switch (response.code()) {
                         case 404:
-                            Toast.makeText(ctx, "404 Not Found", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "404 Not Found", Toast.LENGTH_SHORT).show();
                             suratTidakMampuView.swipeRefreshFalse();
                             break;
                         case 500:
-                            Toast.makeText(ctx, "500 Internal Server Error", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "500 Internal Server Error", Toast.LENGTH_SHORT).show();
                             suratTidakMampuView.swipeRefreshFalse();
                             break;
                         default:
-                            Toast.makeText(ctx, "Unknown Error", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "Unknown Error", Toast.LENGTH_SHORT).show();
                             suratTidakMampuView.swipeRefreshFalse();
                             break;
                     }
@@ -74,6 +69,5 @@ public class SuratTidakMampuPresenter implements Presenter<SuratTidakMampuView> 
 
             }
         });
-        suratTidakMampuView.onShowData(suratTidakMampuData);
     }
 }
