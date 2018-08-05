@@ -5,21 +5,26 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.codelab.helmi.simades.R;
+import com.codelab.helmi.simades.helper.api.RestApi;
+import com.codelab.helmi.simades.helper.api.RestServer;
 import com.codelab.helmi.simades.datang.DatangFragment;
 import com.codelab.helmi.simades.kelahiran.KelahiranFragment;
 import com.codelab.helmi.simades.kematian.KematianFragment;
 import com.codelab.helmi.simades.kk.ShowKkFragment;
-import com.codelab.helmi.simades.pergi.PergiActivity;
+import com.codelab.helmi.simades.pergi.PergiFragment;
+import com.codelab.helmi.simades.profil.ProfilResponseModel;
 import com.codelab.helmi.simades.surat.HomeSuratFragment;
 import com.glide.slider.library.Animations.DescriptionAnimation;
 import com.glide.slider.library.SliderLayout;
@@ -28,6 +33,10 @@ import com.glide.slider.library.SliderTypes.TextSliderView;
 import com.glide.slider.library.Tricks.ViewPagerEx;
 
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class HomeActivity extends Fragment implements BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener, View.OnClickListener {
@@ -38,8 +47,10 @@ public class HomeActivity extends Fragment implements BaseSliderView.OnSliderCli
     RequestOptions requestOptions = new RequestOptions();
     LinearLayout lnPenduduk, lnPengajuanSurat, lnKelahiran, lnKematian, lnDatang, lnPergi;
     ImageView ivPenduduk, ivPengajuanSurat, ivKelahiran, ivKematian, ivDatang, ivPergi;
+    TextView tvInformasi;
     FragmentManager fragmentManager;
     Fragment fragment;
+    RestApi api = RestServer.getClient().create(RestApi.class);
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -49,11 +60,34 @@ public class HomeActivity extends Fragment implements BaseSliderView.OnSliderCli
         view = inflater.inflate(R.layout.fragment_home, container, false);
         getActivity().setTitle("Beranda");
         initView();
+        loadData();
         initSlider();
         implSlider();
 
         return view;
 
+    }
+
+    private void loadData() {
+        Call<ProfilResponseModel> getData = api.getProfilData();
+        getData.enqueue(new Callback<ProfilResponseModel>() {
+            @Override
+            public void onResponse(Call<ProfilResponseModel> call, Response<ProfilResponseModel> response) {
+                try
+                {
+                    if(response.isSuccessful()){
+                        tvInformasi.setText("Sistem Informasi Desa\n"+response.body().getResult().get(0).getNm_desa());
+                    }
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ProfilResponseModel> call, Throwable t) {
+
+            }
+        });
     }
 
     private void implSlider() {
@@ -100,6 +134,7 @@ public class HomeActivity extends Fragment implements BaseSliderView.OnSliderCli
         lnKematian = view.findViewById(R.id.ln_home_kematian);
         lnDatang = view.findViewById(R.id.ln_home_datang);
         lnPergi = view.findViewById(R.id.ln_home_pergi);
+        tvInformasi = view.findViewById(R.id.informasi_desa);
 
         ivPenduduk = view.findViewById(R.id.iv_home_penduduk);
         ivPengajuanSurat = view.findViewById(R.id.iv_home_pengajuan_surat);
@@ -174,7 +209,7 @@ public class HomeActivity extends Fragment implements BaseSliderView.OnSliderCli
                 callFragment(fragment);
                 break;
             case R.id.ln_home_pergi:
-                fragment = new PergiActivity();
+                fragment = new PergiFragment();
                 callFragment(fragment);
                 break;
 
@@ -183,10 +218,12 @@ public class HomeActivity extends Fragment implements BaseSliderView.OnSliderCli
 
     private void callFragment(Fragment fragment) {
         fragmentManager = getFragmentManager();
-
         fragmentManager.beginTransaction()
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 .replace(R.id.frame_container, fragment, fragment.getClass().getSimpleName())
                 .addToBackStack(fragment.getClass().getSimpleName())
                 .commit();
     }
+
+
 }

@@ -1,12 +1,10 @@
 package com.codelab.helmi.simades.kelahiran;
 
 import android.content.Context;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
-import com.codelab.helmi.simades.api.RestApi;
-import com.codelab.helmi.simades.api.RestServer;
+import com.codelab.helmi.simades.helper.api.RestApi;
+import com.codelab.helmi.simades.helper.api.RestServer;
 import com.codelab.helmi.simades.base.Presenter;
 
 import java.util.ArrayList;
@@ -51,12 +49,15 @@ public class KelahiranPresenter implements Presenter<KelahiranView> {
                         switch (response.code()) {
                             case 404:
                                 Toast.makeText(context, "404 Not Found", Toast.LENGTH_SHORT).show();
+                                kelahiranView.swipeRefreshFalse();
                                 break;
                             case 500:
                                 Toast.makeText(context, "500 Internal Server Error", Toast.LENGTH_SHORT).show();
+                                kelahiranView.swipeRefreshFalse();
                                 break;
                             default:
                                 Toast.makeText(context, "Unknown Error", Toast.LENGTH_SHORT).show();
+                                kelahiranView.swipeRefreshFalse();
                                 break;
                         }
                     }

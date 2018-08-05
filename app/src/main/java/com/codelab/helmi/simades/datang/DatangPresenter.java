@@ -1,11 +1,10 @@
 package com.codelab.helmi.simades.datang;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
-import com.codelab.helmi.simades.api.RestApi;
-import com.codelab.helmi.simades.api.RestServer;
+import com.codelab.helmi.simades.helper.api.RestApi;
+import com.codelab.helmi.simades.helper.api.RestServer;
 import com.codelab.helmi.simades.base.Presenter;
 
 import java.util.ArrayList;
@@ -17,13 +16,13 @@ import retrofit2.Response;
 
 public class DatangPresenter implements Presenter<DatangView> {
 
-    RecyclerView.Adapter mAdapter;
+    Context context;
+    private DatangView datangView;
 
-    DatangView datangView;
     public List<DatangData> mItems = new ArrayList<>();
 
-    public DatangPresenter(RecyclerView.Adapter mAdapter) {
-        this.mAdapter = mAdapter;
+    public DatangPresenter(Context context) {
+        this.context = context;
     }
 
     @Override
@@ -36,39 +35,44 @@ public class DatangPresenter implements Presenter<DatangView> {
         datangView = null;
     }
 
-    public void showData(final Context ctx, final RecyclerView mRecycler) {
-        final DatangData datangData = new DatangData();
+    public void showData() {
         RestApi api = RestServer.getClient().create(RestApi.class);
         Call<DatangResponseModel> getData = api.getDatangData();
         getData.enqueue(new Callback<DatangResponseModel>() {
             @Override
             public void onResponse(Call<DatangResponseModel> call, Response<DatangResponseModel> response) {
-                if(response.isSuccessful()) {
-                    mItems = response.body().getResult();
-                    mAdapter = new DatangRecyclerAdapter(ctx, mItems);
-                    mRecycler.setAdapter(mAdapter);
-                }else{
-                    switch (response.code()) {
-                        case 404:
-                            Toast.makeText(ctx, "404 Not Found", Toast.LENGTH_SHORT).show();
-                            break;
-                        case 500:
-                            Toast.makeText(ctx, "500 Internal Server Error", Toast.LENGTH_SHORT).show();
-                            break;
-                        default:
-                            Toast.makeText(ctx, "Unknown Error", Toast.LENGTH_SHORT).show();
-                            break;
+                try {
+                    if (response.isSuccessful()) {
+                        mItems = response.body().getResult();
+                        datangView.setAdapter(mItems);
+                        datangView.swipeRefreshFalse();
+                    } else {
+                        switch (response.code()) {
+                            case 404:
+                                Toast.makeText(context, "404 Not Found", Toast.LENGTH_SHORT).show();
+                                datangView.swipeRefreshFalse();
+                                break;
+                            case 500:
+                                Toast.makeText(context, "500 Internal Server Error", Toast.LENGTH_SHORT).show();
+                                datangView.swipeRefreshFalse();
+                                break;
+                            default:
+                                Toast.makeText(context, "Unknown Error", Toast.LENGTH_SHORT).show();
+                                datangView.swipeRefreshFalse();
+                                break;
+                        }
                     }
+                } catch (Exception e){
+                    e.printStackTrace();
+                    datangView.swipeRefreshFalse();
                 }
             }
 
             @Override
             public void onFailure(Call<DatangResponseModel> call, Throwable t) {
-
+                datangView.swipeRefreshFalse();
             }
         });
-
-        datangView.onShowData(datangData);
 
     }
 }

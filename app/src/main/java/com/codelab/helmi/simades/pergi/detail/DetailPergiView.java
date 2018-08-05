@@ -1,4 +1,9 @@
 package com.codelab.helmi.simades.pergi.detail;
 
-public interface DetailPergiView {
+import com.codelab.helmi.simades.base.View;
+
+public interface DetailPergiView  extends View{
+    void initView();
+    void initPresenter();
+    void tampilDataDetail();
 }

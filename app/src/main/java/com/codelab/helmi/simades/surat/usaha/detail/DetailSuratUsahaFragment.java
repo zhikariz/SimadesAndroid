@@ -91,12 +91,8 @@ public class DetailSuratUsahaFragment extends Fragment implements DetailSuratUsa
 
         if(suratUsahaData.getStatus_persetujuan().equals("Disetujui")){
             tvStatusPersetujuanSuratUsaha.setTextColor(Color.parseColor("#008000"));
-            btnBatalSetujuiSuratUsaha.setVisibility(View.VISIBLE);
-            btnSetujuiSuratUsaha.setVisibility(View.GONE);
         }else if(suratUsahaData.getStatus_persetujuan().equals("Belum disetujui")){
             tvStatusPersetujuanSuratUsaha.setTextColor(Color.parseColor("#ff0000"));
-            btnSetujuiSuratUsaha.setVisibility(View.VISIBLE);
-            btnBatalSetujuiSuratUsaha.setVisibility(View.GONE);
         }
 
 

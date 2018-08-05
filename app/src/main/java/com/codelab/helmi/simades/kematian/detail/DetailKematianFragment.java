@@ -50,6 +50,7 @@ public class DetailKematianFragment extends Fragment implements DetailKematianVi
         initView();
         initPresenter();
         tampilDataDetail();
+        getActivity().setTitle("Detail Kematian");
 
         return view;
     }
@@ -90,9 +91,9 @@ public class DetailKematianFragment extends Fragment implements DetailKematianVi
         kematianData = bundle.getParcelable(EXTRA_KEMATIAN);
 
         if(kematianData.getJekel().equals("Laki-laki")){
-            Glide.with(this).load(R.drawable.ic_baby_boy).into(ivDetailKematianGambar);
+            Glide.with(this).load(R.drawable.ic_boy).into(ivDetailKematianGambar);
         } else {
-            Glide.with(this).load(R.drawable.ic_baby_girl).into(ivDetailKematianGambar);
+            Glide.with(this).load(R.drawable.ic_girl).into(ivDetailKematianGambar);
         }
 
         tvDetailKematianNikMeninggal.setText(kematianData.getNikMeninggal());

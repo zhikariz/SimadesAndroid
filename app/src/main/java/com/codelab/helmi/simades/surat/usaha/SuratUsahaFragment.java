@@ -7,24 +7,28 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.codelab.helmi.simades.R;
 
+import java.util.List;
+
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SuratUsahaFragment extends Fragment implements SuratUsahaView, SwipeRefreshLayout.OnRefreshListener {
+public class SuratUsahaFragment extends Fragment implements SuratUsahaView, SwipeRefreshLayout.OnRefreshListener, View.OnClickListener, SearchView.OnQueryTextListener {
     View view;
     private RecyclerView mRecycler;
-    private RecyclerView.Adapter mAdapter;
+    SuratUsahaRecyclerAdapter mAdapter;
     private RecyclerView.LayoutManager mManager;
     SuratUsahaPresenter presenter;
     public static final String KEY_RECYCLER_STATE = "recycler_state";
     public static Bundle mBundleRecyclerViewState = null;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private SearchView searchView;
 
 
     public SuratUsahaFragment() {
@@ -45,33 +49,37 @@ public class SuratUsahaFragment extends Fragment implements SuratUsahaView, Swip
         return view;
     }
 
-    private void initView() {
+    @Override
+    public void initView() {
         mRecycler = (RecyclerView) view.findViewById(R.id.recyclerTemp);
         mManager = new LinearLayoutManager(getActivity().getApplicationContext());
         mRecycler.setLayoutManager(mManager);
         swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(this);
-    }
-
-    private void initPresenter() {
-        presenter = new SuratUsahaPresenter(mAdapter);
+        searchView = view.findViewById(R.id.search_view);
+        searchView.setOnClickListener(this);
+        searchView.setOnQueryTextListener(this);
     }
 
     @Override
-    public void onShowData(SuratUsahaData suratUsahaData) {
+    public void initPresenter() {
+        presenter = new SuratUsahaPresenter(getActivity());
+    }
 
+    @Override
+    public void setAdapter(List<SuratUsahaData> suratUsahaData) {
+        mAdapter = new SuratUsahaRecyclerAdapter(getActivity(), suratUsahaData, getFragmentManager());
+        mRecycler.setAdapter(mAdapter);
     }
 
     @Override
     public void onAttachView() {
         presenter.onAttach(this);
-
     }
 
     @Override
     public void onDetachView() {
         presenter.onDetach();
-
     }
 
     @Override
@@ -88,7 +96,6 @@ public class SuratUsahaFragment extends Fragment implements SuratUsahaView, Swip
 
         Parcelable listState = mRecycler.getLayoutManager().onSaveInstanceState();
         mBundleRecyclerViewState.putParcelable(KEY_RECYCLER_STATE, listState);
-        mAdapter = mRecycler.getAdapter();
     }
 
     @Override
@@ -102,7 +109,7 @@ public class SuratUsahaFragment extends Fragment implements SuratUsahaView, Swip
         } else {
             swipeRefreshTrue();
             mRecycler.removeAllViewsInLayout();
-            presenter.showData(getActivity().getApplicationContext(), mRecycler, getFragmentManager());
+            presenter.showData();
         }
     }
 
@@ -120,6 +127,27 @@ public class SuratUsahaFragment extends Fragment implements SuratUsahaView, Swip
     public void onRefresh() {
         swipeRefreshTrue();
         mRecycler.removeAllViewsInLayout();
-        presenter.showData(getActivity().getApplicationContext(), mRecycler, getFragmentManager());
+        presenter.showData();
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId())
+        {
+            case R.id.search_view:
+                searchView.setIconified(false);
+                break;
+        }
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        mAdapter.getFilter().filter(newText);
+        return true;
     }
 }

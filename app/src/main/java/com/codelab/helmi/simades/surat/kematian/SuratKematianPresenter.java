@@ -1,12 +1,10 @@
 package com.codelab.helmi.simades.surat.kematian;
 
 import android.content.Context;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
-import com.codelab.helmi.simades.api.RestApi;
-import com.codelab.helmi.simades.api.RestServer;
+import com.codelab.helmi.simades.helper.api.RestApi;
+import com.codelab.helmi.simades.helper.api.RestServer;
 import com.codelab.helmi.simades.base.Presenter;
 
 import java.util.ArrayList;
@@ -19,10 +17,10 @@ import retrofit2.Response;
 public class SuratKematianPresenter implements Presenter<SuratKematianView> {
     private SuratKematianView suratKematianView;
     public List<SuratKematianData> mItems = new ArrayList<>();
-    RecyclerView.Adapter mAdapter;
+    private Context context;
 
-    public SuratKematianPresenter(RecyclerView.Adapter mAdapter) {
-        this.mAdapter = mAdapter;
+    public SuratKematianPresenter(Context context) {
+        this.context = context;
     }
 
     @Override
@@ -35,33 +33,36 @@ public class SuratKematianPresenter implements Presenter<SuratKematianView> {
         suratKematianView = null;
     }
 
-    public void showData(final Context ctx, final RecyclerView mRecycler, final FragmentManager fragmentManager) {
-        final SuratKematianData suratKematianData = new SuratKematianData();
+    public void showData() {
         RestApi api = RestServer.getClient().create(RestApi.class);
         Call<SuratKematianResponseModel> getData = api.getSuratKematianData();
         getData.enqueue(new Callback<SuratKematianResponseModel>() {
             @Override
             public void onResponse(Call<SuratKematianResponseModel> call, Response<SuratKematianResponseModel> response) {
-                if(response.isSuccessful()) {
-                    mItems = response.body().getResult();
-                    mAdapter = new SuratKematianRecyclerAdapter(ctx, mItems, fragmentManager);
-                    mRecycler.setAdapter(mAdapter);
-                    suratKematianView.swipeRefreshFalse();
-                }else{
-                    switch (response.code()) {
-                        case 404:
-                            Toast.makeText(ctx, "404 Not Found", Toast.LENGTH_SHORT).show();
-                            suratKematianView.swipeRefreshFalse();
-                            break;
-                        case 500:
-                            Toast.makeText(ctx, "500 Internal Server Error", Toast.LENGTH_SHORT).show();
-                            suratKematianView.swipeRefreshFalse();
-                            break;
-                        default:
-                            Toast.makeText(ctx, "Unknown Error", Toast.LENGTH_SHORT).show();
-                            suratKematianView.swipeRefreshFalse();
-                            break;
+                try {
+                    if (response.isSuccessful()) {
+                        mItems = response.body().getResult();
+                        suratKematianView.setAdapter(mItems);
+                        suratKematianView.swipeRefreshFalse();
+                    } else {
+                        switch (response.code()) {
+                            case 404:
+                                Toast.makeText(context, "404 Not Found", Toast.LENGTH_SHORT).show();
+                                suratKematianView.swipeRefreshFalse();
+                                break;
+                            case 500:
+                                Toast.makeText(context, "500 Internal Server Error", Toast.LENGTH_SHORT).show();
+                                suratKematianView.swipeRefreshFalse();
+                                break;
+                            default:
+                                Toast.makeText(context, "Unknown Error", Toast.LENGTH_SHORT).show();
+                                suratKematianView.swipeRefreshFalse();
+                                break;
+                        }
                     }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    suratKematianView.swipeRefreshFalse();
                 }
             }
 
@@ -70,6 +71,5 @@ public class SuratKematianPresenter implements Presenter<SuratKematianView> {
                 suratKematianView.swipeRefreshFalse();
             }
         });
-        suratKematianView.onShowData(suratKematianData);
     }
 }

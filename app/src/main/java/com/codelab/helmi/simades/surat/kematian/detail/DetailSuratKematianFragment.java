@@ -82,12 +82,8 @@ public class DetailSuratKematianFragment extends Fragment implements DetailSurat
 
         if(suratKematianData.getStatus_persetujuan().equals("Disetujui")){
             tvStatusPersetujuanSuratKematian.setTextColor(Color.parseColor("#008000"));
-            btnBatalSetujuiSuratKematian.setVisibility(View.VISIBLE);
-            btnSetujuiSuratKematian.setVisibility(View.GONE);
         }else if(suratKematianData.getStatus_persetujuan().equals("Belum disetujui")){
             tvStatusPersetujuanSuratKematian.setTextColor(Color.parseColor("#ff0000"));
-            btnSetujuiSuratKematian.setVisibility(View.VISIBLE);
-            btnBatalSetujuiSuratKematian.setVisibility(View.GONE);
         }
 
 

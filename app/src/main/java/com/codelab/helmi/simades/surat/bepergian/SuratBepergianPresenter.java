@@ -1,12 +1,10 @@
 package com.codelab.helmi.simades.surat.bepergian;
 
 import android.content.Context;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
-import com.codelab.helmi.simades.api.RestApi;
-import com.codelab.helmi.simades.api.RestServer;
+import com.codelab.helmi.simades.helper.api.RestApi;
+import com.codelab.helmi.simades.helper.api.RestServer;
 import com.codelab.helmi.simades.base.Presenter;
 
 import java.util.ArrayList;
@@ -18,11 +16,11 @@ import retrofit2.Response;
 
 public class SuratBepergianPresenter implements Presenter<SuratBepergianView> {
     private SuratBepergianView suratBepergianView;
+    private Context context;
     public List<SuratBepergianData> mItems = new ArrayList<>();
-    RecyclerView.Adapter mAdapter;
 
-    public SuratBepergianPresenter(RecyclerView.Adapter mAdapter) {
-        this.mAdapter = mAdapter;
+    public SuratBepergianPresenter(Context context) {
+        this.context = context;
     }
 
     @Override
@@ -35,33 +33,37 @@ public class SuratBepergianPresenter implements Presenter<SuratBepergianView> {
         suratBepergianView = null;
     }
 
-    public void showData(final Context ctx, final RecyclerView mRecycler, final FragmentManager fragmentManager) {
-        final SuratBepergianData suratBepergianData = new SuratBepergianData();
+    public void showData() {
+
         RestApi api = RestServer.getClient().create(RestApi.class);
         Call<SuratBepergianResponseModel> getData = api.getSuratBepergianData();
         getData.enqueue(new Callback<SuratBepergianResponseModel>() {
             @Override
             public void onResponse(Call<SuratBepergianResponseModel> call, Response<SuratBepergianResponseModel> response) {
-                if(response.isSuccessful()) {
-                    mItems = response.body().getResult();
-                    mAdapter = new SuratBepergianRecyclerAdapter(ctx, mItems, fragmentManager);
-                    mRecycler.setAdapter(mAdapter);
-                    suratBepergianView.swipeRefreshFalse();
-                }else{
-                    switch (response.code()) {
-                        case 404:
-                            Toast.makeText(ctx, "404 Not Found", Toast.LENGTH_SHORT).show();
-                            suratBepergianView.swipeRefreshFalse();
-                            break;
-                        case 500:
-                            Toast.makeText(ctx, "500 Internal Server Error", Toast.LENGTH_SHORT).show();
-                            suratBepergianView.swipeRefreshFalse();
-                            break;
-                        default:
-                            Toast.makeText(ctx, "Unknown Error", Toast.LENGTH_SHORT).show();
-                            suratBepergianView.swipeRefreshFalse();
-                            break;
+                try {
+                    if (response.isSuccessful()) {
+                        mItems = response.body().getResult();
+                        suratBepergianView.setAdapter(mItems);
+                        suratBepergianView.swipeRefreshFalse();
+                    } else {
+                        switch (response.code()) {
+                            case 404:
+                                Toast.makeText(context, "404 Not Found", Toast.LENGTH_SHORT).show();
+                                suratBepergianView.swipeRefreshFalse();
+                                break;
+                            case 500:
+                                Toast.makeText(context, "500 Internal Server Error", Toast.LENGTH_SHORT).show();
+                                suratBepergianView.swipeRefreshFalse();
+                                break;
+                            default:
+                                Toast.makeText(context, "Unknown Error", Toast.LENGTH_SHORT).show();
+                                suratBepergianView.swipeRefreshFalse();
+                                break;
+                        }
                     }
+                }catch (Exception e){
+                    e.printStackTrace();
+                    suratBepergianView.swipeRefreshFalse();
                 }
             }
 
@@ -70,6 +72,5 @@ public class SuratBepergianPresenter implements Presenter<SuratBepergianView> {
                 suratBepergianView.swipeRefreshFalse();
             }
         });
-        suratBepergianView.onShowData(suratBepergianData);
     }
 }

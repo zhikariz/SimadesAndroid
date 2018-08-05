@@ -190,27 +190,35 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
         <Button
             android:id="@+id/btn_detail_surat_wali_setujui"
-            android:layout_width="200dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="60dp"
             android:layout_gravity="center"
             android:layout_marginBottom="10dp"
             android:background="#008000"
             android:text="Setujui"
-            android:textColor="#fff"
-            android:visibility="gone" />
+            android:textColor="#fff" />
 
         <Button
             android:id="@+id/btn_detail_surat_wali_batalkan_persetujuan"
-            android:layout_width="200dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:layout_height="60dp"
             android:layout_gravity="center"
             android:layout_marginBottom="10dp"
             android:background="#ff0000"
             android:text="Batalkan Persetujuan"
-            android:textColor="#fff"
-            android:visibility="gone" />
+            android:textColor="#fff" />
+        </LinearLayout>
 
     </LinearLayout>
 

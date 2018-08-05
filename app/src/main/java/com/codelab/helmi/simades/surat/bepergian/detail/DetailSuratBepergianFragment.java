@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.codelab.helmi.simades.R;
 import com.codelab.helmi.simades.surat.bepergian.SuratBepergianData;
@@ -42,7 +43,8 @@ public class DetailSuratBepergianFragment extends Fragment implements DetailSura
         return view;
     }
 
-    private void initView() {
+    @Override
+    public void initView() {
         tvKodeSuratBepergian = view.findViewById(R.id.tv_detail_surat_bepergian_kode);
         tvNomorSuratBepergian = view.findViewById(R.id.tv_detail_surat_bepergian_nomor_surat);
         tvStatusPersetujuanSuratBepergian = view.findViewById(R.id.tv_detail_surat_bepergian_status_persetujuan);
@@ -57,8 +59,9 @@ public class DetailSuratBepergianFragment extends Fragment implements DetailSura
         btnBatalSetujuiSuratBepergian.setOnClickListener(this);
     }
 
-    private void initPresenter() {
-        presenter = new DetailSuratBepergianPresenter();
+    @Override
+    public void initPresenter() {
+        presenter = new DetailSuratBepergianPresenter(getActivity());
 
     }
 
@@ -77,20 +80,12 @@ public class DetailSuratBepergianFragment extends Fragment implements DetailSura
 
         if(suratBepergianData.getStatus_persetujuan().equals("Disetujui")){
             tvStatusPersetujuanSuratBepergian.setTextColor(Color.parseColor("#008000"));
-            btnBatalSetujuiSuratBepergian.setVisibility(View.VISIBLE);
-            btnSetujuiSuratBepergian.setVisibility(View.GONE);
         }else if(suratBepergianData.getStatus_persetujuan().equals("Belum disetujui")){
             tvStatusPersetujuanSuratBepergian.setTextColor(Color.parseColor("#ff0000"));
-            btnBatalSetujuiSuratBepergian.setVisibility(View.GONE);
-            btnSetujuiSuratBepergian.setVisibility(View.VISIBLE);
 
         }
     }
 
-    @Override
-    public void onShowData(SuratBepergianData suratBepergianData) {
-
-    }
 
     @Override
     public void onAttachView() {
@@ -114,6 +109,7 @@ presenter.onAttach(this);
             switch (v.getId()){
                 case R.id.btn_detail_surat_bepergian_setujui:
                     presenter.putStatusPersetujuan(suratBepergianData.getKd_surat(), "Disetujui");
+                    Toast.makeText(getActivity(), "Status Persetujuan Berhasil !" , Toast.LENGTH_SHORT).show();
                     SuratBepergianFragment.mBundleRecyclerViewState = null;
                     try {
                         Thread.sleep(500);
@@ -124,6 +120,7 @@ presenter.onAttach(this);
                     break;
                 case R.id.btn_detail_surat_bepergian_batalkan_persetujuan:
                     presenter.putStatusPersetujuan(suratBepergianData.getKd_surat(), "Belum disetujui");
+                    Toast.makeText(getActivity(), "Status Persetujuan Berhasil !" , Toast.LENGTH_SHORT).show();
                     SuratBepergianFragment.mBundleRecyclerViewState = null;
                     try {
                         Thread.sleep(500);

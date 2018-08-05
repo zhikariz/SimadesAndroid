@@ -1,6 +1,7 @@
 package com.codelab.helmi.simades.navigasi;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -11,17 +12,22 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.codelab.helmi.simades.helper.shared_preference.SharedPrefManager;
 import com.codelab.helmi.simades.home.HomeActivity;
 import com.codelab.helmi.simades.R;
 import com.codelab.helmi.simades.datang.DatangFragment;
 import com.codelab.helmi.simades.kelahiran.KelahiranFragment;
 import com.codelab.helmi.simades.kematian.KematianFragment;
 import com.codelab.helmi.simades.kk.ShowKkFragment;
-import com.codelab.helmi.simades.pergi.PergiActivity;
+import com.codelab.helmi.simades.layanan.LayananFragment;
+import com.codelab.helmi.simades.login.LoginActivity;
+import com.codelab.helmi.simades.pergi.PergiFragment;
 import com.codelab.helmi.simades.profil.ShowProfilActivity;
 import com.codelab.helmi.simades.surat.HomeSuratFragment;
-import com.codelab.helmi.simades.user.UserActivity;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 public class NavigateActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, NavigateView {
 
@@ -31,6 +37,10 @@ public class NavigateActivity extends AppCompatActivity implements NavigationVie
     NavigationView navigationView;
     FragmentManager fragmentManager;
     Fragment fragment = null;
+    SharedPrefManager sharedPrefManager;
+    TextView tvNama;
+//    Fragment fragmentTag = null;
+//    boolean doubleBackToExitPressedOnce = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,10 +49,16 @@ public class NavigateActivity extends AppCompatActivity implements NavigationVie
         initPresenter();
         setNavigasi();
         // tampilan default awal ketika aplikasii dijalankan
-        if (savedInstanceState == null) {
+
+        if(savedInstanceState == null) {
             fragment = new HomeActivity();
             callFragment(fragment);
         }
+
+
+
+
+//        FirebaseMessaging.getInstance().subscribeToTopic("android");
 
     }
 
@@ -52,15 +68,31 @@ public class NavigateActivity extends AppCompatActivity implements NavigationVie
 
     @Override
     public void onBackPressed() {
-        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
+//            if (doubleBackToExitPressedOnce) {
+//                super.onBackPressed();
+//                return;
+//            }
+//
+//            this.doubleBackToExitPressedOnce = true;
+//            Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+//
+//            new Handler().postDelayed(new Runnable() {
+//
+//                @Override
+//                public void run() {
+//                    doubleBackToExitPressedOnce=false;
+//                }
+//            }, 2000);
         }
     }
 
     public void setNavigasi() {
+        sharedPrefManager = new SharedPrefManager(this);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -72,6 +104,9 @@ public class NavigateActivity extends AppCompatActivity implements NavigationVie
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        tvNama = navigationView.getHeaderView(0).findViewById(R.id.tv_navigate_nama_user);
+
+        tvNama.setText(sharedPrefManager.getSpNamaUser());
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -100,14 +135,26 @@ public class NavigateActivity extends AppCompatActivity implements NavigationVie
             fragment = new DatangFragment();
             callFragment(fragment);
         } else if (id == R.id.pergi) {
-            fragment = new PergiActivity();
+            fragment = new PergiFragment();
             callFragment(fragment);
-        } else if (id == R.id.user) {
-            fragment = new UserActivity();
+        } else if(id == R.id.layanan) {
+            fragment = new LayananFragment();
             callFragment(fragment);
+//        } else if (id == R.id.user) {
+//            fragment = new UserActivity();
+//            callFragment(fragment);
         } else if (id == R.id.pengajuan_surat) {
             fragment = new HomeSuratFragment();
             callFragment(fragment);
+        } else if(id == R.id.logout)
+        {
+
+            sharedPrefManager.saveSPBoolean(SharedPrefManager.SP_SUDAH_LOGIN, false);
+            Toast.makeText(this, "Berhasil Logout !", Toast.LENGTH_SHORT).show();
+            finish();
+            startActivity(new Intent(this, LoginActivity.class)
+                    .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+
         }
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -117,6 +164,8 @@ public class NavigateActivity extends AppCompatActivity implements NavigationVie
 
     // untuk mengganti isi kontainer menu yang dipiih
     private void callFragment(Fragment fragment) {
+
+//        fragmentTag = getSupportFragmentManager().findFragmentByTag(fragment.getClass().getSimpleName());
         fragmentManager = getSupportFragmentManager();
 
         fragmentManager.popBackStack();
@@ -147,6 +196,8 @@ public class NavigateActivity extends AppCompatActivity implements NavigationVie
     public void onShowFragment() {
 
     }
+
+
 
 
 }

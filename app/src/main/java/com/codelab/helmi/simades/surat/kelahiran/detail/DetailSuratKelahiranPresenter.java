@@ -1,14 +1,9 @@
 package com.codelab.helmi.simades.surat.kelahiran.detail;
 
-import android.content.Context;
-import android.support.v7.widget.RecyclerView;
-
-import com.codelab.helmi.simades.api.RestApi;
-import com.codelab.helmi.simades.api.RestServer;
+import com.codelab.helmi.simades.helper.api.RestApi;
+import com.codelab.helmi.simades.helper.api.RestServer;
 import com.codelab.helmi.simades.base.Presenter;
 import com.codelab.helmi.simades.surat.kelahiran.SuratKelahiranData;
-import com.codelab.helmi.simades.surat.kelahiran.SuratKelahiranFragment;
-import com.codelab.helmi.simades.surat.kelahiran.SuratKelahiranRecyclerAdapter;
 import com.codelab.helmi.simades.surat.kelahiran.SuratKelahiranResponseModel;
 
 import retrofit2.Call;

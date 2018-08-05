@@ -5,5 +5,6 @@ import com.codelab.helmi.simades.surat.bepergian.SuratBepergianData;
 
 public interface DetailSuratBepergianView extends View {
     void tampilDataDetail();
-    void onShowData(SuratBepergianData suratBepergianData);
+    void initView();
+    void initPresenter();
 }

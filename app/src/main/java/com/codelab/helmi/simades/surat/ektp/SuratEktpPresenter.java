@@ -1,12 +1,10 @@
 package com.codelab.helmi.simades.surat.ektp;
 
 import android.content.Context;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
-import com.codelab.helmi.simades.api.RestApi;
-import com.codelab.helmi.simades.api.RestServer;
+import com.codelab.helmi.simades.helper.api.RestApi;
+import com.codelab.helmi.simades.helper.api.RestServer;
 import com.codelab.helmi.simades.base.Presenter;
 
 import java.util.ArrayList;
@@ -19,11 +17,11 @@ import retrofit2.Response;
 public class SuratEktpPresenter implements Presenter<SuratEktpView> {
     private SuratEktpView suratEktpView;
     public List<SuratEktpData> mItems = new ArrayList<>();
-    RecyclerView.Adapter mAdapter;
+    Context context;
 
 
-    public SuratEktpPresenter(RecyclerView.Adapter mAdapter) {
-        this.mAdapter = mAdapter;
+    public SuratEktpPresenter(Context context) {
+        this.context = context;
     }
 
     @Override
@@ -36,30 +34,28 @@ public class SuratEktpPresenter implements Presenter<SuratEktpView> {
         suratEktpView = null;
     }
 
-    public void showData(final Context ctx, final RecyclerView mRecycler, final FragmentManager fragmentManager) {
-        final SuratEktpData suratEktpData = new SuratEktpData();
+    public void showData() {
         RestApi api = RestServer.getClient().create(RestApi.class);
         Call<SuratEktpResponseModel> getData = api.getSuratPengantarEktpData();
         getData.enqueue(new Callback<SuratEktpResponseModel>() {
             @Override
             public void onResponse(Call<SuratEktpResponseModel> call, Response<SuratEktpResponseModel> response) {
-                if(response.isSuccessful()) {
+                if (response.isSuccessful()) {
                     mItems = response.body().getResult();
-                    mAdapter = new SuratEktpRecyclerAdapter(ctx, mItems, fragmentManager);
-                    mRecycler.setAdapter(mAdapter);
+                    suratEktpView.setAdapter(mItems);
                     suratEktpView.swipeRefreshFalse();
-                }else{
+                } else {
                     switch (response.code()) {
                         case 404:
-                            Toast.makeText(ctx, "404 Not Found", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "404 Not Found", Toast.LENGTH_SHORT).show();
                             suratEktpView.swipeRefreshFalse();
                             break;
                         case 500:
-                            Toast.makeText(ctx, "500 Internal Server Error", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "500 Internal Server Error", Toast.LENGTH_SHORT).show();
                             suratEktpView.swipeRefreshFalse();
                             break;
                         default:
-                            Toast.makeText(ctx, "Unknown Error", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "Unknown Error", Toast.LENGTH_SHORT).show();
                             suratEktpView.swipeRefreshFalse();
                             break;
                     }
@@ -72,6 +68,5 @@ public class SuratEktpPresenter implements Presenter<SuratEktpView> {
 
             }
         });
-        suratEktpView.onShowData(suratEktpData);
     }
 }

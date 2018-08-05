@@ -6,7 +6,7 @@
     android:id="@+id/profil_scroll_view">
 
     <LinearLayout
-        android:padding="10dp"
+        android:padding="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/layout_bg"

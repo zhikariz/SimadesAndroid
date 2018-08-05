@@ -1,9 +1,11 @@
-package com.codelab.helmi.simades.api;
+package com.codelab.helmi.simades.helper.api;
 
 import com.codelab.helmi.simades.datang.DatangResponseModel;
 import com.codelab.helmi.simades.kelahiran.KelahiranResponseModel;
 import com.codelab.helmi.simades.kematian.KematianResponseModel;
 import com.codelab.helmi.simades.kk.KkResponseModel;
+import com.codelab.helmi.simades.layanan.LayananResponseModel;
+import com.codelab.helmi.simades.login.LoginResponseModel;
 import com.codelab.helmi.simades.penduduk.ShowPendudukResponseModel;
 import com.codelab.helmi.simades.pergi.PergiResponseModel;
 import com.codelab.helmi.simades.profil.ProfilResponseModel;
@@ -26,6 +28,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
+import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Query;
 
@@ -57,6 +60,9 @@ public interface RestApi {
 
     @GET("api/datang")
     Call<DatangResponseModel> getDatangData();
+
+    @GET("api/layanan")
+    Call<LayananResponseModel> getLayananData();
 
     @GET("api/surat_kelahiran")
     Call<SuratKelahiranResponseModel> getSuratKelahiranData();
@@ -153,5 +159,10 @@ public interface RestApi {
     @FormUrlEncoded
     Call<SuratEktpResponseModel> putSuratPengantarEktp(@Field("kd_surat") String kd_surat,
                                                        @Field("status_persetujuan") String status_persetujuan);
+
+    @POST("api/login")
+    @FormUrlEncoded
+    Call<LoginResponseModel> postLogin(@Field("username") String username,
+                                       @Field("password") String password);
 
 }

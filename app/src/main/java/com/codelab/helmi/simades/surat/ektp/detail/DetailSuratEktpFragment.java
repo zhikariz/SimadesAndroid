@@ -80,12 +80,8 @@ public class DetailSuratEktpFragment extends Fragment  implements  DetailSuratEk
 
         if(suratEktpData.getStatus_persetujuan().equals("Disetujui")){
             tvStatusPersetujuanSuratPengantarEktp.setTextColor(Color.parseColor("#008000"));
-            btnBatalSetujuiSuratPengantarEktp.setVisibility(View.VISIBLE);
-            btnSetujuiSuratPengantarEktp.setVisibility(View.GONE);
         } else if(suratEktpData.getStatus_persetujuan().equals("Belum disetujui")){
             tvStatusPersetujuanSuratPengantarEktp.setTextColor(Color.parseColor("#ff0000"));
-            btnBatalSetujuiSuratPengantarEktp.setVisibility(View.GONE);
-            btnSetujuiSuratPengantarEktp.setVisibility(View.VISIBLE);
 
         }
 
